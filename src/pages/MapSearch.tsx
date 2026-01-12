@@ -1,6 +1,5 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { MapContainer, TileLayer, useMap, Circle, Marker, Popup } from "react-leaflet";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -16,14 +15,6 @@ import {
 } from "lucide-react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
-// Fix for default marker icons in Leaflet with Vite
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-});
 
 // City coordinates for Colombia
 const CITY_COORDINATES: Record<string, { lat: number; lng: number; zoom: number }> = {
@@ -97,60 +88,13 @@ const CITY_LABELS: Record<string, string> = {
   bucaramanga: "Bucaramanga",
 };
 
-// Component to handle map center changes
-function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
-  const map = useMap();
-  
-  useEffect(() => {
-    map.flyTo(center, zoom, { duration: 1.5 });
-  }, [center, zoom, map]);
-  
-  return null;
-}
-
-// Custom zone marker
-function ZoneMarker({ 
-  zone, 
-  isSelected, 
-  onClick 
-}: { 
-  zone: { name: string; lat: number; lng: number; properties: number }; 
-  isSelected: boolean;
-  onClick: () => void;
-}) {
-  const customIcon = L.divIcon({
-    className: "custom-zone-marker",
-    html: `
-      <div class="relative flex items-center justify-center">
-        <div class="absolute w-16 h-16 rounded-full ${isSelected ? 'bg-gold/30 animate-ping' : 'bg-primary/20'}" style="animation-duration: 2s;"></div>
-        <div class="relative w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shadow-lg ${isSelected ? 'bg-gold text-white' : 'bg-white text-primary'} border-2 ${isSelected ? 'border-gold' : 'border-primary/30'}">
-          ${zone.properties}
-        </div>
-      </div>
-    `,
-    iconSize: [64, 64],
-    iconAnchor: [32, 32],
-  });
-
-  return (
-    <Marker 
-      position={[zone.lat, zone.lng]} 
-      icon={customIcon}
-      eventHandlers={{ click: onClick }}
-    >
-      <Popup>
-        <div className="text-center p-1">
-          <p className="font-semibold text-primary">{zone.name}</p>
-          <p className="text-sm text-muted-foreground">{zone.properties} propiedades</p>
-        </div>
-      </Popup>
-    </Marker>
-  );
-}
-
 const MapSearch = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const mapRef = useRef<L.Map | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const markersRef = useRef<Map<string, L.Marker>>(new Map());
+  const circlesRef = useRef<Map<string, L.Circle>>(new Map());
   
   const operationType = searchParams.get("operacion") || "";
   const propertyType = searchParams.get("tipo") || "";
@@ -163,11 +107,6 @@ const MapSearch = () => {
   const cityData = CITY_COORDINATES[city] || CITY_COORDINATES.bogota;
   const zones = CITY_ZONES[city] || CITY_ZONES.bogota;
   
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-  
   const toggleZone = useCallback((zoneName: string) => {
     setSelectedZones(prev => 
       prev.includes(zoneName) 
@@ -175,13 +114,128 @@ const MapSearch = () => {
         : [...prev, zoneName]
     );
   }, []);
+
+  // Initialize map
+  useEffect(() => {
+    if (!mapContainerRef.current || mapRef.current) return;
+
+    const map = L.map(mapContainerRef.current, {
+      center: [cityData.lat, cityData.lng],
+      zoom: cityData.zoom,
+      zoomControl: false,
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    mapRef.current = map;
+
+    // Add zoom control to bottom right
+    L.control.zoom({ position: "bottomright" }).addTo(map);
+
+    setTimeout(() => setIsLoading(false), 800);
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
+  // Update markers when zones or selection changes
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // Clear existing markers and circles
+    markersRef.current.forEach(marker => marker.remove());
+    markersRef.current.clear();
+    circlesRef.current.forEach(circle => circle.remove());
+    circlesRef.current.clear();
+
+    // Add markers for each zone
+    zones.forEach(zone => {
+      const isSelected = selectedZones.includes(zone.name);
+      
+      const icon = L.divIcon({
+        className: "custom-zone-marker",
+        html: `
+          <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+            <div style="
+              position: absolute;
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              background: ${isSelected ? 'rgba(180, 130, 60, 0.3)' : 'rgba(30, 30, 30, 0.15)'};
+              ${isSelected ? 'animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;' : ''}
+            "></div>
+            <div style="
+              position: relative;
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 12px;
+              font-weight: 700;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+              background: ${isSelected ? 'hsl(38, 70%, 45%)' : 'white'};
+              color: ${isSelected ? 'white' : 'hsl(30, 5%, 12%)'};
+              border: 2px solid ${isSelected ? 'hsl(38, 70%, 45%)' : 'rgba(30, 30, 30, 0.2)'};
+              cursor: pointer;
+              transition: all 0.2s;
+            ">${zone.properties}</div>
+          </div>
+        `,
+        iconSize: [48, 48],
+        iconAnchor: [24, 24],
+      });
+
+      const marker = L.marker([zone.lat, zone.lng], { icon })
+        .addTo(map)
+        .bindPopup(`
+          <div style="text-align: center; padding: 4px;">
+            <p style="font-weight: 600; margin: 0;">${zone.name}</p>
+            <p style="font-size: 12px; color: #666; margin: 4px 0 0 0;">${zone.properties} propiedades</p>
+          </div>
+        `);
+
+      marker.on("click", () => {
+        toggleZone(zone.name);
+      });
+
+      markersRef.current.set(zone.name, marker);
+
+      // Add circle for selected zones
+      if (isSelected) {
+        const circle = L.circle([zone.lat, zone.lng], {
+          radius: 800,
+          color: "hsl(38, 70%, 45%)",
+          fillColor: "hsl(38, 70%, 45%)",
+          fillOpacity: 0.15,
+          weight: 2,
+        }).addTo(map);
+
+        circlesRef.current.set(zone.name, circle);
+      }
+    });
+  }, [zones, selectedZones, toggleZone]);
+
+  // Fly to city when it changes
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.flyTo([cityData.lat, cityData.lng], cityData.zoom, {
+        duration: 1.5,
+      });
+    }
+  }, [city, cityData]);
   
   const handleContinue = () => {
     const params = new URLSearchParams(searchParams);
     if (selectedZones.length > 0) {
       params.set("zonas", selectedZones.join(","));
     }
-    // Navigate to properties page (or back to home for now)
     navigate(`/?${params.toString()}#propiedades`);
   };
   
@@ -335,7 +389,7 @@ const MapSearch = () => {
           )}
           
           {/* Zoom Hint - Mobile */}
-          <div className="absolute top-4 left-4 right-4 z-10 lg:hidden">
+          <div className="absolute top-4 left-4 right-4 z-10 lg:hidden pointer-events-none">
             <Card className="p-2 bg-background/90 backdrop-blur-sm border-border/50">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <ZoomIn className="w-4 h-4" />
@@ -344,52 +398,22 @@ const MapSearch = () => {
             </Card>
           </div>
           
-          <MapContainer
-            center={[cityData.lat, cityData.lng]}
-            zoom={cityData.zoom}
+          <div 
+            ref={mapContainerRef} 
             className="h-[50vh] lg:h-full w-full"
-            zoomControl={false}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            
-            <MapController 
-              center={[cityData.lat, cityData.lng]} 
-              zoom={cityData.zoom} 
-            />
-            
-            {/* Zone Markers */}
-            {zones.map((zone) => (
-              <ZoneMarker
-                key={zone.name}
-                zone={zone}
-                isSelected={selectedZones.includes(zone.name)}
-                onClick={() => toggleZone(zone.name)}
-              />
-            ))}
-            
-            {/* Selected Zone Circles */}
-            {zones
-              .filter(z => selectedZones.includes(z.name))
-              .map(zone => (
-                <Circle
-                  key={`circle-${zone.name}`}
-                  center={[zone.lat, zone.lng]}
-                  radius={800}
-                  pathOptions={{
-                    color: "hsl(38, 70%, 45%)",
-                    fillColor: "hsl(38, 70%, 45%)",
-                    fillOpacity: 0.15,
-                    weight: 2,
-                  }}
-                />
-              ))
-            }
-          </MapContainer>
+          />
         </div>
       </div>
+
+      {/* CSS for ping animation */}
+      <style>{`
+        @keyframes ping {
+          75%, 100% {
+            transform: scale(1.5);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 };

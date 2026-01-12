@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -11,26 +12,22 @@ import { Search, Home, MapPin } from "lucide-react";
 import heroBg from "@/assets/hero-home-bg.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [operationType, setOperationType] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [city, setCity] = useState("");
   const [priceRange, setPriceRange] = useState("");
 
   const handleSearch = () => {
-    console.log({
-      operationType,
-      propertyType,
-      city,
-      priceRange,
-    });
-    // Navigate to properties page with filters
+    // Build search params
     const params = new URLSearchParams();
     if (operationType) params.set("operacion", operationType);
     if (propertyType) params.set("tipo", propertyType);
     if (city) params.set("ciudad", city);
     if (priceRange) params.set("precio", priceRange);
     
-    window.location.href = `#propiedades?${params.toString()}`;
+    // Navigate to map search page
+    navigate(`/buscar-zona?${params.toString()}`);
   };
 
   return (

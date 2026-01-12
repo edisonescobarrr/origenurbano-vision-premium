@@ -224,3 +224,26 @@
   .delay-400 { animation-delay: 0.4s; }
   .delay-500 { animation-delay: 0.5s; }
 }
+
+/* Leaflet Map Custom Styles */
+.leaflet-container {
+  font-family: var(--font-body);
+}
+
+.custom-zone-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-elevated);
+}
+
+.leaflet-popup-content {
+  margin: 8px 12px;
+}
+
+.leaflet-popup-tip {
+  background: white;
+}

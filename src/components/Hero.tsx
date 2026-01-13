@@ -1,23 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, Home, MapPin } from "lucide-react";
 import heroBg from "@/assets/hero-home-bg.jpg";
-
 const Hero = () => {
   const navigate = useNavigate();
   const [operationType, setOperationType] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [city, setCity] = useState("");
   const [priceRange, setPriceRange] = useState("");
-
   const handleSearch = () => {
     // Build search params
     const params = new URLSearchParams();
@@ -25,21 +17,15 @@ const Hero = () => {
     if (propertyType) params.set("tipo", propertyType);
     if (city) params.set("ciudad", city);
     if (priceRange) params.set("precio", priceRange);
-    
+
     // Navigate to map search page
     navigate(`/buscar-zona?${params.toString()}`);
   };
-
-  return (
-    <section
-      id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
+  return <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBg})`
+    }} />
       
       {/* Warm Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/80" />
@@ -74,8 +60,7 @@ const Hero = () => {
               <div className="hidden md:grid md:grid-cols-5 gap-3 items-end">
                 {/* Tipo de Operación */}
                 <div className="space-y-2">
-                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide flex items-center gap-1">
-                    <Home className="w-3 h-3" />
+                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide flex items-center gap-1">¿QUE BUSCAS ?<Home className="w-3 h-3" />
                     Operación
                   </label>
                   <Select value={operationType} onValueChange={setOperationType}>
@@ -130,29 +115,10 @@ const Hero = () => {
                 </div>
 
                 {/* Rango de Precio */}
-                <div className="space-y-2">
-                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                    Precio
-                  </label>
-                  <Select value={priceRange} onValueChange={setPriceRange}>
-                    <SelectTrigger className="h-12 bg-secondary/50 border-border/50 hover:bg-secondary transition-colors">
-                      <SelectValue placeholder="Rango" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50">
-                      <SelectItem value="0-100">Hasta $100M</SelectItem>
-                      <SelectItem value="100-200">$100M - $200M</SelectItem>
-                      <SelectItem value="200-400">$200M - $400M</SelectItem>
-                      <SelectItem value="400-700">$400M - $700M</SelectItem>
-                      <SelectItem value="700+">Más de $700M</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                
 
                 {/* Search Button */}
-                <Button 
-                  onClick={handleSearch}
-                  className="h-12 bg-gold hover:bg-gold/90 text-gold-foreground font-medium shadow-gold transition-all hover:shadow-lg"
-                >
+                <Button onClick={handleSearch} className="h-12 bg-gold hover:bg-gold/90 text-gold-foreground font-medium shadow-gold transition-all hover:shadow-lg">
                   <Search className="w-4 h-4 mr-2" />
                   Buscar
                 </Button>
@@ -238,10 +204,7 @@ const Hero = () => {
                 </div>
 
                 {/* Search Button - Full Width */}
-                <Button 
-                  onClick={handleSearch}
-                  className="w-full h-12 bg-gold hover:bg-gold/90 text-gold-foreground font-semibold shadow-gold transition-all hover:shadow-lg mt-2"
-                >
+                <Button onClick={handleSearch} className="w-full h-12 bg-gold hover:bg-gold/90 text-gold-foreground font-semibold shadow-gold transition-all hover:shadow-lg mt-2">
                   <Search className="w-5 h-5 mr-2" />
                   Buscar mi hogar
                 </Button>
@@ -273,8 +236,6 @@ const Hero = () => {
           <div className="w-1 h-3 bg-gold rounded-full mt-2 animate-bounce" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;

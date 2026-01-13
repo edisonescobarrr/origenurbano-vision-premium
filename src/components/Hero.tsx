@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Building2, MapPin, Sparkles } from "lucide-react";
+import { Search, Building2, MapPin, Sparkles, ExternalLink } from "lucide-react";
 import heroBg from "@/assets/hero-home-bg.jpg";
 
 const Hero = () => {
@@ -11,12 +11,35 @@ const Hero = () => {
   const [propertyType, setPropertyType] = useState("");
   const [city, setCity] = useState("");
 
+  // Define which operations are for property seekers vs property owners
+  const isOwnerAction = operationType === "vender";
+  const isSeekerAction = ["comprar", "alquilar", "arrendar"].includes(operationType);
+
   const handleSearch = () => {
     const params = new URLSearchParams();
     if (operationType) params.set("operacion", operationType);
     if (propertyType) params.set("tipo", propertyType);
     if (city) params.set("ciudad", city);
-    navigate(`/buscar-zona?${params.toString()}`);
+
+    // Conditional redirection based on user intent
+    if (isOwnerAction) {
+      // Owner wants to sell or rent out their property → property submission page
+      window.open(`/publicar-inmueble?${params.toString()}`, "_blank");
+    } else {
+      // Seeker wants to buy or rent → map-based search
+      navigate(`/buscar-zona?${params.toString()}`);
+    }
+  };
+
+  // Dynamic button text based on selection
+  const getButtonText = () => {
+    if (isOwnerAction) return "Publicar mi inmueble";
+    return "Buscar propiedades";
+  };
+
+  const getButtonIcon = () => {
+    if (isOwnerAction) return <ExternalLink className="w-5 h-5 mr-2" />;
+    return <Search className="w-5 h-5 mr-2" />;
   };
 
   return (
@@ -124,13 +147,17 @@ const Hero = () => {
                   </div>
                 </div>
 
-                {/* Search Button - Full width */}
+                {/* Action Button - Full width */}
                 <Button 
                   onClick={handleSearch} 
-                  className="w-full h-14 bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base shadow-gold transition-all hover:shadow-lg hover:scale-[1.01] rounded-xl"
+                  className={`w-full h-14 font-semibold text-base shadow-gold transition-all hover:shadow-lg hover:scale-[1.01] rounded-xl ${
+                    isOwnerAction 
+                      ? "bg-earth hover:bg-earth/90 text-earth-foreground" 
+                      : "bg-gold hover:bg-gold/90 text-gold-foreground"
+                  }`}
                 >
-                  <Search className="w-5 h-5 mr-2" />
-                  Buscar propiedades
+                  {getButtonIcon()}
+                  {getButtonText()}
                 </Button>
               </div>
 
@@ -199,13 +226,17 @@ const Hero = () => {
                   </Select>
                 </div>
 
-                {/* Search Button */}
+                {/* Action Button */}
                 <Button 
                   onClick={handleSearch} 
-                  className="w-full h-12 bg-gold hover:bg-gold/90 text-gold-foreground font-semibold shadow-gold transition-all hover:shadow-lg rounded-xl mt-2"
+                  className={`w-full h-12 font-semibold shadow-gold transition-all hover:shadow-lg rounded-xl mt-2 ${
+                    isOwnerAction 
+                      ? "bg-earth hover:bg-earth/90 text-earth-foreground" 
+                      : "bg-gold hover:bg-gold/90 text-gold-foreground"
+                  }`}
                 >
-                  <Search className="w-5 h-5 mr-2" />
-                  Buscar propiedades
+                  {getButtonIcon()}
+                  {getButtonText()}
                 </Button>
               </div>
             </div>

@@ -161,9 +161,14 @@ const MapSearch = () => {
 
   // Initialize map
   useEffect(() => {
-    if (!mapContainerRef.current || mapRef.current) return;
+    if (!mapContainerRef.current) return;
+    
+    // Prevent double initialization
+    if (mapRef.current) return;
 
-    const map = L.map(mapContainerRef.current, {
+    const container = mapContainerRef.current;
+    
+    const map = L.map(container, {
       center: [cityData.lat, cityData.lng],
       zoom: cityData.zoom,
       zoomControl: false,
@@ -235,8 +240,33 @@ const MapSearch = () => {
     setTimeout(() => setIsLoading(false), 800);
 
     return () => {
-      map.remove();
-      mapRef.current = null;
+      // Clean up all markers and circles first
+      markersRef.current.forEach(marker => {
+        if (marker) marker.remove();
+      });
+      markersRef.current.clear();
+      
+      circlesRef.current.forEach(circle => {
+        if (circle) circle.remove();
+      });
+      circlesRef.current.clear();
+      
+      // Clean up drawn items
+      if (drawnItemsRef.current) {
+        drawnItemsRef.current.clearLayers();
+        drawnItemsRef.current = null;
+      }
+      
+      drawControlRef.current = null;
+      
+      // Remove all event listeners before destroying
+      map.off();
+      
+      // Only remove if the map still exists and container is valid
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
     };
   }, []);
 

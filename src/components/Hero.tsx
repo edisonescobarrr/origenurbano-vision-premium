@@ -60,8 +60,8 @@ const Hero = () => {
               <div className="hidden md:grid md:grid-cols-5 gap-3 items-end">
                 {/* Tipo de Operación */}
                 <div className="space-y-2">
-                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide flex items-center gap-1">¿QUE BUSCAS ?<Home className="w-3 h-3" />
-                    Operación
+                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide flex items-center gap-1">¿QUE BUSCAS?​<Home className="w-3 h-3" />
+                    ​
                   </label>
                   <Select value={operationType} onValueChange={setOperationType}>
                     <SelectTrigger className="h-12 bg-secondary/50 border-border/50 hover:bg-secondary transition-colors">

@@ -60,39 +60,39 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contacto" className="py-24 bg-secondary/50">
-      <div className="container mx-auto px-6">
+    <section id="contacto" className="py-16 sm:py-24 bg-secondary/50">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-gold font-body text-sm uppercase tracking-[0.2em] mb-4">
+        <div className="text-center mb-10 sm:mb-16">
+          <p className="text-gold font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
             Contacto
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground font-medium mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium mb-4 sm:mb-6">
             Comienza tu inversión hoy
           </h2>
-          <p className="font-body text-muted-foreground max-w-2xl mx-auto">
+          <p className="font-body text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
             Estamos listos para ayudarte. Cuéntanos sobre tu proyecto 
             y agendaremos una asesoría sin compromiso.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Contact Info */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             {contactInfo.map((item) => (
               <div
                 key={item.title}
-                className="flex items-start gap-4 p-4 bg-background"
+                className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-background"
               >
-                <div className="w-12 h-12 bg-primary flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-5 h-5 text-primary-foreground" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
                 </div>
-                <div>
-                  <h4 className="font-display text-lg text-foreground font-medium">
+                <div className="min-w-0">
+                  <h4 className="font-display text-base sm:text-lg text-foreground font-medium">
                     {item.title}
                   </h4>
-                  <p className="font-body text-foreground">{item.content}</p>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-sm sm:text-base text-foreground break-words">{item.content}</p>
+                  <p className="font-body text-xs sm:text-sm text-muted-foreground">
                     {item.subtitle}
                   </p>
                 </div>

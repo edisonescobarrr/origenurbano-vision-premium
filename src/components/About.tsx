@@ -39,7 +39,7 @@ const About = () => {
           <div className="w-16 h-px bg-gold mx-auto" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Image */}
           <div className="relative">
             <div className="aspect-[4/3] overflow-hidden">
@@ -49,8 +49,8 @@ const About = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* Decorative frame */}
-            <div className="absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10" />
+            {/* Decorative frame - hidden on mobile to prevent overflow */}
+            <div className="hidden md:block absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10" />
           </div>
 
           {/* Content */}
@@ -70,18 +70,18 @@ const About = () => {
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 border-t border-border pt-8">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 border-t border-border pt-8">
               <div className="text-center">
-                <p className="font-display text-3xl text-gold font-medium">15+</p>
-                <p className="font-body text-sm text-muted-foreground mt-1">Años de experiencia</p>
+                <p className="font-display text-2xl sm:text-3xl text-gold font-medium">15+</p>
+                <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Años de experiencia</p>
               </div>
               <div className="text-center">
-                <p className="font-display text-3xl text-gold font-medium">500+</p>
-                <p className="font-body text-sm text-muted-foreground mt-1">Familias felices</p>
+                <p className="font-display text-2xl sm:text-3xl text-gold font-medium">500+</p>
+                <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Familias felices</p>
               </div>
               <div className="text-center">
-                <p className="font-display text-3xl text-gold font-medium">98%</p>
-                <p className="font-body text-sm text-muted-foreground mt-1">Satisfacción</p>
+                <p className="font-display text-2xl sm:text-3xl text-gold font-medium">98%</p>
+                <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Satisfacción</p>
               </div>
             </div>
           </div>

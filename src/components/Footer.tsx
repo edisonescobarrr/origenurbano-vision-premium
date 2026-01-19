@@ -112,26 +112,31 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-body text-sm text-primary-foreground/50">
-            © 2025 ORIGENURBANO. Todos los derechos reservados.
-          </p>
-          <div className="flex items-center gap-6">
+        <div className="container mx-auto px-6 py-6 flex flex-col items-center gap-4">
+          {/* Links - stack on mobile */}
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
             <a
               href="#"
-              className="font-body text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
             >
               Política de Privacidad
             </a>
             <a
               href="#"
-              className="font-body text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
             >
               Términos y Condiciones
             </a>
+          </div>
+          
+          {/* Copyright and scroll button */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between">
+            <p className="font-body text-xs sm:text-sm text-primary-foreground/50 text-center">
+              © 2025 ORIGENURBANO. Todos los derechos reservados.
+            </p>
             <button
               onClick={scrollToTop}
-              className="w-10 h-10 bg-gold text-gold-foreground flex items-center justify-center hover:bg-gold/90 transition-colors"
+              className="w-10 h-10 bg-gold text-gold-foreground flex items-center justify-center hover:bg-gold/90 transition-colors flex-shrink-0"
               aria-label="Volver arriba"
             >
               <ArrowUp className="w-4 h-4" />

@@ -45,26 +45,26 @@ const Properties = () => {
   ];
 
   return (
-    <section id="propiedades" className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="propiedades" className="py-16 sm:py-24 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 sm:mb-16 gap-4">
           <div>
-            <p className="text-gold font-body text-sm uppercase tracking-[0.2em] mb-4">
+            <p className="text-gold font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
               Propiedades Destacadas
             </p>
-            <h2 className="font-display text-4xl md:text-5xl text-foreground font-medium">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium">
               Encuentra tu próximo hogar
             </h2>
           </div>
-          <Button variant="premium-outline" size="lg" className="mt-6 md:mt-0 group">
+          <Button variant="premium-outline" size="lg" className="mt-4 md:mt-0 group self-start md:self-auto">
             Ver Todas
             <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
 
         {/* Properties Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {properties.map((property) => (
             <article
               key={property.id}

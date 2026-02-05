@@ -6,7 +6,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import MapSearch from "./pages/MapSearch";
 import PublicarInmueble from "./pages/PublicarInmueble";
+import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
+import PoliticaCookies from "./pages/PoliticaCookies";
+import TerminosCondiciones from "./pages/TerminosCondiciones";
+import AvisoLegal from "./pages/AvisoLegal";
 import NotFound from "./pages/NotFound";
+import CookieBanner from "./components/CookieBanner";
 
 const queryClient = new QueryClient();
 
@@ -20,9 +25,14 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/buscar-zona" element={<MapSearch />} />
           <Route path="/publicar-inmueble" element={<PublicarInmueble />} />
+          <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
+          <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
+          <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />
+          <Route path="/aviso-legal" element={<AvisoLegal />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <CookieBanner />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

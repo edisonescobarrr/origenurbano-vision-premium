@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin, ArrowUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -113,20 +114,32 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/10">
         <div className="container mx-auto px-6 py-6 flex flex-col items-center gap-4">
-          {/* Links - stack on mobile */}
+          {/* Legal Links */}
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-            <a
-              href="#"
+            <Link
+              to="/politica-de-privacidad"
               className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
             >
               Política de Privacidad
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/politica-de-cookies"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+            >
+              Política de Cookies
+            </Link>
+            <Link
+              to="/terminos-y-condiciones"
               className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
             >
               Términos y Condiciones
-            </a>
+            </Link>
+            <Link
+              to="/aviso-legal"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+            >
+              Aviso Legal
+            </Link>
           </div>
           
           {/* Copyright and scroll button */}

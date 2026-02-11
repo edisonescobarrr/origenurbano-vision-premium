@@ -42,7 +42,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Teléfono",
-      content: "+57 300 123 4567",
+      content: "+57 321 589 3324",
       subtitle: "Lunes a Sábado",
     },
     {
@@ -105,7 +105,7 @@ const Contact = () => {
               size="xl"
               className="w-full mt-6"
               onClick={() =>
-                window.open("https://wa.me/573001234567", "_blank")
+                window.open("https://wa.me/573215893324", "_blank")
               }
             >
               <MessageCircle className="mr-2" />

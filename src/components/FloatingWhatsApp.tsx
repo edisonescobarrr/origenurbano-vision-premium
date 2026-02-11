@@ -6,7 +6,7 @@ const FloatingWhatsApp = () => {
 
   const handleWhatsAppClick = () => {
     window.open(
-      "https://wa.me/573001234567?text=Hola,%20me%20gustaría%20recibir%20asesoría%20personalizada",
+      "https://wa.me/573215893324?text=Hola,%20me%20gustaría%20recibir%20asesoría%20personalizada",
       "_blank"
     );
   };

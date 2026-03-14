@@ -29,7 +29,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <h3 className="font-display text-2xl font-semibold tracking-tight mb-4">
-              ORIGEN<span className="text-gold">URBANO</span>
+              Visión<span className="text-gold">Urbana</span>
             </h3>
             <p className="font-body text-primary-foreground/70 text-sm leading-relaxed mb-6">
               El origen de decisiones inteligentes. Tu aliado estratégico 
@@ -145,7 +145,7 @@ const Footer = () => {
           {/* Copyright and scroll button */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between">
             <p className="font-body text-xs sm:text-sm text-primary-foreground/50 text-center">
-              © 2025 ORIGENURBANO. Todos los derechos reservados.
+              © 2025 Visión Urbana. Todos los derechos reservados.
             </p>
             <button
               onClick={scrollToTop}

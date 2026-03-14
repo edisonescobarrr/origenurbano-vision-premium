@@ -145,7 +145,7 @@ const Footer = () => {
           {/* Copyright and scroll button */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between">
             <p className="font-body text-xs sm:text-sm text-primary-foreground/50 text-center">
-              © 2025 ORIGENURBANO. Todos los derechos reservados.
+              © 2025 Visión Urbana. Todos los derechos reservados.
             </p>
             <button
               onClick={scrollToTop}

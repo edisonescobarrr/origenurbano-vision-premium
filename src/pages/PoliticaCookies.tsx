@@ -128,7 +128,7 @@ const PoliticaCookies = () => {
                   <tbody className="text-foreground/80">
                     <tr>
                       <td className="p-4 border-b border-border">Propia</td>
-                      <td className="p-4 border-b border-border">ORIGENURBANO</td>
+                      <td className="p-4 border-b border-border">DOMOURBANO</td>
                       <td className="p-4 border-b border-border">Sesión y preferencias</td>
                       <td className="p-4 border-b border-border">1 año</td>
                     </tr>

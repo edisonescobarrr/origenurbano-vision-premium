@@ -219,7 +219,7 @@ const PoliticaCookies = () => {
                 7. Actualizaciones de esta Política
               </h2>
               <p className="font-body text-foreground/80">
-                ORIGENURBANO puede actualizar esta política de cookies periódicamente. Le recomendamos 
+                DOMOURBANO puede actualizar esta política de cookies periódicamente. Le recomendamos 
                 revisar esta página regularmente para mantenerse informado sobre el uso de cookies.
               </p>
             </section>

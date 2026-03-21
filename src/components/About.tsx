@@ -10,7 +10,7 @@ const About = () => {
     },
     {
       icon: Eye,
-      title: "Visión Urbana",
+      title: "Visión Estratégica",
       description: "Entendemos la ciudad como un ecosistema de oportunidades estratégicas.",
     },
     {

@@ -104,7 +104,7 @@ const Footer = () => {
             <ul className="space-y-3 font-body text-sm text-primary-foreground/70">
               <li>Bogotá, Colombia</li>
               <li>+57 300 123 4567</li>
-              <li>contacto@origenurbano.co</li>
+              <li>contacto@domourbano.co</li>
               <li>Lun - Vie: 8am - 6pm</li>
             </ul>
           </div>

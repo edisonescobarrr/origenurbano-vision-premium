@@ -37,7 +37,7 @@ const Header = () => {
           <span className={`font-display text-2xl md:text-3xl font-semibold tracking-tight transition-colors duration-300 ${
             isScrolled ? "text-primary" : "text-primary-foreground"
           }`}>
-            Visión<span className="text-gold">Urbana</span>
+            Domo<span className="text-gold">Urbano</span>
           </span>
         </a>
 

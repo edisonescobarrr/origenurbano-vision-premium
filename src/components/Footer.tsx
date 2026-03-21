@@ -29,7 +29,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <h3 className="font-display text-2xl font-semibold tracking-tight mb-4">
-              Visión<span className="text-gold">Urbana</span>
+              Domo<span className="text-gold">Urbano</span>
             </h3>
             <p className="font-body text-primary-foreground/70 text-sm leading-relaxed mb-6">
               El origen de decisiones inteligentes. Tu aliado estratégico 
@@ -104,7 +104,7 @@ const Footer = () => {
             <ul className="space-y-3 font-body text-sm text-primary-foreground/70">
               <li>Bogotá, Colombia</li>
               <li>+57 300 123 4567</li>
-              <li>contacto@origenurbano.co</li>
+              <li>contacto@domourbano.co</li>
               <li>Lun - Vie: 8am - 6pm</li>
             </ul>
           </div>
@@ -145,7 +145,7 @@ const Footer = () => {
           {/* Copyright and scroll button */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between">
             <p className="font-body text-xs sm:text-sm text-primary-foreground/50 text-center">
-              © 2025 Visión Urbana. Todos los derechos reservados.
+              © 2025 DomoUrbano. Todos los derechos reservados.
             </p>
             <button
               onClick={scrollToTop}

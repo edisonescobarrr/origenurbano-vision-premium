@@ -128,7 +128,7 @@ const PoliticaCookies = () => {
                   <tbody className="text-foreground/80">
                     <tr>
                       <td className="p-4 border-b border-border">Propia</td>
-                      <td className="p-4 border-b border-border">ORIGENURBANO</td>
+                      <td className="p-4 border-b border-border">DOMOURBANO</td>
                       <td className="p-4 border-b border-border">Sesión y preferencias</td>
                       <td className="p-4 border-b border-border">1 año</td>
                     </tr>
@@ -219,7 +219,7 @@ const PoliticaCookies = () => {
                 7. Actualizaciones de esta Política
               </h2>
               <p className="font-body text-foreground/80">
-                ORIGENURBANO puede actualizar esta política de cookies periódicamente. Le recomendamos 
+                DOMOURBANO puede actualizar esta política de cookies periódicamente. Le recomendamos 
                 revisar esta página regularmente para mantenerse informado sobre el uso de cookies.
               </p>
             </section>
@@ -227,8 +227,8 @@ const PoliticaCookies = () => {
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
                 Si tiene preguntas sobre el uso de cookies, contáctenos en{" "}
-                <a href="mailto:contacto@origenurbano.co" className="text-gold hover:underline">
-                  contacto@origenurbano.co
+                <a href="mailto:contacto@domourbano.co" className="text-gold hover:underline">
+                  contacto@domourbano.co
                 </a>
               </p>
             </div>

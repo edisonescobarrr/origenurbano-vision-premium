@@ -32,7 +32,7 @@ const TerminosCondiciones = () => {
                 1. Aceptación de los Términos
               </h2>
               <p className="font-body text-foreground/80">
-                Al acceder y utilizar el sitio web de ORIGENURBANO (en adelante "el Sitio"), usted acepta 
+                Al acceder y utilizar el sitio web de DOMOURBANO (en adelante "el Sitio"), usted acepta 
                 estar sujeto a estos términos y condiciones de uso. Si no está de acuerdo con alguna 
                 parte de estos términos, le solicitamos que no utilice nuestro sitio web.
               </p>
@@ -63,7 +63,7 @@ const TerminosCondiciones = () => {
                 3. Servicios Inmobiliarios
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                ORIGENURBANO ofrece los siguientes servicios a través de este Sitio:
+                DOMOURBANO ofrece los siguientes servicios a través de este Sitio:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Promoción y exhibición de propiedades inmobiliarias</li>
@@ -99,10 +99,10 @@ const TerminosCondiciones = () => {
 
             <section className="mb-10">
               <h2 className="font-display text-2xl font-medium text-foreground mb-4">
-                5. Responsabilidades de ORIGENURBANO
+                5. Responsabilidades de DOMOURBANO
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                ORIGENURBANO se compromete a:
+                DOMOURBANO se compromete a:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Proporcionar información actualizada sobre propiedades disponibles</li>
@@ -128,7 +128,7 @@ const TerminosCondiciones = () => {
                 <li>Fotografías de propiedades</li>
               </ul>
               <p className="font-body text-foreground/80 mt-4">
-                Son propiedad exclusiva de ORIGENURBANO o de sus respectivos propietarios, y están 
+                Son propiedad exclusiva de DOMOURBANO o de sus respectivos propietarios, y están 
                 protegidos por las leyes de propiedad intelectual de Colombia y tratados internacionales.
               </p>
             </section>
@@ -138,7 +138,7 @@ const TerminosCondiciones = () => {
                 7. Exclusión de Garantías
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                ORIGENURBANO no garantiza:
+                DOMOURBANO no garantiza:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Que el Sitio esté disponible de forma ininterrumpida</li>
@@ -148,7 +148,7 @@ const TerminosCondiciones = () => {
                 <li>El resultado de cualquier negociación inmobiliaria</li>
               </ul>
               <p className="font-body text-foreground/80 mt-4">
-                El uso del Sitio es bajo su propio riesgo. ORIGENURBANO actúa como intermediario y no 
+                El uso del Sitio es bajo su propio riesgo. DOMOURBANO actúa como intermediario y no 
                 se hace responsable de disputas entre compradores y vendedores.
               </p>
             </section>
@@ -158,7 +158,7 @@ const TerminosCondiciones = () => {
                 8. Limitación de Responsabilidad
               </h2>
               <p className="font-body text-foreground/80">
-                En ningún caso ORIGENURBANO será responsable por daños indirectos, incidentales, 
+                En ningún caso DOMOURBANO será responsable por daños indirectos, incidentales, 
                 especiales o consecuentes que surjan del uso o la imposibilidad de uso del Sitio, 
                 incluyendo pérdida de beneficios, pérdida de datos o interrupción del negocio, 
                 incluso si se ha advertido de la posibilidad de tales daños.
@@ -170,7 +170,7 @@ const TerminosCondiciones = () => {
                 9. Enlaces a Terceros
               </h2>
               <p className="font-body text-foreground/80">
-                El Sitio puede contener enlaces a sitios web de terceros. ORIGENURBANO no tiene control 
+                El Sitio puede contener enlaces a sitios web de terceros. DOMOURBANO no tiene control 
                 sobre el contenido de estos sitios y no se hace responsable de su contenido, políticas 
                 de privacidad o prácticas. La inclusión de enlaces no implica respaldo o asociación 
                 con dichos sitios.
@@ -182,7 +182,7 @@ const TerminosCondiciones = () => {
                 10. Modificaciones
               </h2>
               <p className="font-body text-foreground/80">
-                ORIGENURBANO se reserva el derecho de modificar estos términos y condiciones en 
+                DOMOURBANO se reserva el derecho de modificar estos términos y condiciones en 
                 cualquier momento. Las modificaciones entrarán en vigor desde su publicación en el 
                 Sitio. El uso continuado del Sitio después de cualquier cambio constituye su aceptación 
                 de los nuevos términos.
@@ -217,8 +217,8 @@ const TerminosCondiciones = () => {
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
                 Si tiene preguntas sobre estos términos, contáctenos en{" "}
-                <a href="mailto:legal@origenurbano.co" className="text-gold hover:underline">
-                  legal@origenurbano.co
+                <a href="mailto:legal@domourbano.co" className="text-gold hover:underline">
+                  legal@domourbano.co
                 </a>
               </p>
             </div>

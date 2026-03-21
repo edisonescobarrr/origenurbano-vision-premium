@@ -23,7 +23,7 @@ const FloatingWhatsApp = () => {
               </div>
               <div>
                 <p className="font-display text-sm font-medium text-foreground">
-                  Asesor ORIGENURBANO
+                  Asesor DOMOURBANO
                 </p>
                 <p className="text-xs text-muted-foreground">En línea</p>
               </div>

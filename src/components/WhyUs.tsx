@@ -93,7 +93,7 @@ const WhyUs = () => {
                 Es el resultado de decisiones informadas."
               </p>
               <cite className="font-body text-sm text-gold not-italic">
-                — Filosofía ORIGENURBANO
+                — Filosofía DOMOURBANO
               </cite>
             </blockquote>
           </div>

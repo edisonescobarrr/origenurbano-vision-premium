@@ -48,7 +48,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "contacto@origenurbano.co",
+      content: "contacto@domourbano.co",
       subtitle: "Respuesta en 24 horas",
     },
     {

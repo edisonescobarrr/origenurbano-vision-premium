@@ -227,8 +227,8 @@ const PoliticaCookies = () => {
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
                 Si tiene preguntas sobre el uso de cookies, contáctenos en{" "}
-                <a href="mailto:contacto@origenurbano.co" className="text-gold hover:underline">
-                  contacto@origenurbano.co
+                <a href="mailto:contacto@domourbano.co" className="text-gold hover:underline">
+                  contacto@domourbano.co
                 </a>
               </p>
             </div>

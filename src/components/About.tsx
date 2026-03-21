@@ -59,7 +59,7 @@ const About = () => {
               Más que una inmobiliaria, somos tu aliado estratégico
             </h3>
             <p className="font-body text-muted-foreground text-lg leading-relaxed mb-6">
-              ORIGENURBANO nace de la convicción de que adquirir vivienda es una de las 
+              DOMOURBANO nace de la convicción de que adquirir vivienda es una de las 
               decisiones más importantes en la vida. Por eso, creamos una experiencia 
               inmobiliaria diferente: cercana, transparente y enfocada en resultados.
             </p>

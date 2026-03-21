@@ -32,11 +32,11 @@ const PoliticaPrivacidad = () => {
                 1. Responsable del Tratamiento
               </h2>
               <div className="bg-card border border-border rounded-lg p-6 font-body">
-                <p className="mb-2"><strong>Razón Social:</strong> ORIGENURBANO S.A.S.</p>
+                <p className="mb-2"><strong>Razón Social:</strong> DOMOURBANO S.A.S.</p>
                 <p className="mb-2"><strong>NIT:</strong> 000.000.000-0</p>
                 <p className="mb-2"><strong>Dirección:</strong> Bogotá, Colombia</p>
-                <p className="mb-2"><strong>Teléfono:</strong> +57 300 123 4567</p>
-                <p><strong>Correo electrónico:</strong> contacto@origenurbano.co</p>
+                <p className="mb-2"><strong>Teléfono:</strong> +57 321 589 3324</p>
+                <p><strong>Correo electrónico:</strong> contacto@domourbano.co</p>
               </div>
             </section>
 
@@ -45,7 +45,7 @@ const PoliticaPrivacidad = () => {
                 2. Datos Personales Recolectados
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                ORIGENURBANO recopila los siguientes datos personales con el consentimiento del titular:
+                DOMOURBANO recopila los siguientes datos personales con el consentimiento del titular:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Nombre completo</li>
@@ -101,8 +101,8 @@ const PoliticaPrivacidad = () => {
                 Para ejercer sus derechos como titular de datos personales, puede contactarnos a través de:
               </p>
               <div className="bg-card border border-border rounded-lg p-6 font-body">
-                <p className="mb-2"><strong>Correo electrónico:</strong> protecciondatos@origenurbano.co</p>
-                <p className="mb-2"><strong>Teléfono:</strong> +57 300 123 4567</p>
+                <p className="mb-2"><strong>Correo electrónico:</strong> protecciondatos@domourbano.co</p>
+                <p className="mb-2"><strong>Teléfono:</strong> +57 321 589 3324</p>
                 <p className="mb-2"><strong>Dirección física:</strong> Bogotá, Colombia</p>
                 <p><strong>Horario de atención:</strong> Lunes a Viernes de 8:00 a.m. a 6:00 p.m.</p>
               </div>
@@ -125,7 +125,7 @@ const PoliticaPrivacidad = () => {
                 7. Transferencia de Datos a Terceros
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                ORIGENURBANO podrá compartir sus datos personales con:
+                DOMOURBANO podrá compartir sus datos personales con:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Entidades financieras para procesos de crédito inmobiliario</li>
@@ -159,7 +159,7 @@ const PoliticaPrivacidad = () => {
                 9. Modificaciones a esta Política
               </h2>
               <p className="font-body text-foreground/80">
-                ORIGENURBANO se reserva el derecho de modificar esta política en cualquier momento. 
+                DOMOURBANO se reserva el derecho de modificar esta política en cualquier momento. 
                 Las modificaciones serán comunicadas a través de nuestro sitio web y/o por correo 
                 electrónico cuando sean sustanciales.
               </p>
@@ -168,8 +168,8 @@ const PoliticaPrivacidad = () => {
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
                 Si tiene preguntas sobre esta política, contáctenos en{" "}
-                <a href="mailto:protecciondatos@origenurbano.co" className="text-gold hover:underline">
-                  protecciondatos@origenurbano.co
+                <a href="mailto:protecciondatos@domourbano.co" className="text-gold hover:underline">
+                  protecciondatos@domourbano.co
                 </a>
               </p>
             </div>

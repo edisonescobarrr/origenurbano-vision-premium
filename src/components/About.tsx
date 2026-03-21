@@ -45,7 +45,7 @@ const About = () => {
             <div className="aspect-[4/3] overflow-hidden">
               <img
                 src={aboutBg}
-                alt="ORIGENURBANO - Desarrollo urbano en Colombia"
+                alt="DomoUrbano - Desarrollo urbano en Colombia"
                 className="w-full h-full object-cover"
               />
             </div>

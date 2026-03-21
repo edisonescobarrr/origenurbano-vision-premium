@@ -29,7 +29,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <h3 className="font-display text-2xl font-semibold tracking-tight mb-4">
-              Visión<span className="text-gold">Urbana</span>
+              Domo<span className="text-gold">Urbano</span>
             </h3>
             <p className="font-body text-primary-foreground/70 text-sm leading-relaxed mb-6">
               El origen de decisiones inteligentes. Tu aliado estratégico 

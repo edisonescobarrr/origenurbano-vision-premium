@@ -11,6 +11,7 @@ import PoliticaCookies from "./pages/PoliticaCookies";
 import TerminosCondiciones from "./pages/TerminosCondiciones";
 import AvisoLegal from "./pages/AvisoLegal";
 import NotFound from "./pages/NotFound";
+import PropertyDetail from "./pages/PropertyDetail";
 import CookieBanner from "./components/CookieBanner";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/buscar-zona" element={<MapSearch />} />
           <Route path="/publicar-inmueble" element={<PublicarInmueble />} />
+          <Route path="/propiedad/:slug" element={<PropertyDetail />} />
           <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
           <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />

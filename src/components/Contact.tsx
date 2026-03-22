@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -105,7 +106,7 @@ const Contact = () => {
               size="xl"
               className="w-full mt-6"
               onClick={() =>
-                window.open("https://wa.me/573215893324", "_blank")
+                window.open(getWhatsAppUrl(), "_blank", "noopener,noreferrer")
               }
             >
               <MessageCircle className="mr-2" />

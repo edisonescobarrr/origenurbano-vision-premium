@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft, Upload, Building2, MapPin, DollarSign, FileText, Phone, Mail, User } from "lucide-react";
+import { CitySearchCombobox } from "@/components/CitySearchCombobox";
 import { useState } from "react";
 
 const PublicarInmueble = () => {
@@ -48,15 +49,6 @@ const PublicarInmueble = () => {
     oficina: "Oficina",
     bodega: "Bodega",
     finca: "Finca / Casa campestre",
-  };
-
-  const cityLabels: Record<string, string> = {
-    bogota: "Bogotá",
-    medellin: "Medellín",
-    cali: "Cali",
-    barranquilla: "Barranquilla",
-    cartagena: "Cartagena",
-    bucaramanga: "Bucaramanga",
   };
 
   return (
@@ -113,19 +105,15 @@ const PublicarInmueble = () => {
                 </Select>
               </div>
 
-              {/* Ciudad */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Ciudad</label>
-                <Select value={formData.city} onValueChange={(v) => updateField("city", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
-                    <SelectValue placeholder="Selecciona ciudad" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50 rounded-xl">
-                    {Object.entries(cityLabels).map(([value, label]) => (
-                      <SelectItem key={value} value={value}>{label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              {/* Ciudad / municipio */}
+              <div className="space-y-2 md:col-span-2">
+                <label className="text-sm font-medium text-foreground">Ciudad o municipio</label>
+                <CitySearchCombobox
+                  value={formData.city}
+                  onValueChange={(v) => updateField("city", v)}
+                  placeholder="Buscar municipio en Colombia…"
+                  triggerClassName="h-12 rounded-xl"
+                />
               </div>
 
               {/* Dirección */}

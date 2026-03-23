@@ -42,8 +42,8 @@ const PropertyDetail = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pb-16">
-        <div className="container mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
+      <main className="pb-16 pt-24 sm:pt-28">
+        <div className="container mx-auto px-4 sm:px-6">
           <nav
             className="font-body text-sm text-muted-foreground mb-6 flex flex-wrap items-center gap-1"
             aria-label="Migas de pan"

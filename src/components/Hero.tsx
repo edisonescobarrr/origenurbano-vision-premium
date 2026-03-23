@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CitySearchCombobox } from "@/components/CitySearchCombobox";
 import { Search, Building2, MapPin, Sparkles, ExternalLink } from "lucide-react";
 import heroBg from "@/assets/hero-home-bg.jpg";
 
@@ -125,25 +126,17 @@ const Hero = () => {
                     </Select>
                   </div>
 
-                  {/* Ciudad */}
+                  {/* Ciudad / municipio */}
                   <div className="space-y-2">
                     <label className="text-xs font-semibold text-foreground uppercase tracking-wider flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-gold" />
-                      Ciudad
+                      Ciudad o municipio
                     </label>
-                    <Select value={city} onValueChange={setCity}>
-                      <SelectTrigger className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base rounded-xl">
-                        <SelectValue placeholder="¿Dónde buscas?" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-popover z-50 rounded-xl border-border/50">
-                        <SelectItem value="bogota" className="py-3 text-base">Bogotá</SelectItem>
-                        <SelectItem value="medellin" className="py-3 text-base">Medellín</SelectItem>
-                        <SelectItem value="cali" className="py-3 text-base">Cali</SelectItem>
-                        <SelectItem value="barranquilla" className="py-3 text-base">Barranquilla</SelectItem>
-                        <SelectItem value="cartagena" className="py-3 text-base">Cartagena</SelectItem>
-                        <SelectItem value="bucaramanga" className="py-3 text-base">Bucaramanga</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <CitySearchCombobox
+                      value={city}
+                      onValueChange={setCity}
+                      placeholder="Escribe para buscar en Colombia…"
+                    />
                   </div>
                 </div>
 
@@ -205,25 +198,18 @@ const Hero = () => {
                   </Select>
                 </div>
 
-                {/* Ciudad */}
+                {/* Ciudad / municipio */}
                 <div className="space-y-2">
                   <label className="text-xs font-semibold text-foreground uppercase tracking-wider flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-gold" />
-                    Ciudad
+                    Ciudad o municipio
                   </label>
-                  <Select value={city} onValueChange={setCity}>
-                    <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
-                      <SelectValue placeholder="¿Dónde buscas?" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover z-50 rounded-xl">
-                      <SelectItem value="bogota">Bogotá</SelectItem>
-                      <SelectItem value="medellin">Medellín</SelectItem>
-                      <SelectItem value="cali">Cali</SelectItem>
-                      <SelectItem value="barranquilla">Barranquilla</SelectItem>
-                      <SelectItem value="cartagena">Cartagena</SelectItem>
-                      <SelectItem value="bucaramanga">Bucaramanga</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <CitySearchCombobox
+                    value={city}
+                    onValueChange={setCity}
+                    placeholder="Buscar en Colombia…"
+                    triggerClassName="h-12 text-sm"
+                  />
                 </div>
 
                 {/* Action Button */}

@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { resolveMapSearchCity } from "@/data/colombiaPlaces";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -22,17 +23,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
 
-// City coordinates for Colombia
-const CITY_COORDINATES: Record<string, { lat: number; lng: number; zoom: number }> = {
-  bogota: { lat: 4.7110, lng: -74.0721, zoom: 12 },
-  medellin: { lat: 6.2442, lng: -75.5812, zoom: 13 },
-  cali: { lat: 3.4516, lng: -76.5320, zoom: 13 },
-  barranquilla: { lat: 10.9685, lng: -74.7813, zoom: 13 },
-  cartagena: { lat: 10.3910, lng: -75.4794, zoom: 13 },
-  bucaramanga: { lat: 7.1254, lng: -73.1198, zoom: 13 },
-};
-
-// Sample neighborhoods/zones for each city
+// Sample neighborhoods/zones for each city (solo ciudades principales con datos demo)
 const CITY_ZONES: Record<string, Array<{ name: string; lat: number; lng: number; properties: number }>> = {
   bogota: [
     { name: "Chapinero", lat: 4.6486, lng: -74.0628, properties: 45 },
@@ -85,15 +76,6 @@ const PROPERTY_LABELS: Record<string, string> = {
   proyecto: "Proyecto nuevo",
 };
 
-const CITY_LABELS: Record<string, string> = {
-  bogota: "Bogotá",
-  medellin: "Medellín",
-  cali: "Cali",
-  barranquilla: "Barranquilla",
-  cartagena: "Cartagena",
-  bucaramanga: "Bucaramanga",
-};
-
 // Helper to check if a point is inside a polygon
 function isPointInPolygon(point: L.LatLng, polygon: L.LatLng[]): boolean {
   let inside = false;
@@ -123,18 +105,25 @@ const MapSearch = () => {
   
   const operationType = searchParams.get("operacion") || "";
   const propertyType = searchParams.get("tipo") || "";
-  const city = searchParams.get("ciudad") || "bogota";
+  const ciudadParam = searchParams.get("ciudad") || "bogota";
   const priceRange = searchParams.get("precio") || "";
-  
+  const resolvedCity = resolveMapSearchCity(ciudadParam);
+  const cityData = {
+    lat: resolvedCity.lat,
+    lng: resolvedCity.lng,
+    zoom: resolvedCity.zoom,
+  };
+  const zones =
+    resolvedCity.zonesLegacyKey && CITY_ZONES[resolvedCity.zonesLegacyKey]
+      ? CITY_ZONES[resolvedCity.zonesLegacyKey]
+      : [];
+
   const [selectedZones, setSelectedZones] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawingMode, setIsDrawingMode] = useState(false);
   const [hasCustomZone, setHasCustomZone] = useState(false);
   const [customZonePolygon, setCustomZonePolygon] = useState<L.LatLng[] | null>(null);
   const [propertiesInZone, setPropertiesInZone] = useState<number>(0);
-  
-  const cityData = CITY_COORDINATES[city] || CITY_COORDINATES.bogota;
-  const zones = CITY_ZONES[city] || CITY_ZONES.bogota;
   
   const toggleZone = useCallback((zoneName: string) => {
     if (hasCustomZone) return; // Disable zone selection when custom zone is active
@@ -144,6 +133,17 @@ const MapSearch = () => {
         : [...prev, zoneName]
     );
   }, [hasCustomZone]);
+
+  useEffect(() => {
+    setSelectedZones([]);
+    if (drawnItemsRef.current) {
+      drawnItemsRef.current.clearLayers();
+    }
+    setHasCustomZone(false);
+    setCustomZonePolygon(null);
+    setPropertiesInZone(0);
+    setIsDrawingMode(false);
+  }, [ciudadParam]);
 
   // Calculate properties inside custom zone
   useEffect(() => {
@@ -366,7 +366,7 @@ const MapSearch = () => {
         duration: 1.5,
       });
     }
-  }, [city, cityData]);
+  }, [ciudadParam, cityData.lat, cityData.lng, cityData.zoom]);
 
   // Start drawing mode
   const startDrawing = () => {
@@ -421,9 +421,12 @@ const MapSearch = () => {
     ? propertiesInZone
     : selectedZones.length > 0
       ? zones.filter(z => selectedZones.includes(z.name)).reduce((sum, z) => sum + z.properties, 0)
-      : zones.reduce((sum, z) => sum + z.properties, 0);
+      : zones.length > 0
+        ? zones.reduce((sum, z) => sum + z.properties, 0)
+        : 42;
 
-  const canContinue = hasCustomZone || selectedZones.length > 0;
+  const canContinue =
+    hasCustomZone || selectedZones.length > 0 || zones.length === 0;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -456,7 +459,7 @@ const MapSearch = () => {
               )}
               <Badge variant="outline" className="border-primary/30">
                 <MapPin className="w-3 h-3 mr-1" />
-                {CITY_LABELS[city]}
+                {resolvedCity.label}
               </Badge>
               {hasCustomZone && (
                 <Badge className="bg-gold text-gold-foreground">
@@ -565,21 +568,28 @@ const MapSearch = () => {
               )}
             </Card>
 
-            {/* Divider */}
-            {!hasCustomZone && (
+            {!hasCustomZone && zones.length === 0 && (
+              <p className="text-sm text-muted-foreground">
+                En este municipio no hay barrios de ejemplo: usá el mapa y{" "}
+                <strong className="text-foreground">dibujá tu zona</strong> o ampliá con zoom para
+                ubicarte.
+              </p>
+            )}
+
+            {/* Divider + barrios solo en ciudades con datos demo */}
+            {!hasCustomZone && zones.length > 0 && (
               <div className="flex items-center gap-3">
                 <div className="flex-1 h-px bg-border" />
                 <span className="text-xs text-muted-foreground">o selecciona barrios</span>
                 <div className="flex-1 h-px bg-border" />
               </div>
             )}
-            
-            {/* Zone List - Hidden when custom zone is active */}
-            {!hasCustomZone && (
+
+            {!hasCustomZone && zones.length > 0 && (
               <div className="space-y-2">
                 <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wide flex items-center gap-2">
                   <MousePointer2 className="w-3 h-3" />
-                  Zonas en {CITY_LABELS[city]}
+                  Zonas en {resolvedCity.label}
                 </h3>
                 <div className="grid gap-2">
                   {zones.map((zone) => {

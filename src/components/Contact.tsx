@@ -49,7 +49,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "contacto@domourbano.co",
+      content: "contacto@arqueno.co",
       subtitle: "Respuesta en 24 horas",
     },
     {

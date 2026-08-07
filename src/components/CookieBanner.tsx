@@ -11,7 +11,7 @@ interface CookiePreferences {
   marketing: boolean;
 }
 
-const COOKIE_CONSENT_KEY = "origenurbano_cookie_consent";
+const COOKIE_CONSENT_KEY = "arqueno_cookie_consent";
 
 const CookieBanner = () => {
   const [isVisible, setIsVisible] = useState(false);

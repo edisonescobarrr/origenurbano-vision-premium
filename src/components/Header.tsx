@@ -46,7 +46,7 @@ const Header = () => {
               solidStyle ? "text-primary" : "text-primary-foreground"
             }`}
           >
-            Domo<span className="text-gold">Urbano</span>
+            ARQUE<span className="text-gold">NO</span>
           </span>
         </Link>
 

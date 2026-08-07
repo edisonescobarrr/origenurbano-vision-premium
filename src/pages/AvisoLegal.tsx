@@ -45,7 +45,7 @@ const AvisoLegal = () => {
                     <h3 className="font-display text-lg font-medium">Datos de la Empresa</h3>
                   </div>
                   <ul className="space-y-3 font-body text-foreground/80 text-sm">
-                    <li><strong>Razón Social:</strong> DOMOURBANO S.A.S.</li>
+                    <li><strong>Razón Social:</strong> ARQUENO S.A.S.</li>
                     <li><strong>NIT:</strong> 000.000.000-0</li>
                     <li><strong>Matrícula Mercantil:</strong> 00-000000-00</li>
                     <li><strong>Registro Inmobiliario:</strong> RIM-00000</li>
@@ -74,9 +74,9 @@ const AvisoLegal = () => {
                     <h3 className="font-display text-lg font-medium">Contacto</h3>
                   </div>
                   <ul className="space-y-3 font-body text-foreground/80 text-sm">
-                    <li><strong>Email general:</strong> contacto@domourbano.co</li>
-                    <li><strong>Email legal:</strong> legal@domourbano.co</li>
-                    <li><strong>Protección de datos:</strong> protecciondatos@domourbano.co</li>
+                    <li><strong>Email general:</strong> contacto@arqueno.co</li>
+                    <li><strong>Email legal:</strong> legal@arqueno.co</li>
+                    <li><strong>Protección de datos:</strong> protecciondatos@arqueno.co</li>
                   </ul>
                 </div>
 
@@ -108,7 +108,7 @@ const AvisoLegal = () => {
                   <h3 className="font-display text-lg font-medium">Objeto Social</h3>
                 </div>
                 <p className="font-body text-foreground/80 mb-4">
-                  DOMOURBANO desarrolla las siguientes actividades económicas:
+                  ARQUENO desarrolla las siguientes actividades económicas:
                 </p>
                 <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                   <li>Intermediación inmobiliaria (compra, venta y arrendamiento)</li>
@@ -130,7 +130,7 @@ const AvisoLegal = () => {
                 3. Registro y Autorización
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                DOMOURBANO opera en cumplimiento de la normatividad colombiana aplicable al sector 
+                ARQUENO opera en cumplimiento de la normatividad colombiana aplicable al sector 
                 inmobiliario y se encuentra debidamente registrada ante:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
@@ -145,7 +145,7 @@ const AvisoLegal = () => {
                 4. Marco Normativo
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                Las actividades de DOMOURBANO se rigen por las siguientes normas:
+                Las actividades de ARQUENO se rigen por las siguientes normas:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Código de Comercio de Colombia</li>
@@ -162,8 +162,8 @@ const AvisoLegal = () => {
                 5. Propiedad del Sitio Web
               </h2>
               <p className="font-body text-foreground/80">
-                Este sitio web es propiedad exclusiva de DOMOURBANO S.A.S. El dominio 
-                www.domourbano.co se encuentra registrado y es de uso exclusivo de la empresa. 
+                Este sitio web es propiedad exclusiva de ARQUENO S.A.S. El dominio 
+                www.arqueno.co se encuentra registrado y es de uso exclusivo de la empresa. 
                 Cualquier reproducción total o parcial del contenido de este sitio requiere 
                 autorización previa y por escrito.
               </p>
@@ -174,7 +174,7 @@ const AvisoLegal = () => {
                 6. Responsabilidad
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                DOMOURBANO se compromete a:
+                ARQUENO se compromete a:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Proporcionar información veraz sobre los inmuebles publicados</li>
@@ -191,7 +191,7 @@ const AvisoLegal = () => {
               </h2>
               <p className="font-body text-foreground/80">
                 En caso de controversias relacionadas con el uso de este sitio web o los servicios 
-                prestados por DOMOURBANO, los usuarios pueden:
+                prestados por ARQUENO, los usuarios pueden:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2 mt-4">
                 <li>Contactar directamente a través de los canales de atención al cliente</li>

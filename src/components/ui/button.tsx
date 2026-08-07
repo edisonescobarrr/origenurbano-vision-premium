@@ -15,7 +15,7 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // ORIGENURBANO custom variants
+        // ARQUENO custom variants
         hero: "bg-gold text-gold-foreground hover:bg-gold/90 shadow-gold uppercase tracking-widest font-semibold rounded-none",
         "hero-outline": "border-2 border-gold/60 text-gold-foreground bg-transparent hover:bg-gold/10 uppercase tracking-widest font-semibold rounded-none",
         premium: "bg-primary text-primary-foreground hover:bg-earth uppercase tracking-widest font-semibold rounded-none",

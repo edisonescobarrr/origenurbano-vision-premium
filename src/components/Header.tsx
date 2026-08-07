@@ -46,7 +46,7 @@ const Header = () => {
               solidStyle ? "text-primary" : "text-primary-foreground"
             }`}
           >
-            ARQUE<span className="text-gold">NO</span>
+            ARQUENO
           </span>
         </Link>
 

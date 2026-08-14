@@ -1,6 +1,6 @@
-import imgPiso1 from "@/Imagenes/vivienda-piso-1.png";
-import imgPiso2 from "@/Imagenes/vivienda-piso-2.png";
-import imgTerraza from "@/Imagenes/vivienda-terraza.png";
+import imgPiso1 from "@/Imagenes/vivienda-piso-1.webp";
+import imgPiso2 from "@/Imagenes/vivienda-piso-2.webp";
+import imgTerraza from "@/Imagenes/vivienda-terraza.webp";
 import photoCota from "@/assets/property-2.jpg";
 import photoBogota from "@/assets/property-3.jpg";
 

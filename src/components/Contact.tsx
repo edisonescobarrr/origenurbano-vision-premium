@@ -17,9 +17,20 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const whatsappMessage = [
+      `Hola, mi nombre es ${formData.name}.`,
+      `Teléfono: ${formData.phone}`,
+      `Email: ${formData.email}`,
+      "",
+      formData.message,
+    ].join("\n");
+
+    window.open(getWhatsAppUrl(whatsappMessage), "_blank", "noopener,noreferrer");
+
     toast({
-      title: "Mensaje enviado",
-      description: "Nos pondremos en contacto contigo pronto.",
+      title: "Te llevamos a WhatsApp",
+      description: "Confirma el envío desde ahí para que recibamos tu mensaje.",
     });
     setFormData({ name: "", email: "", phone: "", message: "" });
   };

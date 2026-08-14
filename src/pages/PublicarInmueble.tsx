@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft, Upload, Building2, MapPin, DollarSign, FileText, Phone, Mail, User } from "lucide-react";
 import { CitySearchCombobox } from "@/components/CitySearchCombobox";
 import { useState } from "react";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const PublicarInmueble = () => {
   const [searchParams] = useSearchParams();
@@ -30,14 +31,9 @@ const PublicarInmueble = () => {
     ownerPhone: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement form submission
-    console.log("Form submitted:", formData);
-  };
-
-  const updateField = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const operationTypeLabels: Record<string, string> = {
+    vender: "Vender",
+    arrendar: "Arrendar",
   };
 
   const propertyTypeLabels: Record<string, string> = {
@@ -49,6 +45,35 @@ const PublicarInmueble = () => {
     oficina: "Oficina",
     bodega: "Bodega",
     finca: "Finca / Casa campestre",
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const lines: (string | null)[] = [
+      "Hola, quiero publicar un inmueble:",
+      "",
+      formData.operationType ? `Operación: ${operationTypeLabels[formData.operationType]}` : null,
+      formData.propertyType ? `Tipo: ${propertyTypeLabels[formData.propertyType]}` : null,
+      formData.city ? `Ciudad: ${formData.city}` : null,
+      formData.address ? `Dirección: ${formData.address}` : null,
+      formData.price ? `Precio: $${formData.price} COP` : null,
+      formData.area ? `Área: ${formData.area} m²` : null,
+      formData.bedrooms ? `Habitaciones: ${formData.bedrooms}` : null,
+      formData.bathrooms ? `Baños: ${formData.bathrooms}` : null,
+      formData.description ? `Descripción: ${formData.description}` : null,
+      "",
+      "Datos de contacto:",
+      formData.ownerName ? `Nombre: ${formData.ownerName}` : null,
+      formData.ownerEmail ? `Email: ${formData.ownerEmail}` : null,
+      formData.ownerPhone ? `Teléfono: ${formData.ownerPhone}` : null,
+    ].filter((line) => line !== null);
+
+    window.open(getWhatsAppUrl(lines.join("\n")), "_blank", "noopener,noreferrer");
+  };
+
+  const updateField = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   return (

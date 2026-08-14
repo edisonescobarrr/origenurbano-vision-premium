@@ -1,73 +1,125 @@
-# Welcome to your Lovable project
+# Origen Urbano Digital
 
-## Project info
+Crea una página web profesional para una empresa inmobiliaria en Colombia llamada ORIGENURBANO.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Identidad de marca
 
-## How can I edit this code?
+ORIGENURBANO es una inmobiliaria especializada en compra y venta de casas y viviendas urbanas, enfocada en confianza, visión estratégica, patrimonio y futuro.
+La marca tiene un tono moderno, sólido, cinematográfico y premium, inspirada en el concepto de “origen”, “decisiones inteligentes” y “ciudad como inversión”.
 
-There are several ways of editing your application.
+Público objetivo
 
-**Use Lovable**
+Familias que buscan vivienda propia
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Inversionistas inmobiliarios
 
-Changes made via Lovable will be committed automatically to this repo.
+Personas entre 30 y 55 años
 
-**Use your preferred IDE**
+Mercado colombiano (lenguaje claro, profesional, sin tecnicismos excesivos)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Estilo visual
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Diseño moderno y minimalista
 
-Follow these steps:
+Colores sobrios: tonos tierra, negro, gris, blanco y acentos urbanos
+
+Tipografía elegante y legible
+
+Sensación de solidez, orden y confianza
+
+Estética urbana, arquitectónica y contemporánea
+
+Estructura de la web
+
+Home
+
+Hero con frase potente (ej: “El origen de tu próxima inversión”)
+
+Breve descripción de ORIGENURBANO
+
+Botón claro de contacto (WhatsApp / formulario)
+
+Quiénes somos
+
+Historia de la marca
+
+Filosofía: origen, visión urbana, decisiones inteligentes
+
+Enfoque en confianza y acompañamiento
+
+Servicios
+
+Compra de vivienda
+
+Venta de inmuebles
+
+Asesoría inmobiliaria
+
+Inversión urbana
+
+Propiedades
+
+Sección para mostrar casas y viviendas
+
+Fichas claras y ordenadas
+
+Llamados a acción
+
+Por qué ORIGENURBANO
+
+Diferenciales
+
+Transparencia
+
+Acompañamiento legal
+
+Enfoque estratégico
+
+Contacto
+
+Formulario simple
+
+WhatsApp
+
+Ubicación en Colombia
+
+Copywriting
+
+Lenguaje profesional, claro y confiable
+
+Frases cortas, poderosas
+
+Enfoque en decisiones, origen, patrimonio, ciudad y futuro
+
+Español neutro colombiano
+
+Extras
+
+Que la web sea responsive
+
+Optimizada para confianza y conversión
+
+Ideal para crecer a nivel nacional La marca debe sentirse como una inmobiliaria de alto nivel, con una narrativa fuerte y cinematográfica, no genérica
+
+This project was built with [Lovable](https://lovable.dev).
+
+**Live app**: https://origenurbano-vision-premium.lovable.app
+
+## Build with Lovable
+
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/61ecd5a7-cf2e-4986-8da0-7759259c7fa2).
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

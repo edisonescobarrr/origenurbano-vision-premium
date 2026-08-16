@@ -155,7 +155,7 @@ const MapSearch = () => {
         }
         return sum;
       }, 0);
-      setPropertiesInZone(count || Math.floor(Math.random() * 50) + 10); // Fallback to random if no zones inside
+      setPropertiesInZone(count);
     }
   }, [customZonePolygon, zones]);
 
@@ -417,13 +417,16 @@ const MapSearch = () => {
     navigate(`/?${params.toString()}#propiedades`);
   };
   
+  /** Solo mostramos un número cuando sale de datos reales de zonas demo; si no, evitamos inventar una cifra */
+  const hasRealPropertyCount = hasCustomZone
+    ? propertiesInZone > 0
+    : selectedZones.length > 0 || zones.length > 0;
+
   const totalProperties = hasCustomZone
     ? propertiesInZone
     : selectedZones.length > 0
       ? zones.filter(z => selectedZones.includes(z.name)).reduce((sum, z) => sum + z.properties, 0)
-      : zones.length > 0
-        ? zones.reduce((sum, z) => sum + z.properties, 0)
-        : 42;
+      : zones.reduce((sum, z) => sum + z.properties, 0);
 
   const canContinue =
     hasCustomZone || selectedZones.length > 0 || zones.length === 0;
@@ -475,8 +478,10 @@ const MapSearch = () => {
               disabled={!canContinue}
             >
               <Check className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Ver {totalProperties} propiedades</span>
-              <span className="sm:hidden">Ver ({totalProperties})</span>
+              <span className="hidden sm:inline">
+                {hasRealPropertyCount ? `Ver ${totalProperties} propiedades` : "Ver propiedades"}
+              </span>
+              <span className="sm:hidden">{hasRealPropertyCount ? `Ver (${totalProperties})` : "Ver"}</span>
             </Button>
           </div>
         </div>
@@ -524,7 +529,11 @@ const MapSearch = () => {
                     </div>
                     <div>
                       <p className="font-medium text-foreground">Zona personalizada</p>
-                      <p className="text-xs text-muted-foreground">{propertiesInZone} propiedades encontradas</p>
+                      <p className="text-xs text-muted-foreground">
+                        {propertiesInZone > 0
+                          ? `${propertiesInZone} propiedades encontradas`
+                          : "Te contactaremos con opciones en esta zona"}
+                      </p>
                     </div>
                   </div>
                   <div className="flex gap-2">

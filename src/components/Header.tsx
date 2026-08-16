@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Logo from "@/components/Logo";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -41,13 +42,11 @@ const Header = () => {
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <span
-            className={`font-display text-2xl md:text-3xl font-semibold tracking-tight transition-colors duration-300 ${
+          <Logo
+            className={`text-2xl md:text-3xl transition-colors duration-300 ${
               solidStyle ? "text-primary" : "text-primary-foreground"
             }`}
-          >
-            ARQUENO
-          </span>
+          />
         </Link>
 
         {/* Desktop Navigation */}

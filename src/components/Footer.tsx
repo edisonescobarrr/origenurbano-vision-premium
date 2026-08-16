@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Linkedin, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "@/components/Logo";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -28,9 +29,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <h3 className="font-display text-2xl font-semibold tracking-tight mb-4">
-              ARQUENO
-            </h3>
+            <Logo className="text-2xl mb-4" />
+
             <p className="font-body text-primary-foreground/70 text-sm leading-relaxed mb-6">
               El origen de decisiones inteligentes. Tu aliado estratégico 
               en el mercado inmobiliario colombiano.

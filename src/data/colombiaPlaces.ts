@@ -1,6 +1,8 @@
 import colombiaRaw from "./colombia-raw.json";
+import municipalityCoordinates from "./colombia-coordinates.json";
 
 type RawDept = { id: number; departamento: string; ciudades: string[] };
+type MunicipalityCoords = Record<string, { lat: number; lng: number }>;
 
 /** Centro aproximado del departamento (mapa cuando no hay override por municipio) */
 const DEPT_CENTERS: Record<string, { lat: number; lng: number }> = {
@@ -107,6 +109,13 @@ function normalizeForSearch(text: string): string {
     .toLowerCase();
 }
 
+/** Igual a normalizeForSearch pero recorta espacios extra, para calzar con las llaves de colombia-coordinates.json */
+function normalizeForCoordKey(text: string): string {
+  return normalizeForSearch(text).trim().replace(/\s+/g, " ");
+}
+
+const MUNICIPALITY_COORDS = municipalityCoordinates as MunicipalityCoords;
+
 function buildPlaces(): ColombiaPlace[] {
   const raw = colombiaRaw as RawDept[];
   const list: ColombiaPlace[] = [];
@@ -123,14 +132,18 @@ function buildPlaces(): ColombiaPlace[] {
       seenSlugs.add(slug);
 
       const override = SLUG_COORD_OVERRIDES[slug];
+      const coordKey = `${normalizeForCoordKey(dept)}|${normalizeForCoordKey(city)}`;
+      const municipalityCoord = MUNICIPALITY_COORDS[coordKey];
+      const preciseCoord = override ?? municipalityCoord;
+
       list.push({
         slug,
         name: city,
         department: dept,
         label: `${city}, ${dept}`,
-        lat: override?.lat ?? center.lat,
-        lng: override?.lng ?? center.lng,
-        zoom: override?.zoom ?? 12,
+        lat: preciseCoord?.lat ?? center.lat,
+        lng: preciseCoord?.lng ?? center.lng,
+        zoom: override?.zoom ?? (preciseCoord ? 13 : 12),
       });
     }
   }

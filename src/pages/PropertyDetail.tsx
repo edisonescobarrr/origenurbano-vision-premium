@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { Button } from "@/components/ui/button";
 import { getPropertyBySlug } from "@/data/propertyListings";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
@@ -195,7 +194,6 @@ const PropertyDetail = () => {
         </div>
       </main>
       <Footer />
-      <FloatingWhatsApp />
     </div>
   );
 };

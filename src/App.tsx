@@ -11,11 +11,13 @@ import AvisoLegal from "./pages/AvisoLegal";
 import NotFound from "./pages/NotFound";
 import PropertyDetail from "./pages/PropertyDetail";
 import CookieBanner from "./components/CookieBanner";
+import ScrollToHash from "./components/ScrollToHash";
 
 const App = () => (
   <TooltipProvider>
     <Toaster />
     <BrowserRouter>
+      <ScrollToHash />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/buscar-zona" element={<MapSearch />} />

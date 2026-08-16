@@ -15,12 +15,14 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Cormorant Garamond", "Georgia", "serif"],
+        display: ["Fraunces", "Georgia", "serif"],
         body: ["Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
+        hairline: "hsl(var(--hairline))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

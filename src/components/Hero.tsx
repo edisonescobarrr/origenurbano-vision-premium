@@ -66,7 +66,7 @@ const Hero = () => {
           </p>
 
           {/* Main Headline */}
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground font-medium leading-tight mb-4 opacity-0 animate-fade-up delay-100">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-foreground font-medium leading-tight mb-4 opacity-0 animate-fade-up delay-100">
             Encuentra el{" "}
             <span className="text-gradient-gold">hogar de tus sueños</span>
           </h1>

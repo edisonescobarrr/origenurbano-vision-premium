@@ -143,7 +143,9 @@ function buildPlaces(): ColombiaPlace[] {
         label: `${city}, ${dept}`,
         lat: preciseCoord?.lat ?? center.lat,
         lng: preciseCoord?.lng ?? center.lng,
-        zoom: override?.zoom ?? (preciseCoord ? 13 : 12),
+        // Con coordenada precisa (centroide del casco urbano) acercamos bastante, como Google Maps;
+        // con solo el centro del departamento nos quedamos más lejos porque es una aproximación.
+        zoom: override?.zoom ?? (preciseCoord ? 15 : 11),
       });
     }
   }

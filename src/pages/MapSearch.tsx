@@ -174,9 +174,14 @@ const MapSearch = () => {
       zoomControl: false,
     });
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    const tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
+
+    // El loader se quita cuando las tiles visibles realmente terminan de cargar,
+    // no con un tiempo fijo inventado (con respaldo por si el evento no llega a tiempo).
+    tileLayer.on("load", () => setIsLoading(false));
+    const loadingFallback = window.setTimeout(() => setIsLoading(false), 4000);
 
     mapRef.current = map;
 
@@ -237,9 +242,9 @@ const MapSearch = () => {
       drawnItems.clearLayers();
     });
 
-    setTimeout(() => setIsLoading(false), 800);
-
     return () => {
+      window.clearTimeout(loadingFallback);
+
       // Clean up all markers and circles first
       markersRef.current.forEach(marker => {
         if (marker) marker.remove();

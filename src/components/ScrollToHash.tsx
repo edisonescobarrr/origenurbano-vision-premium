@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 
 const MAX_ATTEMPTS = 30;
 const RETRY_DELAY_MS = 50;
+/** Reintento tardío por si el layout se recalcula justo después del primer scroll (ej. al desmontar el mapa de Leaflet) */
+const SETTLE_RESCROLL_MS = 400;
 
 /**
  * React Router no hace scroll automático a #anclas al navegar entre rutas
@@ -18,11 +20,16 @@ const ScrollToHash = () => {
     const id = hash.replace("#", "");
     let attempts = 0;
     let timeoutId: number;
+    let settleTimeoutId: number;
 
     const tryScroll = () => {
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
+        // Reafirma el scroll poco después por si algo (ej. el mapa al desmontarse) mueve el layout justo después.
+        settleTimeoutId = window.setTimeout(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, SETTLE_RESCROLL_MS);
         return;
       }
       attempts += 1;
@@ -32,7 +39,10 @@ const ScrollToHash = () => {
     };
 
     timeoutId = window.setTimeout(tryScroll, RETRY_DELAY_MS);
-    return () => window.clearTimeout(timeoutId);
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearTimeout(settleTimeoutId);
+    };
   }, [pathname, hash]);
 
   return null;

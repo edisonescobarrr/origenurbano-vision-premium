@@ -70,19 +70,9 @@ const About = () => {
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-6 border-t border-border pt-8">
-              <div className="text-center">
-                <p className="font-display text-2xl sm:text-3xl text-gold font-medium">15+</p>
-                <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Años de experiencia</p>
-              </div>
-              <div className="text-center">
-                <p className="font-display text-2xl sm:text-3xl text-gold font-medium">500+</p>
-                <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Familias felices</p>
-              </div>
-              <div className="text-center">
-                <p className="font-display text-2xl sm:text-3xl text-gold font-medium">98%</p>
-                <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Satisfacción</p>
-              </div>
+            <div className="border-t border-border pt-8">
+              <p className="font-display text-2xl sm:text-3xl text-gold font-medium">98%</p>
+              <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Satisfacción</p>
             </div>
           </div>
         </div>

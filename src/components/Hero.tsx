@@ -233,14 +233,6 @@ const Hero = () => {
                 <p className="text-2xl sm:text-3xl font-display font-semibold text-foreground">500+</p>
                 <p className="text-xs sm:text-sm text-muted-foreground">Propiedades</p>
               </div>
-              <div className="opacity-0 animate-fade-up delay-400">
-                <p className="text-2xl sm:text-3xl font-display font-semibold text-foreground">15+</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Años de experiencia</p>
-              </div>
-              <div className="opacity-0 animate-fade-up delay-500">
-                <p className="text-2xl sm:text-3xl font-display font-semibold text-foreground">2,000+</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Familias felices</p>
-              </div>
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ import TerminosCondiciones from "./pages/TerminosCondiciones";
 import AvisoLegal from "./pages/AvisoLegal";
 import NotFound from "./pages/NotFound";
 import PropertyDetail from "./pages/PropertyDetail";
+import ServiceDetail from "./pages/ServiceDetail";
 import CookieBanner from "./components/CookieBanner";
 import ScrollToHash from "./components/ScrollToHash";
 
@@ -23,6 +24,7 @@ const App = () => (
         <Route path="/buscar-zona" element={<MapSearch />} />
         <Route path="/publicar-inmueble" element={<PublicarInmueble />} />
         <Route path="/propiedad/:slug" element={<PropertyDetail />} />
+        <Route path="/servicio/:slug" element={<ServiceDetail />} />
         <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
         <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
         <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />

@@ -1,37 +1,10 @@
-import { Home, Building2, Briefcase, TrendingUp, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { SERVICES } from "@/data/services";
 
 const Services = () => {
-  const services = [
-    {
-      icon: Home,
-      title: "Compra de Vivienda",
-      description:
-        "Encontramos la casa o apartamento ideal para ti y tu familia. Asesoría completa desde la búsqueda hasta la entrega de llaves.",
-      features: ["Análisis de necesidades", "Visitas personalizadas", "Negociación experta"],
-    },
-    {
-      icon: Building2,
-      title: "Venta de Inmuebles",
-      description:
-        "Vendemos tu propiedad al mejor precio del mercado. Estrategia de marketing y exposición máxima.",
-      features: ["Valoración profesional", "Marketing digital", "Red de compradores"],
-    },
-    {
-      icon: Briefcase,
-      title: "Asesoría Inmobiliaria",
-      description:
-        "Consultoría especializada para tomar las mejores decisiones. Te guiamos con datos y experiencia.",
-      features: ["Análisis de mercado", "Estudios de zona", "Proyección de valorización"],
-    },
-    {
-      icon: TrendingUp,
-      title: "Inversión Urbana",
-      description:
-        "Identificamos oportunidades de inversión con alto potencial de rentabilidad y valorización.",
-      features: ["ROI proyectado", "Oportunidades off-market", "Gestión integral"],
-    },
-  ];
+  const services = SERVICES;
 
   return (
     <section id="servicios" className="py-16 sm:py-24 bg-secondary/50">
@@ -76,9 +49,11 @@ const Services = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button variant="link" className="p-0 text-gold hover:text-gold/80 group/btn">
-                    Más información
-                    <ArrowRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  <Button variant="link" className="p-0 text-gold hover:text-gold/80 group/btn" asChild>
+                    <Link to={`/servicio/${service.slug}`}>
+                      Más información
+                      <ArrowRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
                   </Button>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CitySearchCombobox } from "@/components/CitySearchCombobox";
 import { Search, Building2, MapPin, Sparkles, ExternalLink } from "lucide-react";
-import heroBg from "@/assets/hero-home-bg.jpg";
+import heroBg from "@/assets/hero-home-bg.webp";
 
 const Hero = () => {
   const navigate = useNavigate();

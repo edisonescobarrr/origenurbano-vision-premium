@@ -32,7 +32,13 @@ const Properties = () => {
             const article = (
               <article className="group bg-card overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-500 h-full flex flex-col">
                 <div className="relative aspect-[4/3] overflow-hidden bg-secondary/40">
-                  <img src={property.coverImage} alt={property.title} className={imgClass} />
+                  <img
+                    src={property.coverImage}
+                    alt={property.title}
+                    className={imgClass}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   <span className="absolute top-4 left-4 bg-primary text-primary-foreground text-xs font-body uppercase tracking-wider px-3 py-1">
                     {property.type}

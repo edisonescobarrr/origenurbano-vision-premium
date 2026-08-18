@@ -1,5 +1,5 @@
 import { Target, Eye, Shield, TrendingUp } from "lucide-react";
-import aboutBg from "@/assets/about-bg.jpg";
+import aboutBg from "@/assets/about-bg.webp";
 
 const About = () => {
   const values = [

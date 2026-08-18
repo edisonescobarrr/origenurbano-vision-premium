@@ -72,6 +72,8 @@ const PropertyDetail = () => {
                 <img
                   src={mainSrc}
                   alt={mainLabel}
+                  fetchpriority="high"
+                  decoding="async"
                   className={
                     property.imageFit === "cover"
                       ? "w-full h-full object-cover object-center"
@@ -104,6 +106,8 @@ const PropertyDetail = () => {
                       <img
                         src={src}
                         alt=""
+                        loading="lazy"
+                        decoding="async"
                         className={
                           property.imageFit === "cover"
                             ? "w-full h-full object-cover object-center"

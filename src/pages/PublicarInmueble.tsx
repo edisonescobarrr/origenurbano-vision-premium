@@ -277,7 +277,7 @@ const PublicarInmueble = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center max-w-md">
-          <h1 className="font-display text-2xl font-medium text-foreground mb-3">¡Publicación enviada!</h1>
+          <h1 className="font-display text-3xl sm:text-4xl font-medium text-foreground mb-3">¡Publicación enviada!</h1>
           <p className="text-muted-foreground mb-6">
             Guardamos tus fotos y el contrato firmado. Te abrimos WhatsApp para confirmar el envío del mensaje.
           </p>
@@ -298,7 +298,7 @@ const PublicarInmueble = () => {
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <h1 className="font-display text-xl font-medium text-foreground">Publicar Inmueble</h1>
+            <h1 className="font-display text-[32px] font-medium text-foreground">Publicar Inmueble</h1>
             <p className="text-sm text-muted-foreground">Completa los datos de tu propiedad</p>
           </div>
         </div>
@@ -307,10 +307,10 @@ const PublicarInmueble = () => {
       <main className="container mx-auto px-4 py-8 max-w-3xl">
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Property Details Section */}
-          <section className="bg-card rounded-2xl border border-border p-6 space-y-6">
+          <section className="bg-card border border-border p-6 space-y-6">
             <div className="flex items-center gap-2 text-foreground">
               <Building2 className="w-5 h-5 text-gold" />
-              <h2 className="font-display text-lg font-medium">Detalles del Inmueble</h2>
+              <h2 className="font-display text-[22px] font-medium">Detalles del Inmueble</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -318,10 +318,10 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Tipo de operación</label>
                 <Select value={formData.operationType} onValueChange={(v) => updateField("operationType", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
+                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="Selecciona" />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover z-50 rounded-xl">
+                  <SelectContent className="bg-popover z-50">
                     <SelectItem value="vender">Vender</SelectItem>
                     <SelectItem value="arrendar">Arrendar</SelectItem>
                   </SelectContent>
@@ -332,10 +332,10 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Tipo de inmueble</label>
                 <Select value={formData.propertyType} onValueChange={(v) => updateField("propertyType", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
+                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="Selecciona tipo" />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover z-50 rounded-xl">
+                  <SelectContent className="bg-popover z-50">
                     {Object.entries(propertyTypeLabels).map(([value, label]) => (
                       <SelectItem key={value} value={value}>
                         {label}
@@ -352,7 +352,7 @@ const PublicarInmueble = () => {
                   value={formData.city}
                   onValueChange={(v) => updateField("city", v)}
                   placeholder="Buscar municipio en Colombia…"
-                  triggerClassName="h-12 rounded-xl"
+                  triggerClassName="h-12"
                 />
               </div>
 
@@ -365,7 +365,7 @@ const PublicarInmueble = () => {
                     placeholder="Dirección del inmueble"
                     value={formData.address}
                     onChange={(e) => updateField("address", e.target.value)}
-                    className="h-12 pl-10 bg-secondary/40 border-border/40 rounded-xl"
+                    className="h-12 pl-10 bg-secondary/40 border-border/40"
                   />
                 </div>
               </div>
@@ -373,10 +373,10 @@ const PublicarInmueble = () => {
           </section>
 
           {/* Characteristics Section */}
-          <section className="bg-card rounded-2xl border border-border p-6 space-y-6">
+          <section className="bg-card border border-border p-6 space-y-6">
             <div className="flex items-center gap-2 text-foreground">
               <FileText className="w-5 h-5 text-gold" />
-              <h2 className="font-display text-lg font-medium">Características</h2>
+              <h2 className="font-display text-[22px] font-medium">Características</h2>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -390,7 +390,7 @@ const PublicarInmueble = () => {
                     placeholder="Ej: 350000000"
                     value={formData.price}
                     onChange={(e) => updateField("price", e.target.value)}
-                    className="h-12 pl-10 bg-secondary/40 border-border/40 rounded-xl"
+                    className="h-12 pl-10 bg-secondary/40 border-border/40"
                   />
                 </div>
               </div>
@@ -403,7 +403,7 @@ const PublicarInmueble = () => {
                   placeholder="Ej: 85"
                   value={formData.area}
                   onChange={(e) => updateField("area", e.target.value)}
-                  className="h-12 bg-secondary/40 border-border/40 rounded-xl"
+                  className="h-12 bg-secondary/40 border-border/40"
                 />
               </div>
 
@@ -411,10 +411,10 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Habitaciones</label>
                 <Select value={formData.bedrooms} onValueChange={(v) => updateField("bedrooms", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
+                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="—" />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover z-50 rounded-xl">
+                  <SelectContent className="bg-popover z-50">
                     {[1, 2, 3, 4, 5, 6].map((n) => (
                       <SelectItem key={n} value={n.toString()}>
                         {n}
@@ -428,10 +428,10 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Baños</label>
                 <Select value={formData.bathrooms} onValueChange={(v) => updateField("bathrooms", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
+                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="—" />
                   </SelectTrigger>
-                  <SelectContent className="bg-popover z-50 rounded-xl">
+                  <SelectContent className="bg-popover z-50">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <SelectItem key={n} value={n.toString()}>
                         {n}
@@ -449,7 +449,7 @@ const PublicarInmueble = () => {
                 placeholder="Describe las características principales de tu inmueble..."
                 value={formData.description}
                 onChange={(e) => updateField("description", e.target.value)}
-                className="min-h-[120px] bg-secondary/40 border-border/40 rounded-xl resize-none"
+                className="min-h-[120px] bg-secondary/40 border-border/40 resize-none"
               />
             </div>
 
@@ -460,7 +460,7 @@ const PublicarInmueble = () => {
               {photoPreviews.length > 0 && (
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-3">
                   {photoPreviews.map((url, i) => (
-                    <div key={url} className="relative aspect-square rounded-xl overflow-hidden border border-border/60">
+                    <div key={url} className="relative aspect-square overflow-hidden border border-border/60">
                       <img src={url} alt={`Foto ${i + 1}`} className="w-full h-full object-cover" />
                       <button
                         type="button"
@@ -476,7 +476,7 @@ const PublicarInmueble = () => {
               )}
 
               {photos.length < MAX_PHOTOS && (
-                <label className="block border-2 border-dashed border-border/60 rounded-xl p-8 text-center hover:border-gold/50 transition-colors cursor-pointer">
+                <label className="block border-2 border-dashed border-border/60 p-8 text-center hover:border-gold/50 transition-colors cursor-pointer">
                   <Upload className="w-8 h-8 mx-auto text-muted-foreground mb-2" />
                   <p className="text-sm text-muted-foreground">Haz clic para seleccionar tus fotos</p>
                   <p className="text-xs text-muted-foreground mt-1">Máximo {MAX_PHOTOS} fotos, JPG o PNG</p>
@@ -488,10 +488,10 @@ const PublicarInmueble = () => {
           </section>
 
           {/* Contact Section */}
-          <section className="bg-card rounded-2xl border border-border p-6 space-y-6">
+          <section className="bg-card border border-border p-6 space-y-6">
             <div className="flex items-center gap-2 text-foreground">
               <Phone className="w-5 h-5 text-gold" />
-              <h2 className="font-display text-lg font-medium">Datos de Contacto</h2>
+              <h2 className="font-display text-[22px] font-medium">Datos de Contacto</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -504,7 +504,7 @@ const PublicarInmueble = () => {
                     placeholder="Tu nombre"
                     value={formData.ownerName}
                     onChange={(e) => updateField("ownerName", e.target.value)}
-                    className="h-12 pl-10 bg-secondary/40 border-border/40 rounded-xl"
+                    className="h-12 pl-10 bg-secondary/40 border-border/40"
                   />
                 </div>
               </div>
@@ -516,7 +516,7 @@ const PublicarInmueble = () => {
                   placeholder="Número de documento"
                   value={formData.ownerIdNumber}
                   onChange={(e) => updateField("ownerIdNumber", e.target.value)}
-                  className="h-12 bg-secondary/40 border-border/40 rounded-xl"
+                  className="h-12 bg-secondary/40 border-border/40"
                 />
               </div>
 
@@ -531,7 +531,7 @@ const PublicarInmueble = () => {
                     value={formData.ownerEmail}
                     onChange={(e) => updateField("ownerEmail", e.target.value)}
                     disabled={otpSent}
-                    className="h-12 pl-10 pr-4 bg-secondary/40 border-border/40 rounded-xl disabled:opacity-100"
+                    className="h-12 pl-10 pr-4 bg-secondary/40 border-border/40 disabled:opacity-100"
                   />
                 </div>
 
@@ -545,7 +545,7 @@ const PublicarInmueble = () => {
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="w-full rounded-xl"
+                    className="w-full"
                     disabled={!formData.ownerEmail || isSendingOtp || otpSent}
                     onClick={sendOtp}
                   >
@@ -565,14 +565,14 @@ const PublicarInmueble = () => {
                       placeholder="Código de 6 dígitos"
                       value={otpCode}
                       onChange={(e) => setOtpCode(e.target.value)}
-                      className="h-12 bg-secondary/40 border-border/40 rounded-xl"
+                      className="h-12 bg-secondary/40 border-border/40"
                       maxLength={6}
                     />
                     <Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="w-full rounded-xl"
+                      className="w-full"
                       disabled={!otpCode || isVerifyingOtp}
                       onClick={verifyOtpCode}
                     >
@@ -600,7 +600,7 @@ const PublicarInmueble = () => {
                     placeholder="+57 300 000 0000"
                     value={formData.ownerPhone}
                     onChange={(e) => updateField("ownerPhone", e.target.value)}
-                    className="h-12 pl-10 bg-secondary/40 border-border/40 rounded-xl"
+                    className="h-12 pl-10 bg-secondary/40 border-border/40"
                   />
                 </div>
               </div>
@@ -608,13 +608,13 @@ const PublicarInmueble = () => {
           </section>
 
           {/* Contract & Signature Section */}
-          <section className="bg-card rounded-2xl border border-border p-6 space-y-4">
+          <section className="bg-card border border-border p-6 space-y-4">
             <div className="flex items-center gap-2 text-foreground">
               <PenLine className="w-5 h-5 text-gold" />
-              <h2 className="font-display text-lg font-medium">Contrato de Autorización</h2>
+              <h2 className="font-display text-[22px] font-medium">Contrato de Autorización</h2>
             </div>
 
-            <div className="bg-secondary/40 rounded-xl p-4 text-sm text-foreground/90 leading-relaxed max-h-48 overflow-y-auto">
+            <div className="bg-secondary/40 p-4 text-sm text-foreground/90 leading-relaxed max-h-48 overflow-y-auto">
               <p className="font-medium mb-2">CONTRATO DE AUTORIZACIÓN DE PUBLICACIÓN</p>
               <p className="mb-2">
                 Yo, {formData.ownerName || "[nombre del propietario]"}
@@ -635,7 +635,7 @@ const PublicarInmueble = () => {
               </p>
             </div>
 
-            <p className="text-xs text-muted-foreground bg-gold/10 border border-gold/30 rounded-lg p-3">
+            <p className="text-xs text-muted-foreground bg-gold/10 border border-gold/30 p-3">
               ⚠️ Este es un texto genérico de ejemplo, sin revisión legal — no debe usarse como contrato definitivo
               sin que un abogado lo valide primero. Además, esta firma digital simple no tiene el mismo respaldo
               legal que una firma electrónica certificada.
@@ -648,7 +648,7 @@ const PublicarInmueble = () => {
           </section>
 
           {submitError && (
-            <p className="text-sm text-destructive bg-destructive/10 border border-destructive/30 rounded-lg p-3">
+            <p className="text-sm text-destructive bg-destructive/10 border border-destructive/30 p-3">
               {submitError}
             </p>
           )}
@@ -658,7 +658,7 @@ const PublicarInmueble = () => {
             <Button
               type="submit"
               disabled={isSubmitting || !emailVerified}
-              className="w-full h-14 bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base shadow-gold transition-all hover:shadow-lg rounded-xl"
+              className="w-full h-14 bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base shadow-gold transition-all hover:shadow-lg"
             >
               {isSubmitting ? (
                 <>

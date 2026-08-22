@@ -116,7 +116,7 @@ export function CitySearchCombobox({
         onFocus={onFocus}
         onKeyDown={onKeyDown}
         className={cn(
-          "h-14 px-3 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 focus-visible:border-gold/40 rounded-xl text-base",
+          "h-14 px-3 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 focus-visible:border-gold/40 text-base",
           triggerClassName,
         )}
       />
@@ -125,7 +125,7 @@ export function CitySearchCombobox({
         <ul
           id="city-suggestions"
           role="listbox"
-          className="absolute left-0 right-0 top-full z-[100] mt-1 max-h-[min(280px,50vh)] overflow-y-auto rounded-xl border border-border/60 bg-popover text-popover-foreground shadow-lg"
+          className="absolute left-0 right-0 top-full z-[100] mt-1 max-h-[min(280px,50vh)] overflow-y-auto border border-border/60 bg-popover text-popover-foreground shadow-lg"
         >
           {filtered.length === 0 ? (
             <li className="px-3 py-3 text-sm text-muted-foreground text-center">

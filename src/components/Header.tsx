@@ -55,8 +55,8 @@ const Header = () => {
             <a
               key={link.href}
               href={isHome ? link.href : `/${link.href}`}
-              className={`text-sm font-body font-medium tracking-wide transition-colors duration-300 hover:text-gold ${
-                solidStyle ? "text-foreground" : "text-primary-foreground/90"
+              className={`text-sm font-body font-medium tracking-wide transition-colors duration-300 ${
+                solidStyle ? "text-foreground hover:text-earth" : "text-primary-foreground/90 hover:text-gold"
               }`}
             >
               {link.label}
@@ -88,7 +88,7 @@ const Header = () => {
                 key={link.href}
                 href={isHome ? link.href : `/${link.href}`}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-foreground font-body font-medium py-2 hover:text-gold transition-colors"
+                className="text-foreground font-body font-medium py-2 hover:text-earth transition-colors"
               >
                 {link.label}
               </a>

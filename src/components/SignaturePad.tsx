@@ -98,7 +98,7 @@ const SignaturePad = forwardRef<SignaturePadHandle, { className?: string }>(({ c
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
-        className="w-full h-40 touch-none rounded-xl border border-border/60 bg-white"
+        className="w-full h-40 touch-none border border-border/60 bg-white"
       />
       <div className="flex items-center justify-between mt-2">
         <p className="text-xs text-muted-foreground">

@@ -66,7 +66,7 @@ const Hero = () => {
           </p>
 
           {/* Main Headline */}
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-foreground font-medium leading-tight mb-4 opacity-0 animate-fade-up delay-100">
+          <h1 className="font-display text-4xl/[1.1] sm:text-5xl/[1.1] lg:text-6xl/[1.1] text-foreground font-medium mb-4 opacity-0 animate-fade-up delay-100">
             Encuentra el{" "}
             <span className="text-gradient-gold">hogar de tus sueños</span>
           </h1>
@@ -79,7 +79,7 @@ const Hero = () => {
 
           {/* Premium Search Card */}
           <div className="opacity-0 animate-fade-up delay-300">
-            <div className="bg-card/98 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-elevated p-6 sm:p-8 max-w-3xl mx-auto border border-border/30">
+            <div className="bg-card/98 backdrop-blur-xl shadow-elevated p-6 sm:p-8 max-w-3xl mx-auto border border-border/30">
               
               {/* Desktop Layout */}
               <div className="hidden md:block">
@@ -91,10 +91,10 @@ const Hero = () => {
                       ¿Qué quieres hacer?
                     </label>
                     <Select value={operationType} onValueChange={setOperationType}>
-                      <SelectTrigger className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base rounded-xl">
+                      <SelectTrigger className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base">
                         <SelectValue placeholder="Selecciona una opción" />
                       </SelectTrigger>
-                      <SelectContent className="bg-popover z-50 rounded-xl border-border/50">
+                      <SelectContent className="bg-popover z-50 border-border/50">
                         <SelectItem value="comprar" className="py-3 text-base">Comprar</SelectItem>
                         <SelectItem value="alquilar" className="py-3 text-base">Alquilar</SelectItem>
                         <SelectItem value="arrendar" className="py-3 text-base">Arrendar</SelectItem>
@@ -110,10 +110,10 @@ const Hero = () => {
                       Tipo de inmueble
                     </label>
                     <Select value={propertyType} onValueChange={setPropertyType}>
-                      <SelectTrigger className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base rounded-xl">
+                      <SelectTrigger className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base">
                         <SelectValue placeholder="Selecciona tipo" />
                       </SelectTrigger>
-                      <SelectContent className="bg-popover z-50 rounded-xl border-border/50">
+                      <SelectContent className="bg-popover z-50 border-border/50">
                         <SelectItem value="apartamento" className="py-3 text-base">Apartamento</SelectItem>
                         <SelectItem value="casa" className="py-3 text-base">Casa</SelectItem>
                         <SelectItem value="lote" className="py-3 text-base">Lote</SelectItem>
@@ -143,7 +143,7 @@ const Hero = () => {
                 {/* Action Button - Full width */}
                 <Button 
                   onClick={handleSearch} 
-                  className={`w-full h-14 font-semibold text-base shadow-gold transition-all hover:shadow-lg hover:scale-[1.01] rounded-xl ${
+                  className={`w-full h-14 font-semibold text-base shadow-gold transition-all hover:shadow-lg hover:scale-[1.01] ${
                     isOwnerAction 
                       ? "bg-earth hover:bg-earth/90 text-earth-foreground" 
                       : "bg-gold hover:bg-gold/90 text-gold-foreground"
@@ -163,10 +163,10 @@ const Hero = () => {
                     ¿Qué quieres hacer?
                   </label>
                   <Select value={operationType} onValueChange={setOperationType}>
-                    <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
+                    <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
                       <SelectValue placeholder="Selecciona una opción" />
                     </SelectTrigger>
-                    <SelectContent className="bg-popover z-50 rounded-xl">
+                    <SelectContent className="bg-popover z-50">
                       <SelectItem value="comprar">Comprar</SelectItem>
                       <SelectItem value="alquilar">Alquilar</SelectItem>
                       <SelectItem value="arrendar">Arrendar</SelectItem>
@@ -182,10 +182,10 @@ const Hero = () => {
                     Tipo de inmueble
                   </label>
                   <Select value={propertyType} onValueChange={setPropertyType}>
-                    <SelectTrigger className="h-12 bg-secondary/40 border-border/40 rounded-xl">
+                    <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
                       <SelectValue placeholder="Selecciona tipo" />
                     </SelectTrigger>
-                    <SelectContent className="bg-popover z-50 rounded-xl">
+                    <SelectContent className="bg-popover z-50">
                       <SelectItem value="apartamento">Apartamento</SelectItem>
                       <SelectItem value="casa">Casa</SelectItem>
                       <SelectItem value="lote">Lote</SelectItem>
@@ -215,7 +215,7 @@ const Hero = () => {
                 {/* Action Button */}
                 <Button 
                   onClick={handleSearch} 
-                  className={`w-full h-12 font-semibold shadow-gold transition-all hover:shadow-lg rounded-xl mt-2 ${
+                  className={`w-full h-12 font-semibold shadow-gold transition-all hover:shadow-lg mt-2 ${
                     isOwnerAction 
                       ? "bg-earth hover:bg-earth/90 text-earth-foreground" 
                       : "bg-gold hover:bg-gold/90 text-gold-foreground"

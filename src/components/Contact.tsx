@@ -76,7 +76,7 @@ const Contact = () => {
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-10 sm:mb-16">
-          <p className="text-gold font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
+          <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
             Contacto
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium mb-4 sm:mb-6">

@@ -11,7 +11,7 @@ const Services = () => {
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-10 sm:mb-16">
-          <p className="text-gold font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
+          <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
             Nuestros Servicios
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium mb-4 sm:mb-6">
@@ -49,7 +49,7 @@ const Services = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button variant="link" className="p-0 text-gold hover:text-gold/80 group/btn" asChild>
+                  <Button variant="link" className="p-0 text-earth hover:text-earth/80 group/btn" asChild>
                     <Link to={`/servicio/${service.slug}`}>
                       Más información
                       <ArrowRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />

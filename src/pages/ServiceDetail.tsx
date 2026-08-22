@@ -38,7 +38,7 @@ const ServiceDetail = () => {
 
           <Link
             to="/#servicios"
-            className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-gold transition-colors mb-8"
+            className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-earth transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver a servicios
@@ -49,7 +49,7 @@ const ServiceDetail = () => {
             <div className="w-14 h-14 sm:w-16 sm:h-16 bg-primary flex items-center justify-center mb-6">
               <service.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary-foreground" />
             </div>
-            <p className="text-gold font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3">
+            <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3">
               {service.tagline}
             </p>
             <h1 className="font-display text-3xl sm:text-4xl text-foreground font-medium mb-4">{service.title}</h1>
@@ -67,7 +67,7 @@ const ServiceDetail = () => {
               <div className="space-y-6">
                 {service.process.map((step, index) => (
                   <div key={step.title} className="flex gap-4 sm:gap-6">
-                    <div className="flex-shrink-0 w-10 h-10 border border-gold/40 text-gold font-display text-lg flex items-center justify-center">
+                    <div className="flex-shrink-0 w-10 h-10 border border-gold/40 text-earth font-display text-lg flex items-center justify-center">
                       {index + 1}
                     </div>
                     <div className="pb-6 border-b border-border last:border-b-0 last:pb-0 flex-1">

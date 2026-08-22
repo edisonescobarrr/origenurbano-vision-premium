@@ -12,14 +12,14 @@ const AvisoLegal = () => {
           {/* Breadcrumb */}
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors mb-8 font-body text-sm"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-earth transition-colors mb-8 font-body text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al inicio
           </Link>
 
           <article className="prose prose-lg max-w-none">
-            <h1 className="font-display text-4xl md:text-5xl font-semibold text-foreground mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl font-medium text-foreground mb-8">
               Aviso Legal
             </h1>
             

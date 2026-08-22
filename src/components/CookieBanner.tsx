@@ -89,7 +89,7 @@ const CookieBanner = () => {
       />
       
       {/* Banner */}
-      <div className="relative w-full max-w-2xl bg-card border border-border shadow-elevated m-4 rounded-xl overflow-hidden animate-fade-up">
+      <div className="relative w-full max-w-2xl bg-card border border-border shadow-elevated m-4 overflow-hidden animate-fade-up">
         {/* Header */}
         <div className="bg-primary px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -153,7 +153,7 @@ const CookieBanner = () => {
 
               <p className="font-body text-xs text-muted-foreground mt-4 text-center">
                 Más información en nuestra{" "}
-                <Link to="/politica-de-cookies" className="text-gold hover:underline">
+                <Link to="/politica-de-cookies" className="text-earth hover:underline">
                   Política de Cookies
                 </Link>
               </p>

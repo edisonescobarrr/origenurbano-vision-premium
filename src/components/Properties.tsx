@@ -9,7 +9,7 @@ const Properties = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 sm:mb-16 gap-4">
           <div>
-            <p className="text-gold font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
+            <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
               Propiedades publicadas
             </p>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium">
@@ -56,7 +56,7 @@ const Properties = () => {
                 <div className="p-6 flex flex-col flex-1">
                   <p className="font-display text-2xl text-gold font-medium mb-2">{property.price}</p>
 
-                  <h3 className="font-display text-xl text-foreground font-medium mb-2 group-hover:text-gold transition-colors">
+                  <h3 className="font-display text-xl text-foreground font-medium mb-2 group-hover:text-earth transition-colors">
                     {property.title}
                   </h3>
 

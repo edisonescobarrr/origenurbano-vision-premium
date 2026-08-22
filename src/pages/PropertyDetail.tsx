@@ -60,7 +60,7 @@ const PropertyDetail = () => {
 
           <Link
             to="/#propiedades"
-            className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-gold transition-colors mb-8"
+            className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-earth transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver a propiedades
@@ -122,7 +122,7 @@ const PropertyDetail = () => {
 
             <div className="lg:col-span-5 space-y-6">
               <div>
-                <p className="text-gold font-body text-xs uppercase tracking-[0.2em] mb-2">
+                <p className="text-earth font-body text-xs uppercase tracking-[0.2em] mb-2">
                   {property.type}
                 </p>
                 <h1 className="font-display text-3xl sm:text-4xl text-foreground font-medium mb-3">

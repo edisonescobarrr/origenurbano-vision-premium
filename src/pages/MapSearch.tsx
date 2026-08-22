@@ -455,7 +455,7 @@ const MapSearch = () => {
             {/* Search Context Badges */}
             <div className="hidden sm:flex items-center gap-2 flex-wrap justify-center">
               {operationType && (
-                <Badge variant="secondary" className="bg-gold/10 text-gold border-gold/20">
+                <Badge variant="secondary" className="bg-gold/10 text-earth border-gold/20">
                   {OPERATION_LABELS[operationType]}
                 </Badge>
               )}

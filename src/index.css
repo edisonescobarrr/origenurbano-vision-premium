@@ -26,12 +26,12 @@
     --muted-foreground: 35 12% 40%;
 
     /* Terracota */
-    --accent: 13 52% 58%;
-    --accent-foreground: 36 33% 99%;
+    --accent: 13 52% 59%;
+    --accent-foreground: 53 27% 13%;
 
     /* Terracota (acento principal) */
-    --gold: 13 52% 58%;
-    --gold-foreground: 36 33% 99%;
+    --gold: 13 52% 59%;
+    --gold-foreground: 53 27% 13%;
 
     /* Óxido (acento fuerte / hover) */
     --earth: 13 36% 42%;
@@ -115,32 +115,11 @@
     font-family: var(--font-body);
   }
 
+  /* El tamaño de cada encabezado lo define su propia clase de Tailwind en cada componente, no esta regla */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.02em;
-  }
-
-  h1 {
-    font-size: 36px;
-  }
-  h2 {
-    font-size: 30px;
-  }
-  h3, h4 {
-    font-size: 20px;
-  }
-
-  @media (min-width: 1024px) {
-    h1 {
-      font-size: 60px;
-    }
-    h2 {
-      font-size: 48px;
-    }
-    h3, h4 {
-      font-size: 24px;
-    }
   }
 }
 

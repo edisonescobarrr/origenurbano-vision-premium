@@ -18,14 +18,14 @@ const PoliticaCookies = () => {
           {/* Breadcrumb */}
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors mb-8 font-body text-sm"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-earth transition-colors mb-8 font-body text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al inicio
           </Link>
 
           <article className="prose prose-lg max-w-none">
-            <h1 className="font-display text-4xl md:text-5xl font-semibold text-foreground mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl font-medium text-foreground mb-8">
               Política de Cookies
             </h1>
             
@@ -227,7 +227,7 @@ const PoliticaCookies = () => {
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
                 Si tiene preguntas sobre el uso de cookies, contáctenos en{" "}
-                <a href="mailto:contacto@arqueno.co" className="text-gold hover:underline">
+                <a href="mailto:contacto@arqueno.co" className="text-earth hover:underline">
                   contacto@arqueno.co
                 </a>
               </p>

@@ -364,8 +364,14 @@ const MapSearch = () => {
     });
   }, [zones, selectedZones, toggleZone, hasCustomZone, customZonePolygon]);
 
-  // Fly to city when it changes
+  // Fly to city when cambia después del primer render (el primer centrado ya lo hace L.map() al crearse;
+  // repetirlo aquí en el mismo instante del montaje fallaba porque el contenedor todavía no tenía tamaño real)
+  const isInitialCityRef = useRef(true);
   useEffect(() => {
+    if (isInitialCityRef.current) {
+      isInitialCityRef.current = false;
+      return;
+    }
     if (mapRef.current) {
       mapRef.current.flyTo([cityData.lat, cityData.lng], cityData.zoom, {
         duration: 1.5,

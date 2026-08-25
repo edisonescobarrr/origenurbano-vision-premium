@@ -14,7 +14,7 @@ const PoliticaCookies = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-24 pb-16">
-        <div className="container mx-auto px-6 max-w-4xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           {/* Breadcrumb */}
           <Link 
             to="/" 

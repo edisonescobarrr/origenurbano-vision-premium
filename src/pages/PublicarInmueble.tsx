@@ -293,7 +293,7 @@ const PublicarInmueble = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="bg-card border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center gap-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
           <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </Link>
@@ -304,7 +304,7 @@ const PublicarInmueble = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8 max-w-3xl">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-3xl">
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Property Details Section */}
           <section className="bg-card border border-border p-6 space-y-6">

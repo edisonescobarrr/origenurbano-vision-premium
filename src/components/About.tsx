@@ -26,8 +26,8 @@ const About = () => {
   ];
 
   return (
-    <section id="nosotros" className="py-24 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="nosotros" className="py-16 sm:py-24 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <p className="text-earth font-body text-sm uppercase tracking-[0.2em] mb-4">

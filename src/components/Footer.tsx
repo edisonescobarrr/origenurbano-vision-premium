@@ -25,7 +25,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       {/* Main Footer */}
-      <div className="container mx-auto px-6 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -113,7 +113,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container mx-auto px-6 py-6 flex flex-col items-center gap-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col items-center gap-4">
           {/* Legal Links */}
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
             <Link

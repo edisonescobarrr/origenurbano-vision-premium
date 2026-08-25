@@ -6,7 +6,7 @@ import { PROPERTY_LISTINGS } from "@/data/propertyListings";
 const Properties = () => {
   return (
     <section id="propiedades" className="py-16 sm:py-24 bg-background">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 sm:mb-16 gap-4">
           <div>
             <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">

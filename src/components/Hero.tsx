@@ -58,7 +58,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gold/5" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
         <div className="max-w-4xl mx-auto text-center">
           {/* Tagline */}
           <p className="text-gold font-body text-sm uppercase tracking-[0.3em] mb-4 opacity-0 animate-fade-up">

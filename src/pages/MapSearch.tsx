@@ -167,7 +167,7 @@ const MapSearch = () => {
     if (mapRef.current) return;
 
     const container = mapContainerRef.current;
-    
+
     const map = L.map(container, {
       center: [cityData.lat, cityData.lng],
       zoom: cityData.zoom,
@@ -444,9 +444,10 @@ const MapSearch = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <h1 className="sr-only">Buscar propiedades por zona en {resolvedCity.label}</h1>
       {/* Header */}
       <header className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center justify-between gap-4">
             <Button 
               variant="ghost" 

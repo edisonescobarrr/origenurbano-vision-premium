@@ -39,7 +39,7 @@ const Header = () => {
           : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <Logo
@@ -82,7 +82,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-background border-t border-border animate-fade-in">
-          <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
+          <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}

@@ -13,14 +13,27 @@ const Properties = () => {
               Propiedades publicadas
             </p>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium">
-              Planos e isometrías disponibles
+              {PROPERTY_LISTINGS.length > 0 ? "Planos e isometrías disponibles" : "Nuevas oportunidades, muy pronto"}
             </h2>
           </div>
-          <Button variant="premium-outline" size="lg" className="mt-4 md:mt-0 group self-start md:self-auto">
-            Ver Todas
-            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          {PROPERTY_LISTINGS.length > 0 && (
+            <Button variant="premium-outline" size="lg" className="mt-4 md:mt-0 group self-start md:self-auto">
+              Ver Todas
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          )}
         </div>
+
+        {PROPERTY_LISTINGS.length === 0 && (
+          <div className="text-center border border-dashed border-border py-16 px-6">
+            <p className="font-body text-muted-foreground mb-6 max-w-md mx-auto">
+              Todavía no hay propiedades publicadas. ¿Tienes un inmueble para vender o arrendar?
+            </p>
+            <Button variant="premium" size="lg" asChild>
+              <Link to="/publicar-inmueble">Publicar mi inmueble</Link>
+            </Button>
+          </div>
+        )}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {PROPERTY_LISTINGS.map((property) => {

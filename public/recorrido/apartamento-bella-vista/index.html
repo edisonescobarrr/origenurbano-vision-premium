@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Apartamento Bella Vista – Recorrido 360° | ARQUENO</title>
-<meta name="description" content="Recorrido virtual 360° del Apartamento Bella Vista. Camina por cada ambiente desde tu celular.">
+<meta name="description" content="Apartamento Bella Vista: cuarto piso, 3 habitaciones, 1 baño, sala-comedor, terraza social y lavandería privada. $210.000.000. Recorrido virtual 360°.">
 <meta property="og:title" content="Apartamento Bella Vista – Recorrido virtual 360°">
-<meta property="og:description" content="Camina por cada ambiente desde tu celular. ARQUENO.">
+<meta property="og:description" content="3 habitaciones · 1 baño · Terraza social · $210.000.000. Recórrelo en 360° desde tu celular.">
 <meta property="og:image" content="https://www.arqueno.com/recorrido/apartamento-bella-vista/portada.jpg">
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.15.1/index.css">
@@ -92,7 +92,18 @@
   .portada-texto { position:relative; align-self:end; padding:24px 24px calc(34px + env(safe-area-inset-bottom)); max-width:560px; }
   .portada-texto .marca { margin-bottom:14px; }
   .portada-texto h1 { margin:0 0 8px; font-size:clamp(30px,6vw,52px); line-height:1.05; font-weight:700; }
-  .portada-texto p { margin:0 0 22px; opacity:.85; font-size:15px; letter-spacing:.04em; }
+  .portada-texto p { margin:0 0 14px; opacity:.85; font-size:15px; letter-spacing:.04em; }
+  .portada { overflow-y:auto; }
+  .portada-texto .desc { opacity:1; font-size:15px; line-height:1.5; letter-spacing:0; }
+  .caract { list-style:none; margin:0 0 16px; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; font-size:14px; }
+  .caract li { display:flex; gap:8px; align-items:flex-start; }
+  .precio { font-size:26px; font-weight:700; color:var(--acento); margin:0 0 18px; }
+  .precio small { display:block; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--texto); opacity:.7; font-weight:600; }
+  .acciones { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .acciones a { color:var(--texto); text-decoration:none; border:1.5px solid rgba(255,255,255,.5); border-radius:99px; padding:12px 20px; font:600 13px Inter,sans-serif; }
+  .acciones a:hover { border-color:var(--acento); color:var(--acento); }
+  .lema { margin-top:18px; font-size:12px; opacity:.6; letter-spacing:.06em; }
+  @media (max-width:600px){ .caract{ grid-template-columns:1fr; font-size:13.5px } .portada-texto{ padding-top:30vh } .portada-texto h1{ font-size:28px } .precio{ margin-bottom:12px } }
   .portada-texto button { border:0; cursor:pointer; background:var(--acento); color:#141414; border-radius:99px; padding:14px 28px;
     font:700 14px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; box-shadow:0 8px 24px rgba(0,0,0,.4); }
   .portada-texto button:hover { filter:brightness(1.08); }
@@ -122,7 +133,14 @@
     <div class="marca">ARQUENO</div>
     <h1 id="portada-titulo"></h1>
     <p id="portada-sub"></p>
-    <button id="portada-entrar">Iniciar recorrido</button>
+    <p class="desc" id="portada-desc"></p>
+    <ul class="caract" id="portada-caract"></ul>
+    <div class="precio" id="portada-precio"></div>
+    <div class="acciones">
+      <button id="portada-entrar">Iniciar recorrido</button>
+      <a id="portada-mapa" target="_blank" rel="noopener" style="display:none">📍 Ver ubicación</a>
+    </div>
+    <div class="lema" id="portada-lema"></div>
   </div>
 </div>
 
@@ -141,7 +159,7 @@
 <button class="boton" id="plano-abrir" style="display:none">▦ Plano</button>
 <button class="boton" id="abrir-lista">☰ Ambientes</button>
 <div class="contacto">
-  <a class="boton" href="https://wa.me/573215893324" target="_blank" rel="noopener" style="text-decoration:none">WhatsApp</a>
+  <a class="boton" id="whatsapp" href="https://wa.me/573215893324" target="_blank" rel="noopener" style="text-decoration:none">WhatsApp</a>
 </div>
 
 <div class="lista" id="lista">
@@ -165,11 +183,21 @@ const g2r = g => g * Math.PI / 180;
 document.title = `${datos.titulo} – Recorrido 360° | ARQUENO`;
 document.getElementById('titulo').textContent = datos.titulo;
 document.getElementById('subtitulo').textContent = datos.subtitulo;
+document.getElementById('whatsapp').href += '?text=' + encodeURIComponent(`Hola, me interesa el ${datos.titulo}`);
+if (datos.ubicacion) { const u = document.createElement('a'); u.className = 'boton'; u.href = datos.ubicacion; u.target = '_blank'; u.rel = 'noopener'; u.style.textDecoration = 'none'; u.textContent = '📍 Ubicación'; document.querySelector('.contacto').prepend(u); }
 if (datos.portada) {
   const p = document.getElementById('portada');
   document.getElementById('portada-foto').style.backgroundImage = `url(${carpeta}/${datos.portada})`;
   document.getElementById('portada-titulo').textContent = datos.titulo;
   document.getElementById('portada-sub').textContent = datos.subtitulo;
+  const pon = (id, v) => { const e = document.getElementById(id); if (v) e.textContent = v; else e.style.display = 'none'; };
+  pon('portada-desc', datos.descripcion);
+  pon('portada-lema', datos.lema && `ARQUENO | ${datos.lema}`);
+  const ul = document.getElementById('portada-caract');
+  (datos.caracteristicas || []).forEach(([ico, txt]) => { const li = document.createElement('li'); li.innerHTML = '<span></span><span></span>'; li.children[0].textContent = ico; li.children[1].textContent = txt; ul.append(li); });
+  const pr = document.getElementById('portada-precio');
+  if (datos.precio) pr.innerHTML = '<small>Precio</small>' + datos.precio.replace(/[<>&]/g, ''); else pr.style.display = 'none';
+  if (datos.ubicacion) { const m = document.getElementById('portada-mapa'); m.href = datos.ubicacion; m.style.display = ''; }
   p.classList.remove('oculta');
   document.getElementById('portada-entrar').onclick = () => p.classList.add('oculta');
 }

@@ -705,5 +705,31 @@
       }
     }
   },
-  "portada": "portada.jpg"
+  "portada": "portada.jpg",
+  "descripcion": "Ubicado en el cuarto piso, cuenta con excelente iluminación y muy buena ubicación.",
+  "caracteristicas": [
+    [
+      "🛏️",
+      "3 habitaciones"
+    ],
+    [
+      "🚿",
+      "1 baño"
+    ],
+    [
+      "🛋️",
+      "Sala-comedor"
+    ],
+    [
+      "🌤️",
+      "Zona social compartida en la terraza"
+    ],
+    [
+      "🧺",
+      "Zona de lavandería privada"
+    ]
+  ],
+  "precio": "$210.000.000",
+  "ubicacion": "https://maps.app.goo.gl/AWuzWQJRGMckTDNu6",
+  "lema": "Espacios para nuevos comienzos"
 }

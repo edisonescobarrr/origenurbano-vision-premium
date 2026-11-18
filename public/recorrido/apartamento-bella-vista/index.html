@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apartamento Bella Vista – Recorrido 360° | ARQUENO</title>
+<meta name="description" content="Recorrido virtual 360° del Apartamento Bella Vista. Camina por cada ambiente desde tu celular.">
+<meta property="og:title" content="Apartamento Bella Vista – Recorrido virtual 360°">
+<meta property="og:description" content="Camina por cada ambiente desde tu celular. ARQUENO.">
+<meta property="og:image" content="https://www.arqueno.com/recorrido/apartamento-bella-vista/portada.jpg">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.15.1/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.15.1/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.15.1/index.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --acento:#c9a96e; --fondo:rgba(15,15,18,.78); --texto:#f4f1ea; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:#000; color:var(--texto); font-family:Inter,system-ui,sans-serif; overflow:hidden; }
+  #visor { position:absolute; inset:0; }
+
+  .barra { position:absolute; top:0; left:0; right:0; z-index:20; display:flex; align-items:center; gap:14px;
+    padding:max(12px,env(safe-area-inset-top)) 16px 12px; background:linear-gradient(#000a,#0000); pointer-events:none; }
+  .marca { font-weight:700; letter-spacing:.22em; font-size:15px; color:var(--acento); }
+  .titulo { display:flex; flex-direction:column; line-height:1.2; }
+  .titulo b { font-size:16px; } .titulo span { font-size:12px; opacity:.8; }
+  .escena-actual { margin-left:auto; background:var(--fondo); padding:7px 14px; border-radius:99px; font-size:13px; backdrop-filter:blur(8px); }
+
+  .boton { pointer-events:auto; border:0; cursor:pointer; background:var(--fondo); color:var(--texto); border-radius:99px;
+    padding:9px 15px; font:600 13px Inter,sans-serif; backdrop-filter:blur(8px); }
+  .boton:hover { background:#000c; }
+  #abrir-lista { position:absolute; left:16px; bottom:calc(58px + env(safe-area-inset-bottom)); z-index:20; }
+
+  .lista { position:absolute; left:0; right:0; bottom:0; z-index:300; background:rgba(12,12,14,.92); backdrop-filter:blur(10px);
+    padding:14px 16px calc(16px + env(safe-area-inset-bottom)); transform:translateY(105%); transition:transform .3s; max-height:60vh; overflow:auto; }
+  .lista.abierta { transform:none; }
+  .lista-cab { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .grupo h3 { margin:12px 0 8px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--acento); }
+  .fila { display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; }
+  .mini { flex:0 0 auto; width:118px; cursor:pointer; border:2px solid transparent; border-radius:10px; overflow:hidden; background:#222; }
+  .mini img { width:100%; height:78px; object-fit:cover; display:block; }
+  .mini span { display:block; font-size:11.5px; padding:5px 7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .mini.activa { border-color:var(--acento); }
+
+  .contacto { position:absolute; right:16px; bottom:calc(58px + env(safe-area-inset-bottom)); z-index:20; display:flex; gap:8px; }
+  /* Flecha "acostada" en el piso, en el sitio al que lleva */
+  .flecha { width:76px; height:76px; border-radius:50%; border:3px solid #fff; background:rgba(0,0,0,.28);
+    display:grid; place-items:center; transform:perspective(160px) rotateX(52deg);
+    box-shadow:0 0 0 2px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.4); transition:transform .2s, border-color .2s, background .2s; cursor:pointer; }
+  .flecha svg { width:42px; height:42px; fill:none; stroke:#fff; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+  .psv-virtual-tour-link:hover .flecha { border-color:var(--acento); background:rgba(201,169,110,.35); transform:perspective(160px) rotateX(52deg) scale(1.12); }
+  .psv-virtual-tour-link:hover .flecha svg { stroke:var(--acento); }
+  /* Recuadro Interior / Exterior */
+  .zonas { position:absolute; top:calc(64px + env(safe-area-inset-top)); left:50%; transform:translateX(-50%); z-index:20;
+    display:flex; padding:4px; gap:4px; border-radius:12px; background:var(--fondo); border:1.5px solid var(--acento); backdrop-filter:blur(8px); }
+  .zonas button { border:0; cursor:pointer; background:transparent; color:var(--texto); padding:9px 20px; border-radius:9px;
+    font:700 13px Inter,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+  .zonas button:hover { background:rgba(255,255,255,.1); }
+  .zonas button.activa { background:var(--acento); color:#141414; }
+  /* Minimapa del plano */
+  .plano { position:absolute; right:16px; top:calc(64px + env(safe-area-inset-top)); z-index:20; width:170px; padding:8px 8px 6px;
+    border-radius:12px; background:var(--fondo); border:1px solid rgba(201,169,110,.5); backdrop-filter:blur(8px); }
+  .plano-cab { display:flex; justify-content:space-between; align-items:center; font:700 11px Inter,sans-serif;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--acento); margin-bottom:6px; }
+  .plano-cab button { border:0; background:transparent; color:var(--texto); font-size:18px; line-height:1; cursor:pointer; padding:0 4px; }
+  .plano svg { display:block; width:100%; height:auto; }
+  .plano-nota { font-size:9.5px; opacity:.6; text-align:center; margin-top:4px; }
+  .plano .amb { fill:rgba(255,255,255,.06); stroke:rgba(255,255,255,.75); stroke-width:.06; }
+  .plano .amb-txt { fill:rgba(255,255,255,.55); font:600 .32px Inter,sans-serif; text-anchor:middle; }
+  .plano .patio { fill:rgba(120,170,220,.15); }
+  .plano .fondo-plano { fill:rgba(255,255,255,.04); }
+  .plano .calle { fill:var(--acento); font:700 .34px Inter,sans-serif; text-anchor:middle; letter-spacing:.05em; }
+  .plano .punto { fill:#fff; stroke:#000; stroke-width:.05; cursor:pointer; }
+  .plano .punto:hover { fill:var(--acento); }
+  .plano .punto.activo { fill:var(--acento); stroke:#fff; stroke-width:.07; }
+  .plano .cono { fill:rgba(201,169,110,.45); stroke:var(--acento); stroke-width:.04; pointer-events:none; }
+  #plano-abrir { position:absolute; right:16px; top:calc(64px + env(safe-area-inset-top)); z-index:20; }
+  @media (max-width:600px){ .plano{ width:120px; top:calc(116px + env(safe-area-inset-top)); } #plano-abrir{ top:calc(116px + env(safe-area-inset-top)); } }
+  /* Recuadro con el nombre de la zona, dentro de la foto */
+  .rotulo { display:flex; align-items:center; gap:8px; padding:9px 18px; border-radius:10px; background:rgba(15,15,18,.72);
+    border:1.5px solid var(--acento); color:#fff; font:700 15px Inter,sans-serif; letter-spacing:.16em; text-transform:uppercase;
+    backdrop-filter:blur(6px); box-shadow:0 6px 20px rgba(0,0,0,.35); white-space:nowrap; pointer-events:none; }
+  .rotulo svg { width:18px; height:18px; fill:none; stroke:var(--acento); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  #editor { position:absolute; top:70px; left:16px; z-index:40; background:#000d; padding:10px; border-radius:8px; font:12px monospace; display:none; max-width:320px; }
+  @media (max-width:600px){ .titulo span{display:none} .escena-actual{font-size:12px} .marca{font-size:13px} }
+  /* Portada con la fachada */
+  .portada { position:fixed; inset:0; z-index:500; display:grid; grid-template-columns:1fr; background:#0d0d0f; transition:opacity .6s; }
+  .portada.oculta { opacity:0; pointer-events:none; }
+  .portada-foto { position:absolute; inset:0; background:center 35%/cover no-repeat; }
+  .portada-foto::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,#0005 0%,#0000 35%,#000c 75%,#000 100%); }
+  .portada-texto { position:relative; align-self:end; padding:24px 24px calc(34px + env(safe-area-inset-bottom)); max-width:560px; }
+  .portada-texto .marca { margin-bottom:14px; }
+  .portada-texto h1 { margin:0 0 8px; font-size:clamp(30px,6vw,52px); line-height:1.05; font-weight:700; }
+  .portada-texto p { margin:0 0 22px; opacity:.85; font-size:15px; letter-spacing:.04em; }
+  .portada-texto button { border:0; cursor:pointer; background:var(--acento); color:#141414; border-radius:99px; padding:14px 28px;
+    font:700 14px Inter,sans-serif; letter-spacing:.12em; text-transform:uppercase; box-shadow:0 8px 24px rgba(0,0,0,.4); }
+  .portada-texto button:hover { filter:brightness(1.08); }
+  @media (min-width:900px) and (orientation:landscape) {
+    .portada { grid-template-columns:minmax(0,46%) 1fr; }
+    .portada-foto { position:relative; }
+    .portada-foto::after { background:linear-gradient(90deg,#0000 70%,#0d0d0f 100%); }
+    .portada-texto { align-self:center; padding:48px 64px; }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+  "@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.15.1/index.module.js",
+  "@photo-sphere-viewer/virtual-tour-plugin": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.15.1/index.module.js",
+  "@photo-sphere-viewer/markers-plugin": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.15.1/index.module.js",
+  "@photo-sphere-viewer/equirectangular-tiles-adapter": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/equirectangular-tiles-adapter@5.15.1/index.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="visor"></div>
+
+<div class="portada oculta" id="portada">
+  <div class="portada-foto" id="portada-foto"></div>
+  <div class="portada-texto">
+    <div class="marca">ARQUENO</div>
+    <h1 id="portada-titulo"></h1>
+    <p id="portada-sub"></p>
+    <button id="portada-entrar">Iniciar recorrido</button>
+  </div>
+</div>
+
+<div class="barra">
+  <div class="marca">ARQUENO</div>
+  <div class="titulo"><b id="titulo">Recorrido</b><span id="subtitulo"></span></div>
+  <div class="escena-actual" id="escena-actual"></div>
+</div>
+
+<div class="zonas" id="zonas"></div>
+<div class="plano" id="plano">
+  <div class="plano-cab"><span id="plano-piso"></span><button id="plano-cerrar" title="Ocultar plano">–</button></div>
+  <svg id="plano-svg"></svg>
+  <div class="plano-nota">Esquema aproximado</div>
+</div>
+<button class="boton" id="plano-abrir" style="display:none">▦ Plano</button>
+<button class="boton" id="abrir-lista">☰ Ambientes</button>
+<div class="contacto">
+  <a class="boton" href="https://wa.me/573215893324" target="_blank" rel="noopener" style="text-decoration:none">WhatsApp</a>
+</div>
+
+<div class="lista" id="lista">
+  <div class="lista-cab"><b>Ambientes</b><button class="boton" id="cerrar-lista">✕ Cerrar</button></div>
+  <div id="grupos"></div>
+</div>
+<div id="editor"></div>
+
+<script type="module">
+import { Viewer } from '@photo-sphere-viewer/core';
+import { VirtualTourPlugin } from '@photo-sphere-viewer/virtual-tour-plugin';
+import { MarkersPlugin } from '@photo-sphere-viewer/markers-plugin';
+import { EquirectangularTilesAdapter } from '@photo-sphere-viewer/equirectangular-tiles-adapter';
+
+const params = new URLSearchParams(location.search);
+const enWeb = location.pathname.match(/\/recorrido\/([\w-]+)(\/(index\.html)?)?$/)?.[1];
+const carpeta = enWeb ? `/recorrido/${enWeb}` : (params.get('t') || 'casa-210');
+const datos = await fetch(`${carpeta}/recorrido.json`).then(r => r.json());
+const g2r = g => g * Math.PI / 180;
+
+document.title = `${datos.titulo} – Recorrido 360° | ARQUENO`;
+document.getElementById('titulo').textContent = datos.titulo;
+document.getElementById('subtitulo').textContent = datos.subtitulo;
+if (datos.portada) {
+  const p = document.getElementById('portada');
+  document.getElementById('portada-foto').style.backgroundImage = `url(${carpeta}/${datos.portada})`;
+  document.getElementById('portada-titulo').textContent = datos.titulo;
+  document.getElementById('portada-sub').textContent = datos.subtitulo;
+  p.classList.remove('oculta');
+  document.getElementById('portada-entrar').onclick = () => p.classList.add('oculta');
+}
+
+const ruta = id => `${carpeta}/escenas/${id}`;
+const nodos = Object.entries(datos.escenas).map(([id, e]) => ({
+  id, name: e.nombre, caption: e.nombre, thumbnail: `${ruta(id)}/mini.jpg`,
+  panorama: { width: 8192, cols: 16, rows: 8, baseUrl: `${ruta(id)}/base.jpg`,
+              tileUrl: (c, r) => `${ruta(id)}/t/${c}_${r}.jpg` },
+  links: e.enlaces.map(([destino, yaw, pitch]) => ({
+    nodeId: destino, position: { yaw: g2r(yaw), pitch: g2r(pitch ?? -24) } })),
+  markers: (e.rotulos || []).map(([texto, yaw, pitch], i) => ({
+    id: `rotulo-${id}-${i}`, position: { yaw: g2r(yaw), pitch: g2r(pitch) }, anchor: 'bottom center',
+    html: `<div class="rotulo"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>${texto}</div>`,
+  })),
+}));
+
+// ===== Rumbo de cada foto: hacia dónde del plano apunta su centro (0 = hacia la calle) =====
+const plano = datos.plano;
+const r2g = r => r * 180 / Math.PI, norm = a => ((a + 540) % 360) - 180;
+const rumbo = {};
+if (plano) {
+  for (const [id, cam] of Object.entries(plano.camaras)) {
+    let sx = 0, cx = 0;
+    for (const [t, yaw] of datos.escenas[id].enlaces) {
+      const o = plano.camaras[t]; if (!o || o.piso !== cam.piso) continue;
+      const b = r2g(Math.atan2(o.xy[0] - cam.xy[0], -(o.xy[1] - cam.xy[1])));
+      const h = (b - yaw) * Math.PI / 180; sx += Math.sin(h); cx += Math.cos(h);
+    }
+    if (sx || cx) rumbo[id] = norm(r2g(Math.atan2(sx, cx)));
+  }
+}
+// Al pasar de una foto a otra, seguir mirando hacia el mismo lado del mundo.
+const enlace = (a, b) => datos.escenas[a]?.enlaces.find(l => l[0] === b);
+function giroAlLlegar(desde, hacia, giroActual) {
+  const fijo = enlace(desde, hacia)?.[3]; // 4.º dato de la flecha: hacia dónde mirar al llegar (escaleras)
+  if (fijo != null) return fijo;
+  if (rumbo[desde] != null && rumbo[hacia] != null) return giroActual + rumbo[desde] - rumbo[hacia];
+  const ida = enlace(desde, hacia), vuelta = enlace(hacia, desde); // sin plano: usar la flecha de regreso
+  if (ida && vuelta) return giroActual + (vuelta[1] + 180) - ida[1];
+  return null;
+}
+function transicion(node, fromNode) {
+  const base = { showLoader: false, effect: 'fade', speed: 650, rotation: false };
+  if (!fromNode || !visor) return base;
+  const pos = visor.getPosition(), giro = giroAlLlegar(fromNode.id, node.id, r2g(pos.yaw));
+  if (giro == null) return base;
+  return { ...base, rotateTo: { yaw: g2r(norm(giro)), pitch: pos.pitch }, zoomTo: visor.getZoomLevel() };
+}
+
+var visor = new Viewer({
+  container: 'visor',
+  adapter: EquirectangularTilesAdapter,
+  navbar: ['zoom', 'move', 'fullscreen'],
+  lang: { zoom: 'Acercar', zoomOut: 'Alejar', zoomIn: 'Acercar', moveUp: 'Arriba', moveDown: 'Abajo',
+          moveLeft: 'Izquierda', moveRight: 'Derecha', fullscreen: 'Pantalla completa', loading: 'Cargando…' },
+  defaultZoomLvl: 20,
+  defaultYaw: g2r(datos.giroInicial ?? 0),
+  touchmoveTwoFingers: false,
+  mousewheelCtrlKey: false,
+  plugins: [
+    MarkersPlugin,
+    [VirtualTourPlugin, {
+      positionMode: 'manual', renderMode: '2d', nodes: nodos, startNodeId: datos.inicio,
+      preload: true, transitionOptions: transicion,
+      arrowStyle: {
+        element: () => {
+          const d = document.createElement('div');
+          d.innerHTML = '<div class="flecha"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></div>';
+          return d;
+        },
+        size: { width: 76, height: 76 },
+      },
+    }],
+  ],
+});
+const tour = visor.getPlugin(VirtualTourPlugin);
+
+// Lista de ambientes
+const cont = document.getElementById('grupos');
+for (const g of datos.grupos) {
+  const div = document.createElement('div'); div.className = 'grupo';
+  div.innerHTML = `<h3>${g.nombre}</h3><div class="fila"></div>`;
+  for (const id of g.escenas) {
+    const m = document.createElement('div'); m.className = 'mini'; m.dataset.id = id;
+    m.innerHTML = `<img loading="lazy" src="${ruta(id)}/mini.jpg" alt=""><span>${datos.escenas[id].nombre}</span>`;
+    m.onclick = () => { tour.setCurrentNode(id); lista.classList.remove('abierta'); };
+    div.querySelector('.fila').appendChild(m);
+  }
+  cont.appendChild(div);
+}
+const lista = document.getElementById('lista');
+document.getElementById('abrir-lista').onclick = () => lista.classList.add('abierta');
+document.getElementById('cerrar-lista').onclick = () => lista.classList.remove('abierta');
+
+// Recuadro Interior / Exterior
+const zonasDiv = document.getElementById('zonas');
+for (const z of datos.zonas || []) {
+  const b = document.createElement('button'); b.textContent = z.nombre; b.dataset.zona = z.nombre;
+  b.onclick = () => { if (!z.escenas.includes(tour.getCurrentNode().id)) tour.setCurrentNode(z.inicio); };
+  zonasDiv.appendChild(b);
+}
+if (!datos.zonas) zonasDiv.remove();
+
+// ===== Minimapa: plano con la posición de cada cámara y hacia dónde se mira =====
+const planoDiv = document.getElementById('plano'), svg = document.getElementById('plano-svg');
+const abrirPlano = document.getElementById('plano-abrir');
+const NS = 'http://www.w3.org/2000/svg';
+let pisoVisible = -1, cono = null;
+function dibujarPiso(p) {
+  pisoVisible = p; const piso = plano.pisos[p], m = 0.5;
+  svg.setAttribute('viewBox', `${-m} ${-m - 0.4} ${plano.ancho + 2 * m} ${plano.fondo + 2 * m + 0.4}`);
+  svg.innerHTML = '';
+  const el = (tag, attrs, txt) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (txt) e.textContent = txt; svg.appendChild(e); return e; };
+  el('text', { x: plano.ancho / 2, y: -0.25, class: 'calle' }, `▲ ${plano.frente.toUpperCase()}`);
+  if (piso.imagen) {
+    el('rect', { x: 0, y: 0, width: plano.ancho, height: plano.fondo, class: 'fondo-plano' });
+    el('image', { href: `${carpeta}/${piso.imagen}`, x: 0, y: 0, width: plano.ancho, height: plano.fondo, preserveAspectRatio: 'none' });
+  }
+  for (const [nombre, x, y, w, h] of piso.ambientes) {
+    if (w === undefined) { // solo el nombre, encima del plano real
+      const pal = nombre.split(' '), lineas = pal.length > 1 && nombre.length > 10 ? [pal.slice(0, -1).join(' '), pal.at(-1)] : [nombre];
+      lineas.forEach((t, i) => el('text', { x, y: y + (i - (lineas.length - 1) / 2) * 0.38 + 0.1, class: 'amb-txt' }, t));
+      continue;
+    }
+    el('rect', { x, y, width: w, height: h, class: 'amb' + (/patio/i.test(nombre) ? ' patio' : '') });
+    const pal = nombre.split(' '), lineas = w < 2 && pal.length > 1 ? pal : [nombre];
+    lineas.forEach((t, i) => el('text', { x: x + w / 2, y: y + h / 2 + (i - (lineas.length - 1) / 2) * 0.38 + 0.1, class: 'amb-txt' }, t));
+  }
+  cono = el('path', { d: 'M0 0 L-0.75 -1.6 A1.75 1.75 0 0 1 0.75 -1.6 Z', class: 'cono' });
+  for (const [id, cam] of Object.entries(plano.camaras)) {
+    if (cam.piso !== p) continue;
+    const c = el('circle', { cx: cam.xy[0], cy: cam.xy[1], r: 0.22, class: 'punto', 'data-id': id });
+    const t = document.createElementNS(NS, 'title'); t.textContent = datos.escenas[id].nombre; c.appendChild(t);
+    c.addEventListener('click', () => tour.setCurrentNode(id));
+  }
+  document.getElementById('plano-piso').textContent = piso.nombre;
+}
+function actualizarCono() {
+  const id = tour.getCurrentNode()?.id, cam = plano?.camaras[id];
+  if (!cam || !cono || cam.piso !== pisoVisible) return;
+  const ang = rumbo[id] + r2g(visor.getPosition().yaw);
+  cono.setAttribute('transform', `translate(${cam.xy[0]} ${cam.xy[1]}) rotate(${ang})`);
+}
+let planoOculto = false;
+try { planoOculto = localStorage.getItem('planoOculto') === '1'; } catch {}
+function mostrarPlano(nodoId) {
+  const cam = plano?.camaras[nodoId];
+  planoDiv.style.display = cam && !planoOculto ? '' : 'none';
+  abrirPlano.style.display = cam && planoOculto ? '' : 'none';
+  if (!cam) return;
+  if (cam.piso !== pisoVisible) dibujarPiso(cam.piso);
+  svg.querySelectorAll('.punto').forEach(c => c.classList.toggle('activo', c.dataset.id === nodoId));
+  actualizarCono();
+}
+document.getElementById('plano-cerrar').onclick = () => { planoOculto = true; try { localStorage.setItem('planoOculto', '1'); } catch {} mostrarPlano(tour.getCurrentNode().id); };
+abrirPlano.onclick = () => { planoOculto = false; try { localStorage.removeItem('planoOculto'); } catch {} mostrarPlano(tour.getCurrentNode().id); };
+if (!plano) planoDiv.remove();
+visor.addEventListener('position-updated', actualizarCono);
+
+tour.addEventListener('node-changed', ({ node }) => {
+  if (plano) mostrarPlano(node.id);
+  const zona = (datos.zonas || []).find(z => z.escenas.includes(node.id));
+  zonasDiv.querySelectorAll('button').forEach(b => b.classList.toggle('activa', b.dataset.zona === zona?.nombre));
+  document.getElementById('escena-actual').textContent = node.name;
+  document.querySelectorAll('.mini').forEach(m => m.classList.toggle('activa', m.dataset.id === node.id));
+});
+
+// Modo edición (?editar=1): muestra el ángulo donde se hace clic, para ubicar flechas.
+if (params.has('editar')) {
+  const ed = document.getElementById('editor'); ed.style.display = 'block';
+  visor.addEventListener('click', ({ data }) => {
+    const yaw = Math.round(data.yaw * 180 / Math.PI), y2 = yaw > 180 ? yaw - 360 : yaw;
+    ed.textContent = `Escena ${tour.getCurrentNode().id} · giro ${y2}° · altura ${Math.round(data.pitch * 180 / Math.PI)}°`;
+  });
+}
+window.recorrido = { visor, tour };
+</script>
+</body>
+</html>

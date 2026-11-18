@@ -8,6 +8,8 @@ import {
   ChevronRight,
   MessageCircle,
   ArrowLeft,
+  Rotate3d,
+  MapPinned,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -150,13 +152,15 @@ const PropertyDetail = () => {
                     <p className="font-display text-lg">{property.baths}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Square className="w-5 h-5 text-muted-foreground" />
-                  <div>
-                    <p className="font-body text-xs text-muted-foreground">Área</p>
-                    <p className="font-display text-lg">{property.area} m²</p>
+                {property.area ? (
+                  <div className="flex items-center gap-2">
+                    <Square className="w-5 h-5 text-muted-foreground" />
+                    <div>
+                      <p className="font-body text-xs text-muted-foreground">Área</p>
+                      <p className="font-display text-lg">{property.area} m²</p>
+                    </div>
                   </div>
-                </div>
+                ) : null}
               </div>
 
               {property.description ? (
@@ -182,13 +186,37 @@ const PropertyDetail = () => {
                 </div>
               ) : null}
 
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              {property.tourUrl ? (
+                <a
+                  href={property.tourUrl}
+                  className="group flex items-center gap-4 border border-gold/60 bg-gold/10 hover:bg-gold/20 transition-colors p-4"
+                >
+                  <Rotate3d className="w-8 h-8 text-gold shrink-0" />
+                  <span className="flex-1">
+                    <span className="block font-display text-lg text-foreground">Recorrido virtual 360°</span>
+                    <span className="block font-body text-sm text-muted-foreground">
+                      Camina por cada ambiente como si estuvieras allí
+                    </span>
+                  </span>
+                  <ChevronRight className="w-5 h-5 text-gold group-hover:translate-x-1 transition-transform" />
+                </a>
+              ) : null}
+
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 pt-2">
                 <Button variant="premium" size="lg" className="w-full sm:w-auto" asChild>
                   <a href={waUrl} target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Consultar por WhatsApp
                   </a>
                 </Button>
+                {property.mapUrl ? (
+                  <Button variant="premium-outline" size="lg" className="w-full sm:w-auto" asChild>
+                    <a href={property.mapUrl} target="_blank" rel="noopener noreferrer">
+                      <MapPinned className="w-4 h-4 mr-2" />
+                      Ver ubicación
+                    </a>
+                  </Button>
+                ) : null}
                 <Button variant="premium-outline" size="lg" className="w-full sm:w-auto" asChild>
                   <Link to="/#contacto">Agendar visita</Link>
                 </Button>

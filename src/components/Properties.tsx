@@ -61,6 +61,11 @@ const Properties = () => {
                       Destacado
                     </span>
                   )}
+                  {property.tourUrl && (
+                    <span className="absolute bottom-4 left-4 bg-primary/90 text-primary-foreground text-xs font-body uppercase tracking-wider px-3 py-1">
+                      Recorrido 360°
+                    </span>
+                  )}
                   <span className="absolute bottom-4 right-4 bg-background/95 text-foreground text-xs font-body uppercase tracking-wider px-3 py-1 border border-border opacity-0 group-hover:opacity-100 transition-opacity">
                     Ver detalle
                   </span>
@@ -87,10 +92,12 @@ const Properties = () => {
                       <Bath className="w-4 h-4 text-muted-foreground" />
                       <span className="font-body text-sm">{property.baths}</span>
                     </div>
-                    <div className="flex items-center gap-1 text-foreground">
-                      <Square className="w-4 h-4 text-muted-foreground" />
-                      <span className="font-body text-sm">{property.area} m²</span>
-                    </div>
+                    {property.area ? (
+                      <div className="flex items-center gap-1 text-foreground">
+                        <Square className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-body text-sm">{property.area} m²</span>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </article>

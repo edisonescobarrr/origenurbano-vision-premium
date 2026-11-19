@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { COMPANY } from "@/data/company";
 
 const TerminosCondiciones = () => {
   return (
@@ -24,7 +25,7 @@ const TerminosCondiciones = () => {
             </h1>
             
             <p className="text-muted-foreground font-body leading-relaxed mb-8">
-              Última actualización: Febrero 2025
+              Última actualización: Septiembre 2026
             </p>
 
             <section className="mb-10">
@@ -217,8 +218,8 @@ const TerminosCondiciones = () => {
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
                 Si tiene preguntas sobre estos términos, contáctenos en{" "}
-                <a href="mailto:legal@arqueno.co" className="text-earth hover:underline">
-                  legal@arqueno.co
+                <a href={`mailto:${COMPANY.email}`} className="text-earth hover:underline break-words">
+                  {COMPANY.email}
                 </a>
               </p>
             </div>

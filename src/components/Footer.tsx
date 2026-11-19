@@ -1,25 +1,21 @@
-import { Facebook, Instagram, Linkedin, ArrowUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import Logo from "@/components/Logo";
+import { COMPANY } from "@/data/company";
+import { SERVICES } from "@/data/services";
 
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Con "/" delante también funcionan desde las páginas legales y de servicios, no solo desde el inicio
   const quickLinks = [
-    { href: "#inicio", label: "Inicio" },
-    { href: "#nosotros", label: "Quiénes Somos" },
-    { href: "#servicios", label: "Servicios" },
-    { href: "#propiedades", label: "Propiedades" },
-    { href: "#contacto", label: "Contacto" },
-  ];
-
-  const services = [
-    "Compra de Vivienda",
-    "Venta de Inmuebles",
-    "Asesoría Inmobiliaria",
-    "Inversión Urbana",
+    { href: "/#inicio", label: "Inicio" },
+    { href: "/#nosotros", label: "Quiénes Somos" },
+    { href: "/#servicios", label: "Servicios" },
+    { href: "/#propiedades", label: "Propiedades" },
+    { href: "/#contacto", label: "Contacto" },
   ];
 
   return (
@@ -31,34 +27,10 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <Logo className="text-2xl mb-4" />
 
-            <p className="font-body text-primary-foreground/70 text-sm leading-relaxed mb-6">
-              El origen de decisiones inteligentes. Tu aliado estratégico 
+            <p className="font-body text-primary-foreground/70 text-sm leading-relaxed">
+              El origen de decisiones inteligentes. Tu aliado estratégico
               en el mercado inmobiliario colombiano.
             </p>
-            {/* Social Links */}
-            <div className="flex gap-4">
-              <a
-                href="#"
-                className="w-10 h-10 border border-primary-foreground/20 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition-all"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 border border-primary-foreground/20 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition-all"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 border border-primary-foreground/20 flex items-center justify-center hover:border-gold hover:bg-gold/10 transition-all"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -71,7 +43,7 @@ const Footer = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="font-body text-sm text-primary-foreground/70 hover:text-gold transition-colors"
+                    className="font-body text-sm text-primary-foreground/70 hover:text-gold-light transition-colors"
                   >
                     {link.label}
                   </a>
@@ -86,11 +58,14 @@ const Footer = () => {
               Servicios
             </h4>
             <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service}>
-                  <span className="font-body text-sm text-primary-foreground/70">
-                    {service}
-                  </span>
+              {SERVICES.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    to={`/servicio/${service.slug}`}
+                    className="font-body text-sm text-primary-foreground/70 hover:text-gold-light transition-colors"
+                  >
+                    {service.title}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -102,10 +77,11 @@ const Footer = () => {
               Contacto
             </h4>
             <ul className="space-y-3 font-body text-sm text-primary-foreground/70">
-              <li>Bogotá, Colombia</li>
-              <li>+57 300 123 4567</li>
-              <li>contacto@arqueno.co</li>
-              <li>Lun - Vie: 8am - 6pm</li>
+              <li>{COMPANY.city}</li>
+              <li>{COMPANY.phoneDisplay}</li>
+              <li className="break-words">{COMPANY.email}</li>
+              <li>{COMPANY.hours.weekdays}</li>
+              <li>{COMPANY.hours.saturday}</li>
             </ul>
           </div>
         </div>
@@ -118,34 +94,34 @@ const Footer = () => {
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
             <Link
               to="/politica-de-privacidad"
-              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold-light transition-colors"
             >
               Política de Privacidad
             </Link>
             <Link
               to="/politica-de-cookies"
-              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold-light transition-colors"
             >
               Política de Cookies
             </Link>
             <Link
               to="/terminos-y-condiciones"
-              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold-light transition-colors"
             >
               Términos y Condiciones
             </Link>
             <Link
               to="/aviso-legal"
-              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold transition-colors"
+              className="font-body text-xs sm:text-sm text-primary-foreground/50 hover:text-gold-light transition-colors"
             >
               Aviso Legal
             </Link>
           </div>
-          
+
           {/* Copyright and scroll button */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between">
             <p className="font-body text-xs sm:text-sm text-primary-foreground/50 text-center">
-              © 2025 ARQUENO. Todos los derechos reservados.
+              © {new Date().getFullYear()} ARQUENO. Todos los derechos reservados.
             </p>
             <button
               onClick={scrollToTop}

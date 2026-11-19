@@ -32,6 +32,8 @@
     /* Terracota (acento principal) */
     --gold: 13 52% 59%;
     --gold-foreground: 53 27% 13%;
+    /* Terracota clara: la única que alcanza contraste 4.5:1 como texto pequeño sobre fondos oscuros */
+    --gold-light: 13 62% 70%;
 
     /* Óxido (acento fuerte / hover) */
     --earth: 13 36% 42%;
@@ -48,13 +50,14 @@
     --radius: 0px;
 
     /* Typography */
-    --font-display: 'Fraunces', Georgia, serif;
-    --font-body: 'Inter', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-display: 'Fraunces Variable', Georgia, serif;
+    --font-body: 'Inter Variable', system-ui, sans-serif;
+    --font-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(53 27% 13%) 0%, hsl(35 20% 22%) 50%, hsl(53 27% 15%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(13 52% 58%) 0%, hsl(13 45% 65%) 100%);
+    /* Va sobre la foto clara del inicio: tonos oscuros para superar contraste 3:1 en texto grande */
+    --gradient-gold: linear-gradient(135deg, hsl(13 36% 42%) 0%, hsl(13 48% 52%) 100%);
     --gradient-overlay: linear-gradient(180deg, hsla(53, 27%, 13%, 0.7) 0%, hsla(53, 27%, 13%, 0.4) 50%, hsla(53, 27%, 13%, 0.8) 100%);
 
     /* Sombras: mínimas en reposo, más visibles solo al hacer hover (se usan bordes finos para definir en reposo) */
@@ -87,6 +90,7 @@
 
     --gold: 13 52% 62%;
     --gold-foreground: 53 20% 8%;
+    --gold-light: 13 62% 72%;
 
     --earth: 13 40% 55%;
     --earth-foreground: 53 20% 8%;

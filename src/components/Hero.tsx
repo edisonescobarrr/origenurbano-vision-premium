@@ -61,7 +61,7 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
         <div className="max-w-4xl mx-auto text-center">
           {/* Tagline */}
-          <p className="text-gold font-body text-sm uppercase tracking-[0.3em] mb-4 opacity-0 animate-fade-up">
+          <p className="text-earth font-body text-sm uppercase tracking-[0.3em] mb-4 opacity-0 animate-fade-up">
             Tu hogar comienza aquí
           </p>
 
@@ -91,7 +91,7 @@ const Hero = () => {
                       ¿Qué quieres hacer?
                     </label>
                     <Select value={operationType} onValueChange={setOperationType}>
-                      <SelectTrigger className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base">
+                      <SelectTrigger aria-label="¿Qué quieres hacer?" className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base">
                         <SelectValue placeholder="Selecciona una opción" />
                       </SelectTrigger>
                       <SelectContent className="bg-popover z-50 border-border/50">
@@ -110,7 +110,7 @@ const Hero = () => {
                       Tipo de inmueble
                     </label>
                     <Select value={propertyType} onValueChange={setPropertyType}>
-                      <SelectTrigger className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base">
+                      <SelectTrigger aria-label="Tipo de inmueble" className="h-14 bg-secondary/40 border-border/40 hover:bg-secondary/60 hover:border-gold/30 transition-all text-base">
                         <SelectValue placeholder="Selecciona tipo" />
                       </SelectTrigger>
                       <SelectContent className="bg-popover z-50 border-border/50">
@@ -136,6 +136,7 @@ const Hero = () => {
                       value={city}
                       onValueChange={setCity}
                       placeholder="Escribe para buscar en Colombia…"
+                      ariaLabel="Ciudad o municipio"
                     />
                   </div>
                 </div>
@@ -163,7 +164,7 @@ const Hero = () => {
                     ¿Qué quieres hacer?
                   </label>
                   <Select value={operationType} onValueChange={setOperationType}>
-                    <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
+                    <SelectTrigger aria-label="¿Qué quieres hacer?" className="h-12 bg-secondary/40 border-border/40">
                       <SelectValue placeholder="Selecciona una opción" />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
@@ -182,7 +183,7 @@ const Hero = () => {
                     Tipo de inmueble
                   </label>
                   <Select value={propertyType} onValueChange={setPropertyType}>
-                    <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
+                    <SelectTrigger aria-label="Tipo de inmueble" className="h-12 bg-secondary/40 border-border/40">
                       <SelectValue placeholder="Selecciona tipo" />
                     </SelectTrigger>
                     <SelectContent className="bg-popover z-50">
@@ -209,6 +210,7 @@ const Hero = () => {
                     onValueChange={setCity}
                     placeholder="Buscar en Colombia…"
                     triggerClassName="h-12 text-sm"
+                    ariaLabel="Ciudad o municipio"
                   />
                 </div>
 
@@ -224,14 +226,6 @@ const Hero = () => {
                   {getButtonIcon()}
                   {getButtonText()}
                 </Button>
-              </div>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 mt-10 sm:mt-12 text-center">
-              <div className="opacity-0 animate-fade-up delay-400">
-                <p className="text-2xl sm:text-3xl font-display font-semibold text-foreground">500+</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Propiedades</p>
               </div>
             </div>
           </div>

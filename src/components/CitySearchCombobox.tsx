@@ -9,6 +9,8 @@ type CitySearchComboboxProps = {
   placeholder?: string;
   className?: string;
   triggerClassName?: string;
+  id?: string;
+  ariaLabel?: string;
 };
 
 export function CitySearchCombobox({
@@ -17,6 +19,8 @@ export function CitySearchCombobox({
   placeholder = "Escribe ciudad o municipio…",
   className,
   triggerClassName,
+  id,
+  ariaLabel,
 }: CitySearchComboboxProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -103,6 +107,8 @@ export function CitySearchCombobox({
     <div ref={wrapRef} className={cn("relative w-full", className)}>
       <Input
         ref={inputRef}
+        id={id}
+        aria-label={ariaLabel}
         type="text"
         role="combobox"
         aria-expanded={showList}
@@ -129,7 +135,7 @@ export function CitySearchCombobox({
         >
           {filtered.length === 0 ? (
             <li className="px-3 py-3 text-sm text-muted-foreground text-center">
-              No hay coincidencias. Probá con otro nombre o departamento.
+              No hay coincidencias. Prueba con otro nombre o departamento.
             </li>
           ) : (
             filtered.map((place, index) => (
@@ -159,7 +165,7 @@ export function CitySearchCombobox({
 
       {focused && draft.trim().length === 0 && (
         <p className="mt-1.5 text-xs text-muted-foreground px-0.5">
-          Escribí al menos una letra para ver municipios y ciudades.
+          Escribe al menos una letra para ver municipios y ciudades.
         </p>
       )}
     </div>

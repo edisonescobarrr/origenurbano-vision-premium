@@ -74,7 +74,8 @@ const PropertyDetail = () => {
                 <img
                   src={mainSrc}
                   alt={mainLabel}
-                  fetchpriority="high"
+                  // React 18 solo reconoce el atributo en minúsculas; los tipos solo aceptan fetchPriority
+                  {...{ fetchpriority: "high" }}
                   decoding="async"
                   className={
                     property.imageFit === "cover"

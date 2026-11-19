@@ -6,6 +6,7 @@ import { Loader2 } from "lucide-react";
 import Index from "./pages/Index";
 import CookieBanner from "./components/CookieBanner";
 import ScrollToHash from "./components/ScrollToHash";
+import RouteMeta from "./components/RouteMeta";
 
 // Rutas fuera del inicio se cargan solo cuando se visitan (ej. el mapa con Leaflet no debe pesar en el inicio)
 const MapSearch = lazy(() => import("./pages/MapSearch"));
@@ -24,29 +25,35 @@ const RouteFallback = () => (
   </div>
 );
 
-const App = () => (
+/** Todo el sitio sin el router: el navegador lo envuelve en BrowserRouter y el pregenerado en StaticRouter */
+export const AppShell = () => (
   <TooltipProvider>
     <Toaster />
-    <BrowserRouter>
-      <ScrollToHash />
-      <Suspense fallback={<RouteFallback />}>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/buscar-zona" element={<MapSearch />} />
-          <Route path="/publicar-inmueble" element={<PublicarInmueble />} />
-          <Route path="/propiedad/:slug" element={<PropertyDetail />} />
-          <Route path="/servicio/:slug" element={<ServiceDetail />} />
-          <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
-          <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
-          <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />
-          <Route path="/aviso-legal" element={<AvisoLegal />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-      <CookieBanner />
-    </BrowserRouter>
+    <ScrollToHash />
+    <RouteMeta />
+    <Suspense fallback={<RouteFallback />}>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/buscar-zona" element={<MapSearch />} />
+        <Route path="/publicar-inmueble" element={<PublicarInmueble />} />
+        <Route path="/propiedad/:slug" element={<PropertyDetail />} />
+        <Route path="/servicio/:slug" element={<ServiceDetail />} />
+        <Route path="/politica-de-privacidad" element={<PoliticaPrivacidad />} />
+        <Route path="/politica-de-cookies" element={<PoliticaCookies />} />
+        <Route path="/terminos-y-condiciones" element={<TerminosCondiciones />} />
+        <Route path="/aviso-legal" element={<AvisoLegal />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+    <CookieBanner />
   </TooltipProvider>
+);
+
+const App = () => (
+  <BrowserRouter>
+    <AppShell />
+  </BrowserRouter>
 );
 
 export default App;

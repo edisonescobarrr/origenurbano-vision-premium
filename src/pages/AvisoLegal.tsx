@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Building2, Mail, Phone, MapPin, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
+import { COMPANY } from "@/data/company";
 
 const AvisoLegal = () => {
   return (
@@ -45,10 +46,8 @@ const AvisoLegal = () => {
                     <h3 className="font-display text-lg font-medium">Datos de la Empresa</h3>
                   </div>
                   <ul className="space-y-3 font-body text-foreground/80 text-sm">
-                    <li><strong>Razón Social:</strong> ARQUENO S.A.S.</li>
-                    <li><strong>NIT:</strong> 000.000.000-0</li>
-                    <li><strong>Matrícula Mercantil:</strong> 00-000000-00</li>
-                    <li><strong>Registro Inmobiliario:</strong> RIM-00000</li>
+                    <li><strong>Razón Social:</strong> {COMPANY.legalName}</li>
+                    <li><strong>Nombre comercial:</strong> {COMPANY.name}</li>
                   </ul>
                 </div>
 
@@ -74,9 +73,8 @@ const AvisoLegal = () => {
                     <h3 className="font-display text-lg font-medium">Contacto</h3>
                   </div>
                   <ul className="space-y-3 font-body text-foreground/80 text-sm">
-                    <li><strong>Email general:</strong> contacto@arqueno.co</li>
-                    <li><strong>Email legal:</strong> legal@arqueno.co</li>
-                    <li><strong>Protección de datos:</strong> protecciondatos@arqueno.co</li>
+                    <li className="break-words"><strong>Correo:</strong> {COMPANY.email}</li>
+                    <li>Consultas generales, legales y de protección de datos</li>
                   </ul>
                 </div>
 
@@ -88,9 +86,9 @@ const AvisoLegal = () => {
                     <h3 className="font-display text-lg font-medium">Teléfono</h3>
                   </div>
                   <ul className="space-y-3 font-body text-foreground/80 text-sm">
-                    <li><strong>Línea principal:</strong> +57 321 589 3324</li>
-                    <li><strong>Horario:</strong> Lun - Vie: 8am - 6pm</li>
-                    <li><strong>Sábados:</strong> 9am - 1pm</li>
+                    <li><strong>Línea principal:</strong> {COMPANY.phoneDisplay}</li>
+                    <li><strong>Horario:</strong> {COMPANY.hours.weekdays}</li>
+                    <li>{COMPANY.hours.saturday}</li>
                   </ul>
                 </div>
               </div>
@@ -162,8 +160,8 @@ const AvisoLegal = () => {
                 5. Propiedad del Sitio Web
               </h2>
               <p className="font-body text-foreground/80">
-                Este sitio web es propiedad exclusiva de ARQUENO S.A.S. El dominio 
-                www.arqueno.co se encuentra registrado y es de uso exclusivo de la empresa. 
+                Este sitio web es propiedad exclusiva de {COMPANY.legalName}. El dominio{" "}
+                {COMPANY.domain} se encuentra registrado y es de uso exclusivo de la empresa.
                 Cualquier reproducción total o parcial del contenido de este sitio requiere 
                 autorización previa y por escrito.
               </p>
@@ -246,7 +244,7 @@ const AvisoLegal = () => {
 
             <div className="bg-gold/10 border border-gold/30 rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
-                <strong>Última actualización:</strong> Febrero 2025
+                <strong>Última actualización:</strong> Septiembre 2026
                 <br />
                 <span className="text-sm text-muted-foreground">
                   Este aviso legal puede ser actualizado sin previo aviso. 

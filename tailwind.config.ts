@@ -15,9 +15,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Fraunces", "Georgia", "serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+        display: ["Fraunces Variable", "Georgia", "serif"],
+        body: ["Inter Variable", "system-ui", "sans-serif"],
+        mono: ["ui-monospace", "Cascadia Mono", "Consolas", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -49,6 +49,7 @@ export default {
         gold: {
           DEFAULT: "hsl(var(--gold))",
           foreground: "hsl(var(--gold-foreground))",
+          light: "hsl(var(--gold-light))",
         },
         earth: {
           DEFAULT: "hsl(var(--earth))",

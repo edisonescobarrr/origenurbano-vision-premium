@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { COMPANY } from "@/data/company";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -48,26 +50,26 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Ubicación",
-      content: "Bogotá, Colombia",
+      content: COMPANY.city,
       subtitle: "Atendemos a nivel nacional",
     },
     {
       icon: Phone,
       title: "Teléfono",
-      content: "+57 321 589 3324",
+      content: COMPANY.phoneDisplay,
       subtitle: "Lunes a Sábado",
     },
     {
       icon: Mail,
       title: "Email",
-      content: "contacto@arqueno.co",
+      content: COMPANY.email,
       subtitle: "Respuesta en 24 horas",
     },
     {
       icon: Clock,
       title: "Horario",
-      content: "Lun - Vie: 8am - 6pm",
-      subtitle: "Sáb: 9am - 2pm",
+      content: COMPANY.hours.weekdays,
+      subtitle: COMPANY.hours.saturday,
     },
   ];
 
@@ -100,9 +102,9 @@ const Contact = () => {
                   <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="font-display text-base sm:text-lg text-foreground font-medium">
+                  <h3 className="font-display text-base sm:text-lg text-foreground font-medium">
                     {item.title}
-                  </h4>
+                  </h3>
                   <p className="font-body text-sm sm:text-base text-foreground break-words">{item.content}</p>
                   <p className="font-body text-xs sm:text-sm text-muted-foreground">
                     {item.subtitle}
@@ -137,10 +139,11 @@ const Contact = () => {
 
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="font-body text-sm text-foreground mb-2 block">
+                  <label htmlFor="contacto-nombre" className="font-body text-sm text-foreground mb-2 block">
                     Nombre completo *
                   </label>
                   <Input
+                    id="contacto-nombre"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -150,10 +153,12 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <label className="font-body text-sm text-foreground mb-2 block">
+                  <label htmlFor="contacto-telefono" className="font-body text-sm text-foreground mb-2 block">
                     Teléfono *
                   </label>
                   <Input
+                    id="contacto-telefono"
+                    type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
@@ -165,10 +170,11 @@ const Contact = () => {
               </div>
 
               <div className="mb-4">
-                <label className="font-body text-sm text-foreground mb-2 block">
+                <label htmlFor="contacto-email" className="font-body text-sm text-foreground mb-2 block">
                   Email *
                 </label>
                 <Input
+                  id="contacto-email"
                   name="email"
                   type="email"
                   value={formData.email}
@@ -180,10 +186,11 @@ const Contact = () => {
               </div>
 
               <div className="mb-6">
-                <label className="font-body text-sm text-foreground mb-2 block">
+                <label htmlFor="contacto-mensaje" className="font-body text-sm text-foreground mb-2 block">
                   ¿Cómo podemos ayudarte? *
                 </label>
                 <Textarea
+                  id="contacto-mensaje"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -200,7 +207,11 @@ const Contact = () => {
               </Button>
 
               <p className="font-body text-xs text-muted-foreground mt-4 text-center">
-                Al enviar este formulario, aceptas nuestra política de privacidad.
+                Al enviar este formulario, aceptas nuestra{" "}
+                <Link to="/politica-de-privacidad" className="underline hover:text-earth">
+                  política de privacidad
+                </Link>
+                .
               </p>
             </form>
           </div>

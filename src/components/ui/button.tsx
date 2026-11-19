@@ -21,7 +21,7 @@ const buttonVariants = cva(
         premium: "bg-primary text-primary-foreground hover:bg-earth uppercase tracking-widest font-semibold rounded-none",
         "premium-outline": "border border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground uppercase tracking-widest rounded-none",
         gold: "bg-gold text-gold-foreground hover:bg-earth shadow-gold rounded-none",
-        whatsapp: "bg-[hsl(142,70%,40%)] text-primary-foreground hover:bg-[hsl(142,70%,35%)] uppercase tracking-widest font-semibold rounded-none",
+        whatsapp: "bg-[hsl(142,72%,29%)] text-primary-foreground hover:bg-[hsl(142,72%,24%)] uppercase tracking-widest font-semibold rounded-none",
       },
       size: {
         default: "h-10 px-4 py-2",

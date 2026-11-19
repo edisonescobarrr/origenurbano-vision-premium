@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { resolveMapSearchCity } from "@/data/colombiaPlaces";
+import { OPERATION_LABELS, PROPERTY_TYPE_LABELS } from "@/data/searchOptions";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -23,57 +24,46 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
 
-// Sample neighborhoods/zones for each city (solo ciudades principales con datos demo)
-const CITY_ZONES: Record<string, Array<{ name: string; lat: number; lng: number; properties: number }>> = {
+type Zone = { name: string; lat: number; lng: number };
+
+// Barrios sugeridos para elegir rápido en las ciudades principales (sin cantidades: aún no hay inventario real)
+const CITY_ZONES: Record<string, Zone[]> = {
   bogota: [
-    { name: "Chapinero", lat: 4.6486, lng: -74.0628, properties: 45 },
-    { name: "Usaquén", lat: 4.7044, lng: -74.0311, properties: 62 },
-    { name: "Suba", lat: 4.7419, lng: -74.0839, properties: 38 },
-    { name: "Chicó", lat: 4.6667, lng: -74.0500, properties: 28 },
-    { name: "Cedritos", lat: 4.7167, lng: -74.0500, properties: 33 },
-    { name: "La Candelaria", lat: 4.5964, lng: -74.0739, properties: 15 },
+    { name: "Chapinero", lat: 4.6486, lng: -74.0628 },
+    { name: "Usaquén", lat: 4.7044, lng: -74.0311 },
+    { name: "Suba", lat: 4.7419, lng: -74.0839 },
+    { name: "Chicó", lat: 4.6667, lng: -74.0500 },
+    { name: "Cedritos", lat: 4.7167, lng: -74.0500 },
+    { name: "La Candelaria", lat: 4.5964, lng: -74.0739 },
   ],
   medellin: [
-    { name: "El Poblado", lat: 6.2086, lng: -75.5659, properties: 55 },
-    { name: "Laureles", lat: 6.2447, lng: -75.5916, properties: 42 },
-    { name: "Envigado", lat: 6.1711, lng: -75.5858, properties: 35 },
-    { name: "Belén", lat: 6.2314, lng: -75.6047, properties: 28 },
-    { name: "Sabaneta", lat: 6.1514, lng: -75.6167, properties: 22 },
+    { name: "El Poblado", lat: 6.2086, lng: -75.5659 },
+    { name: "Laureles", lat: 6.2447, lng: -75.5916 },
+    { name: "Envigado", lat: 6.1711, lng: -75.5858 },
+    { name: "Belén", lat: 6.2314, lng: -75.6047 },
+    { name: "Sabaneta", lat: 6.1514, lng: -75.6167 },
   ],
   cali: [
-    { name: "Ciudad Jardín", lat: 3.3731, lng: -76.5225, properties: 30 },
-    { name: "Granada", lat: 3.4458, lng: -76.5428, properties: 25 },
-    { name: "San Fernando", lat: 3.4306, lng: -76.5411, properties: 22 },
-    { name: "El Peñón", lat: 3.4539, lng: -76.5406, properties: 18 },
+    { name: "Ciudad Jardín", lat: 3.3731, lng: -76.5225 },
+    { name: "Granada", lat: 3.4458, lng: -76.5428 },
+    { name: "San Fernando", lat: 3.4306, lng: -76.5411 },
+    { name: "El Peñón", lat: 3.4539, lng: -76.5406 },
   ],
   barranquilla: [
-    { name: "El Prado", lat: 10.9878, lng: -74.7956, properties: 28 },
-    { name: "Alto Prado", lat: 10.9922, lng: -74.8031, properties: 22 },
-    { name: "Villa Country", lat: 11.0086, lng: -74.8119, properties: 18 },
+    { name: "El Prado", lat: 10.9878, lng: -74.7956 },
+    { name: "Alto Prado", lat: 10.9922, lng: -74.8031 },
+    { name: "Villa Country", lat: 11.0086, lng: -74.8119 },
   ],
   cartagena: [
-    { name: "Bocagrande", lat: 10.3994, lng: -75.5536, properties: 35 },
-    { name: "Castillogrande", lat: 10.3872, lng: -75.5503, properties: 20 },
-    { name: "Manga", lat: 10.4097, lng: -75.5333, properties: 15 },
+    { name: "Bocagrande", lat: 10.3994, lng: -75.5536 },
+    { name: "Castillogrande", lat: 10.3872, lng: -75.5503 },
+    { name: "Manga", lat: 10.4097, lng: -75.5333 },
   ],
   bucaramanga: [
-    { name: "Cabecera", lat: 7.1106, lng: -73.1147, properties: 25 },
-    { name: "Sotomayor", lat: 7.1089, lng: -73.1089, properties: 18 },
-    { name: "Cañaveral", lat: 7.0833, lng: -73.0833, properties: 22 },
+    { name: "Cabecera", lat: 7.1106, lng: -73.1147 },
+    { name: "Sotomayor", lat: 7.1089, lng: -73.1089 },
+    { name: "Cañaveral", lat: 7.0833, lng: -73.0833 },
   ],
-};
-
-const OPERATION_LABELS: Record<string, string> = {
-  comprar: "Comprar",
-  arrendar: "Arrendar",
-  invertir: "Invertir",
-};
-
-const PROPERTY_LABELS: Record<string, string> = {
-  apartamento: "Apartamento",
-  casa: "Casa",
-  lote: "Lote",
-  proyecto: "Proyecto nuevo",
 };
 
 // Helper to check if a point is inside a polygon
@@ -113,17 +103,14 @@ const MapSearch = () => {
     lng: resolvedCity.lng,
     zoom: resolvedCity.zoom,
   };
-  const zones =
-    resolvedCity.zonesLegacyKey && CITY_ZONES[resolvedCity.zonesLegacyKey]
-      ? CITY_ZONES[resolvedCity.zonesLegacyKey]
-      : [];
+  const zonesKey = resolvedCity.zonesLegacyKey;
+  const zones = useMemo(() => (zonesKey && CITY_ZONES[zonesKey] ? CITY_ZONES[zonesKey] : []), [zonesKey]);
 
   const [selectedZones, setSelectedZones] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDrawingMode, setIsDrawingMode] = useState(false);
   const [hasCustomZone, setHasCustomZone] = useState(false);
   const [customZonePolygon, setCustomZonePolygon] = useState<L.LatLng[] | null>(null);
-  const [propertiesInZone, setPropertiesInZone] = useState<number>(0);
   
   const toggleZone = useCallback((zoneName: string) => {
     if (hasCustomZone) return; // Disable zone selection when custom zone is active
@@ -141,32 +128,19 @@ const MapSearch = () => {
     }
     setHasCustomZone(false);
     setCustomZonePolygon(null);
-    setPropertiesInZone(0);
     setIsDrawingMode(false);
   }, [ciudadParam]);
-
-  // Calculate properties inside custom zone
-  useEffect(() => {
-    if (customZonePolygon && customZonePolygon.length > 0) {
-      const count = zones.reduce((sum, zone) => {
-        const zonePoint = L.latLng(zone.lat, zone.lng);
-        if (isPointInPolygon(zonePoint, customZonePolygon)) {
-          return sum + zone.properties;
-        }
-        return sum;
-      }, 0);
-      setPropertiesInZone(count);
-    }
-  }, [customZonePolygon, zones]);
 
   // Initialize map
   useEffect(() => {
     if (!mapContainerRef.current) return;
-    
+
     // Prevent double initialization
     if (mapRef.current) return;
 
     const container = mapContainerRef.current;
+    const markers = markersRef.current;
+    const circles = circlesRef.current;
 
     const map = L.map(container, {
       center: [cityData.lat, cityData.lng],
@@ -174,7 +148,7 @@ const MapSearch = () => {
       zoomControl: false,
     });
 
-    const tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    const tileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
 
@@ -225,11 +199,11 @@ const MapSearch = () => {
     drawControlRef.current = drawControl;
 
     // Handle created shapes
-    map.on(L.Draw.Event.CREATED, (event: any) => {
-      const layer = event.layer;
+    map.on(L.Draw.Event.CREATED, (event) => {
+      const layer = (event as L.DrawEvents.Created).layer as L.Polygon;
       drawnItems.clearLayers();
       drawnItems.addLayer(layer);
-      
+
       const latLngs = layer.getLatLngs()[0] as L.LatLng[];
       setCustomZonePolygon(latLngs);
       setHasCustomZone(true);
@@ -246,15 +220,15 @@ const MapSearch = () => {
       window.clearTimeout(loadingFallback);
 
       // Clean up all markers and circles first
-      markersRef.current.forEach(marker => {
+      markers.forEach(marker => {
         if (marker) marker.remove();
       });
-      markersRef.current.clear();
-      
-      circlesRef.current.forEach(circle => {
+      markers.clear();
+
+      circles.forEach(circle => {
         if (circle) circle.remove();
       });
-      circlesRef.current.clear();
+      circles.clear();
       
       // Clean up drawn items
       if (drawnItemsRef.current) {
@@ -273,6 +247,8 @@ const MapSearch = () => {
         mapRef.current = null;
       }
     };
+    // Solo al montar: los cambios de ciudad posteriores los maneja el efecto de flyTo
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update markers when zones or selection changes
@@ -324,7 +300,7 @@ const MapSearch = () => {
               border: 2px solid ${shouldHighlight ? 'hsl(38, 70%, 45%)' : 'rgba(30, 30, 30, 0.2)'};
               cursor: ${hasCustomZone ? 'default' : 'pointer'};
               transition: all 0.2s;
-            ">${zone.properties}</div>
+            "><span style="width: 10px; height: 10px; border-radius: 50%; background: ${shouldHighlight ? 'white' : 'hsl(38, 70%, 45%)'};"></span></div>
           </div>
         `,
         iconSize: [48, 48],
@@ -336,7 +312,6 @@ const MapSearch = () => {
         .bindPopup(`
           <div style="text-align: center; padding: 4px;">
             <p style="font-weight: 600; margin: 0;">${zone.name}</p>
-            <p style="font-size: 12px; color: #666; margin: 4px 0 0 0;">${zone.properties} propiedades</p>
             ${isInsideCustomZone ? '<p style="font-size: 11px; color: hsl(38, 70%, 45%); margin: 4px 0 0 0;">✓ Dentro de tu zona</p>' : ''}
           </div>
         `);
@@ -386,7 +361,7 @@ const MapSearch = () => {
     setIsDrawingMode(true);
     
     // Create a new polygon handler and enable it
-    const polygonDrawer = new (L.Draw as any).Polygon(mapRef.current as any, {
+    const polygonDrawer = new L.Draw.Polygon(mapRef.current as L.DrawMap, {
       allowIntersection: false,
       shapeOptions: {
         color: "hsl(38, 70%, 45%)",
@@ -406,7 +381,6 @@ const MapSearch = () => {
     setHasCustomZone(false);
     setCustomZonePolygon(null);
     setIsDrawingMode(false);
-    setPropertiesInZone(0);
   };
 
   // Edit custom zone (redraw)
@@ -428,17 +402,6 @@ const MapSearch = () => {
     navigate(`/?${params.toString()}#propiedades`);
   };
   
-  /** Solo mostramos un número cuando sale de datos reales de zonas demo; si no, evitamos inventar una cifra */
-  const hasRealPropertyCount = hasCustomZone
-    ? propertiesInZone > 0
-    : selectedZones.length > 0 || zones.length > 0;
-
-  const totalProperties = hasCustomZone
-    ? propertiesInZone
-    : selectedZones.length > 0
-      ? zones.filter(z => selectedZones.includes(z.name)).reduce((sum, z) => sum + z.properties, 0)
-      : zones.reduce((sum, z) => sum + z.properties, 0);
-
   const canContinue =
     hasCustomZone || selectedZones.length > 0 || zones.length === 0;
 
@@ -469,7 +432,7 @@ const MapSearch = () => {
               {propertyType && (
                 <Badge variant="secondary">
                   <Building2 className="w-3 h-3 mr-1" />
-                  {PROPERTY_LABELS[propertyType]}
+                  {PROPERTY_TYPE_LABELS[propertyType]}
                 </Badge>
               )}
               <Badge variant="outline" className="border-primary/30">
@@ -490,10 +453,8 @@ const MapSearch = () => {
               disabled={!canContinue}
             >
               <Check className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">
-                {hasRealPropertyCount ? `Ver ${totalProperties} propiedades` : "Ver propiedades"}
-              </span>
-              <span className="sm:hidden">{hasRealPropertyCount ? `Ver (${totalProperties})` : "Ver"}</span>
+              <span className="hidden sm:inline">Ver propiedades</span>
+              <span className="sm:hidden">Ver</span>
             </Button>
           </div>
         </div>
@@ -542,9 +503,7 @@ const MapSearch = () => {
                     <div>
                       <p className="font-medium text-foreground">Zona personalizada</p>
                       <p className="text-xs text-muted-foreground">
-                        {propertiesInZone > 0
-                          ? `${propertiesInZone} propiedades encontradas`
-                          : "Te contactaremos con opciones en esta zona"}
+                        Lista para buscar dentro de esta zona
                       </p>
                     </div>
                   </div>
@@ -591,8 +550,8 @@ const MapSearch = () => {
 
             {!hasCustomZone && zones.length === 0 && (
               <p className="text-sm text-muted-foreground">
-                En este municipio no hay barrios de ejemplo: usá el mapa y{" "}
-                <strong className="text-foreground">dibujá tu zona</strong> o ampliá con zoom para
+                En este municipio no hay barrios sugeridos: usa el mapa y{" "}
+                <strong className="text-foreground">dibuja tu zona</strong> o amplía con zoom para
                 ubicarte.
               </p>
             )}
@@ -627,19 +586,14 @@ const MapSearch = () => {
                           }
                         `}
                       >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <div className={`
-                              w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold
-                              ${isSelected ? "bg-gold text-white" : "bg-secondary text-muted-foreground"}
-                            `}>
-                              {isSelected ? <Check className="w-3 h-3" /> : zone.properties}
-                            </div>
-                            <span className="font-medium">{zone.name}</span>
+                        <div className="flex items-center gap-2">
+                          <div className={`
+                            w-5 h-5 rounded-full flex items-center justify-center
+                            ${isSelected ? "bg-gold text-white" : "border border-border bg-secondary"}
+                          `}>
+                            {isSelected && <Check className="w-3 h-3" />}
                           </div>
-                          <span className="text-xs text-muted-foreground">
-                            {zone.properties} prop.
-                          </span>
+                          <span className="font-medium">{zone.name}</span>
                         </div>
                       </button>
                     );
@@ -658,7 +612,7 @@ const MapSearch = () => {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {totalProperties} propiedades disponibles
+                  {selectedZones.join(", ")}
                 </p>
               </Card>
             )}

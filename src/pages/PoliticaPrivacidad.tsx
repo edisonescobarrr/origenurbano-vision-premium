@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { COMPANY } from "@/data/company";
 
 const PoliticaPrivacidad = () => {
   return (
@@ -24,7 +25,7 @@ const PoliticaPrivacidad = () => {
             </h1>
             
             <p className="text-muted-foreground font-body leading-relaxed mb-8">
-              Última actualización: Febrero 2025
+              Última actualización: Septiembre 2026
             </p>
 
             <section className="mb-10">
@@ -32,11 +33,10 @@ const PoliticaPrivacidad = () => {
                 1. Responsable del Tratamiento
               </h2>
               <div className="bg-card border border-border rounded-lg p-6 font-body">
-                <p className="mb-2"><strong>Razón Social:</strong> ARQUENO S.A.S.</p>
-                <p className="mb-2"><strong>NIT:</strong> 000.000.000-0</p>
-                <p className="mb-2"><strong>Dirección:</strong> Bogotá, Colombia</p>
-                <p className="mb-2"><strong>Teléfono:</strong> +57 321 589 3324</p>
-                <p><strong>Correo electrónico:</strong> contacto@arqueno.co</p>
+                <p className="mb-2"><strong>Razón Social:</strong> {COMPANY.legalName}</p>
+                <p className="mb-2"><strong>Dirección:</strong> {COMPANY.city}</p>
+                <p className="mb-2"><strong>Teléfono:</strong> {COMPANY.phoneDisplay}</p>
+                <p className="break-words"><strong>Correo electrónico:</strong> {COMPANY.email}</p>
               </div>
             </section>
 
@@ -53,6 +53,10 @@ const PoliticaPrivacidad = () => {
                 <li>Dirección de correo electrónico</li>
                 <li>Número de teléfono móvil y/o fijo</li>
                 <li>Dirección de residencia o trabajo</li>
+                <li>
+                  Dirección y fotografías del inmueble, y su firma en la autorización de publicación,
+                  cuando publica un inmueble en el sitio
+                </li>
                 <li>Información financiera (cuando sea necesaria para transacciones inmobiliarias)</li>
                 <li>Datos de navegación y cookies (ver Política de Cookies)</li>
               </ul>
@@ -101,9 +105,9 @@ const PoliticaPrivacidad = () => {
                 Para ejercer sus derechos como titular de datos personales, puede contactarnos a través de:
               </p>
               <div className="bg-card border border-border rounded-lg p-6 font-body">
-                <p className="mb-2"><strong>Correo electrónico:</strong> protecciondatos@arqueno.co</p>
-                <p className="mb-2"><strong>Teléfono:</strong> +57 321 589 3324</p>
-                <p className="mb-2"><strong>Dirección física:</strong> Bogotá, Colombia</p>
+                <p className="mb-2 break-words"><strong>Correo electrónico:</strong> {COMPANY.email}</p>
+                <p className="mb-2"><strong>Teléfono:</strong> {COMPANY.phoneDisplay}</p>
+                <p className="mb-2"><strong>Dirección física:</strong> {COMPANY.city}</p>
                 <p><strong>Horario de atención:</strong> Lunes a Viernes de 8:00 a.m. a 6:00 p.m.</p>
               </div>
             </section>
@@ -168,8 +172,8 @@ const PoliticaPrivacidad = () => {
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mt-12">
               <p className="font-body text-foreground/80 text-center">
                 Si tiene preguntas sobre esta política, contáctenos en{" "}
-                <a href="mailto:protecciondatos@arqueno.co" className="text-earth hover:underline">
-                  protecciondatos@arqueno.co
+                <a href={`mailto:${COMPANY.email}`} className="text-earth hover:underline break-words">
+                  {COMPANY.email}
                 </a>
               </p>
             </div>

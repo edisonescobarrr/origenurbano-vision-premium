@@ -47,6 +47,8 @@ const About = () => {
                 src={aboutBg}
                 alt="ARQUENO - Desarrollo urbano en Colombia"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             {/* Decorative frame - hidden on mobile to prevent overflow */}
@@ -63,17 +65,11 @@ const About = () => {
               decisiones más importantes en la vida. Por eso, creamos una experiencia 
               inmobiliaria diferente: cercana, transparente y enfocada en resultados.
             </p>
-            <p className="font-body text-muted-foreground leading-relaxed mb-8">
-              Con un profundo conocimiento del mercado colombiano, acompañamos a familias 
-              e inversionistas en cada etapa del proceso. Desde la búsqueda inicial hasta 
+            <p className="font-body text-muted-foreground leading-relaxed">
+              Con un profundo conocimiento del mercado colombiano, acompañamos a familias
+              e inversionistas en cada etapa del proceso. Desde la búsqueda inicial hasta
               la firma final, estamos contigo.
             </p>
-
-            {/* Stats */}
-            <div className="border-t border-border pt-8">
-              <p className="font-display text-2xl sm:text-3xl text-gold font-medium">98%</p>
-              <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">Satisfacción</p>
-            </div>
           </div>
         </div>
 

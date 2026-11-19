@@ -64,6 +64,7 @@ const PublicarInmueble = () => {
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [otpError, setOtpError] = useState<string | null>(null);
+  const [dataConsent, setDataConsent] = useState(false);
 
   const signaturePadRef = useRef<SignaturePadHandle>(null);
 
@@ -207,6 +208,11 @@ const PublicarInmueble = () => {
       return;
     }
 
+    if (!dataConsent) {
+      setSubmitError("Debes autorizar el tratamiento de tus datos personales para enviar la publicación.");
+      return;
+    }
+
     if (!isSupabaseConfigured || !supabase) {
       setSubmitError("El almacenamiento todavía no está configurado. Por ahora no se pueden guardar fotos ni firma.");
       return;
@@ -318,7 +324,7 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Tipo de operación</label>
                 <Select value={formData.operationType} onValueChange={(v) => updateField("operationType", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
+                  <SelectTrigger aria-label="Tipo de operación" className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="Selecciona" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
@@ -332,7 +338,7 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Tipo de inmueble</label>
                 <Select value={formData.propertyType} onValueChange={(v) => updateField("propertyType", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
+                  <SelectTrigger aria-label="Tipo de inmueble" className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="Selecciona tipo" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
@@ -347,8 +353,9 @@ const PublicarInmueble = () => {
 
               {/* Ciudad / municipio */}
               <div className="space-y-2 md:col-span-2">
-                <label className="text-sm font-medium text-foreground">Ciudad o municipio</label>
+                <label htmlFor="publicar-ciudad" className="text-sm font-medium text-foreground">Ciudad o municipio</label>
                 <CitySearchCombobox
+                  id="publicar-ciudad"
                   value={formData.city}
                   onValueChange={(v) => updateField("city", v)}
                   placeholder="Buscar municipio en Colombia…"
@@ -358,10 +365,11 @@ const PublicarInmueble = () => {
 
               {/* Dirección */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Dirección</label>
+                <label htmlFor="publicar-direccion" className="text-sm font-medium text-foreground">Dirección</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
+                    id="publicar-direccion"
                     placeholder="Dirección del inmueble"
                     value={formData.address}
                     onChange={(e) => updateField("address", e.target.value)}
@@ -382,10 +390,11 @@ const PublicarInmueble = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {/* Precio */}
               <div className="space-y-2 col-span-2">
-                <label className="text-sm font-medium text-foreground">Precio (COP)</label>
+                <label htmlFor="publicar-precio" className="text-sm font-medium text-foreground">Precio (COP)</label>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
+                    id="publicar-precio"
                     type="number"
                     placeholder="Ej: 350000000"
                     value={formData.price}
@@ -397,8 +406,9 @@ const PublicarInmueble = () => {
 
               {/* Área */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Área (m²)</label>
+                <label htmlFor="publicar-area" className="text-sm font-medium text-foreground">Área (m²)</label>
                 <Input
+                  id="publicar-area"
                   type="number"
                   placeholder="Ej: 85"
                   value={formData.area}
@@ -411,7 +421,7 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Habitaciones</label>
                 <Select value={formData.bedrooms} onValueChange={(v) => updateField("bedrooms", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
+                  <SelectTrigger aria-label="Habitaciones" className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="—" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
@@ -428,7 +438,7 @@ const PublicarInmueble = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">Baños</label>
                 <Select value={formData.bathrooms} onValueChange={(v) => updateField("bathrooms", v)}>
-                  <SelectTrigger className="h-12 bg-secondary/40 border-border/40">
+                  <SelectTrigger aria-label="Baños" className="h-12 bg-secondary/40 border-border/40">
                     <SelectValue placeholder="—" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
@@ -444,8 +454,9 @@ const PublicarInmueble = () => {
 
             {/* Descripción */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Descripción</label>
+              <label htmlFor="publicar-descripcion" className="text-sm font-medium text-foreground">Descripción</label>
               <Textarea
+                id="publicar-descripcion"
                 placeholder="Describe las características principales de tu inmueble..."
                 value={formData.description}
                 onChange={(e) => updateField("description", e.target.value)}
@@ -455,7 +466,7 @@ const PublicarInmueble = () => {
 
             {/* Fotos */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Fotos del inmueble</label>
+              <p className="text-sm font-medium text-foreground">Fotos del inmueble</p>
 
               {photoPreviews.length > 0 && (
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-3">
@@ -497,10 +508,11 @@ const PublicarInmueble = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Nombre */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Nombre completo</label>
+                <label htmlFor="publicar-nombre" className="text-sm font-medium text-foreground">Nombre completo</label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
+                    id="publicar-nombre"
                     placeholder="Tu nombre"
                     value={formData.ownerName}
                     onChange={(e) => updateField("ownerName", e.target.value)}
@@ -511,8 +523,9 @@ const PublicarInmueble = () => {
 
               {/* Cédula */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Cédula de ciudadanía</label>
+                <label htmlFor="publicar-cedula" className="text-sm font-medium text-foreground">Cédula de ciudadanía</label>
                 <Input
+                  id="publicar-cedula"
                   placeholder="Número de documento"
                   value={formData.ownerIdNumber}
                   onChange={(e) => updateField("ownerIdNumber", e.target.value)}
@@ -522,10 +535,11 @@ const PublicarInmueble = () => {
 
               {/* Email */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Correo electrónico</label>
+                <label htmlFor="publicar-correo" className="text-sm font-medium text-foreground">Correo electrónico</label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
+                    id="publicar-correo"
                     type="email"
                     placeholder="correo@ejemplo.com"
                     value={formData.ownerEmail}
@@ -562,6 +576,9 @@ const PublicarInmueble = () => {
                 {otpSent && !emailVerified && (
                   <div className="space-y-2">
                     <Input
+                      aria-label="Código de verificación"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
                       placeholder="Código de 6 dígitos"
                       value={otpCode}
                       onChange={(e) => setOtpCode(e.target.value)}
@@ -592,10 +609,11 @@ const PublicarInmueble = () => {
 
               {/* Teléfono */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Teléfono</label>
+                <label htmlFor="publicar-telefono" className="text-sm font-medium text-foreground">Teléfono</label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
+                    id="publicar-telefono"
                     type="tel"
                     placeholder="+57 300 000 0000"
                     value={formData.ownerPhone}
@@ -642,10 +660,29 @@ const PublicarInmueble = () => {
             </p>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">Firma</label>
+              <p className="text-sm font-medium text-foreground">Firma</p>
               <SignaturePad ref={signaturePadRef} />
             </div>
           </section>
+
+          <label htmlFor="autorizacion-datos" className="flex items-start gap-3 text-sm text-foreground/90 cursor-pointer">
+            <input
+              id="autorizacion-datos"
+              type="checkbox"
+              required
+              checked={dataConsent}
+              onChange={(e) => setDataConsent(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 accent-[hsl(var(--earth))]"
+            />
+            <span>
+              Autorizo a ARQUENO a tratar mis datos personales (incluidos cédula, firma y fotos) para gestionar
+              la publicación de mi inmueble, según la{" "}
+              <Link to="/politica-de-privacidad" target="_blank" className="underline text-earth hover:text-earth/80">
+                Política de Privacidad
+              </Link>
+              .
+            </span>
+          </label>
 
           {submitError && (
             <p className="text-sm text-destructive bg-destructive/10 border border-destructive/30 p-3">

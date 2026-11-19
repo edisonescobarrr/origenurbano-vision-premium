@@ -10,8 +10,9 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isHome = pathname === "/";
-  /** Fuera del home el fondo del header va sólido para no tapar el contenido ni usar colores del hero */
+  /** Fuera del home el fondo del header va sólido para no tapar el contenido. El texto siempre es oscuro porque la foto del inicio es clara. */
   const solidStyle = !isHome || isScrolled;
+  const contactHref = isHome ? "#contacto" : "/#contacto";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,28 +43,22 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <Logo
-            className={`text-2xl md:text-3xl transition-colors duration-300 ${
-              solidStyle ? "text-primary" : "text-primary-foreground"
-            }`}
-          />
+          <Logo className="text-2xl md:text-3xl text-primary" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        {/* Desktop Navigation: desde 1280 px; por debajo no caben el logo, seis enlaces y el botón */}
+        <nav className="hidden xl:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={isHome ? link.href : `/${link.href}`}
-              className={`text-sm font-body font-medium tracking-wide transition-colors duration-300 ${
-                solidStyle ? "text-foreground hover:text-earth" : "text-primary-foreground/90 hover:text-gold"
-              }`}
+              className="text-sm font-body font-medium tracking-wide text-foreground hover:text-earth transition-colors duration-300"
             >
               {link.label}
             </a>
           ))}
-          <Button variant={solidStyle ? "premium" : "hero"} size="lg">
-            Contáctenos
+          <Button variant={solidStyle ? "premium" : "hero"} size="lg" asChild>
+            <a href={contactHref}>Contáctenos</a>
           </Button>
         </nav>
 
@@ -71,9 +66,10 @@ const Header = () => {
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={`lg:hidden p-2 transition-colors ${
-            solidStyle ? "text-primary" : "text-primary-foreground"
-          }`}
+          aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="menu-movil"
+          className="xl:hidden p-2 text-primary transition-colors"
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -81,7 +77,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border animate-fade-in">
+        <div id="menu-movil" className="xl:hidden bg-background border-t border-border animate-fade-in">
           <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
@@ -93,8 +89,10 @@ const Header = () => {
                 {link.label}
               </a>
             ))}
-            <Button variant="premium" size="lg" className="mt-4">
-              Contáctenos
+            <Button variant="premium" size="lg" className="mt-4" asChild>
+              <a href={contactHref} onClick={() => setIsMobileMenuOpen(false)}>
+                Contáctenos
+              </a>
             </Button>
           </nav>
         </div>

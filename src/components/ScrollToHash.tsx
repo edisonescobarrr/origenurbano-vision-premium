@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 const MAX_ATTEMPTS = 30;
@@ -13,11 +13,17 @@ const SETTLE_RESCROLL_MS = 400;
  */
 const ScrollToHash = () => {
   const { pathname, hash } = useLocation();
+  const lastPathname = useRef<string | null>(null);
 
   useEffect(() => {
+    const samePage = lastPathname.current === pathname;
+    lastPathname.current = pathname;
     if (!hash) return;
 
-    const id = hash.replace("#", "");
+    const id = decodeURIComponent(hash.slice(1));
+    // Al llegar desde otra página (o al cargarla) se salta directo: justo después del cambio de página
+    // la animación suave no arranca y el visitante se quedaba arriba (ej. al volver del mapa).
+    const behavior: ScrollBehavior = samePage ? "smooth" : "instant";
     let attempts = 0;
     let timeoutId: number;
     let settleTimeoutId: number;
@@ -25,10 +31,12 @@ const ScrollToHash = () => {
     const tryScroll = () => {
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        // Reafirma el scroll poco después por si algo (ej. el mapa al desmontarse) mueve el layout justo después.
+        el.scrollIntoView({ behavior, block: "start" });
         settleTimeoutId = window.setTimeout(() => {
-          document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+          const target = document.getElementById(id);
+          if (target && Math.abs(target.getBoundingClientRect().top) > 2) {
+            target.scrollIntoView({ behavior, block: "start" });
+          }
         }, SETTLE_RESCROLL_MS);
         return;
       }

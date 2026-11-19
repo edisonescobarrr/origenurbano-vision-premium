@@ -51,7 +51,7 @@ const Services = () => {
                   </ul>
                   <Button variant="link" className="p-0 text-earth hover:text-earth/80 group/btn" asChild>
                     <Link to={`/servicio/${service.slug}`}>
-                      Más información
+                      Más información<span className="sr-only"> sobre {service.title}</span>
                       <ArrowRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </Button>

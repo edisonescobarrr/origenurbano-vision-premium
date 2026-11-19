@@ -260,11 +260,6 @@ const PropertyDetail = () => {
 
           {property.tourUrl ? (
             <section className="mt-14 sm:mt-20" aria-labelledby="recorrido-360">
-              <style>{`
-                @keyframes arqueno-pano { from { background-position: 0 50%; } to { background-position: -1520px 50%; } }
-                .arqueno-pano { background-size: auto 760px; background-repeat: repeat-x; animation: arqueno-pano 70s linear infinite; }
-                @media (prefers-reduced-motion: reduce) { .arqueno-pano { animation: none; } }
-              `}</style>
               <a href={property.tourUrl} className="group relative block overflow-hidden h-[360px] sm:h-[440px] bg-primary">
                 {property.tourPreview ? (
                   <div

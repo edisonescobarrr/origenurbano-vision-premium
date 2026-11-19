@@ -256,3 +256,8 @@
 .leaflet-popup-tip {
   background: white;
 }
+
+/* Foto 360 que se desplaza en el bloque del recorrido virtual (ficha de propiedad) */
+@keyframes arqueno-pano { from { background-position: 0 50%; } to { background-position: -1520px 50%; } }
+.arqueno-pano { background-size: auto 760px; background-repeat: repeat-x; animation: arqueno-pano 70s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .arqueno-pano { animation: none; } }

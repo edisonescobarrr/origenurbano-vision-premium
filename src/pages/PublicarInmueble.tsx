@@ -26,6 +26,9 @@ import SignaturePad, { SignaturePadHandle } from "@/components/SignaturePad";
 
 const MAX_PHOTOS = 10;
 const MAX_PHOTO_SIZE_MB = 10;
+const ALLOWED_PHOTO_TYPES: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+// Versión de la política de privacidad que la persona acepta (prueba de la autorización, Decreto 1377/2013 art. 8).
+const POLICY_VERSION = "privacidad-2026-09";
 
 const PublicarInmueble = () => {
   const [searchParams] = useSearchParams();
@@ -144,6 +147,12 @@ const PublicarInmueble = () => {
 
     setPhotoError(null);
 
+    const wrongType = files.find((f) => !ALLOWED_PHOTO_TYPES[f.type]);
+    if (wrongType) {
+      setPhotoError(`"${wrongType.name}" no es JPG, PNG ni WEBP. Si es una foto de iPhone, compártela como JPG.`);
+      return;
+    }
+
     const oversized = files.find((f) => f.size > MAX_PHOTO_SIZE_MB * 1024 * 1024);
     if (oversized) {
       setPhotoError(`"${oversized.name}" pesa más de ${MAX_PHOTO_SIZE_MB} MB. Elige una foto más liviana.`);
@@ -220,59 +229,63 @@ const PublicarInmueble = () => {
 
     setIsSubmitting(true);
     try {
-      const submissionId = crypto.randomUUID();
+      const { data: userData } = await supabase.auth.getUser();
+      const userId = userData.user?.id;
+      if (!userId) {
+        setEmailVerified(false);
+        throw new Error("Tu verificación de correo venció. Vuelve a pedir el código.");
+      }
 
-      const photoUrls: string[] = [];
+      // Cada persona sube solo a su propia carpeta privada; las fotos y la firma no quedan públicas.
+      const folder = `${userId}/${crypto.randomUUID()}`;
+      const bucket = supabase.storage.from("property-submissions");
+
+      const photoPaths: string[] = [];
       for (let i = 0; i < photos.length; i++) {
         const file = photos[i];
-        const ext = file.name.split(".").pop() || "jpg";
-        const path = `${submissionId}/photo-${i}.${ext}`;
-        const { error } = await supabase.storage.from("property-submissions").upload(path, file);
+        const path = `${folder}/photo-${i}.${ALLOWED_PHOTO_TYPES[file.type] ?? "jpg"}`;
+        const { error } = await bucket.upload(path, file, { contentType: file.type });
         if (error) throw error;
-        const { data } = supabase.storage.from("property-submissions").getPublicUrl(path);
-        photoUrls.push(data.publicUrl);
+        photoPaths.push(path);
       }
 
       const signatureBlob = await signaturePadRef.current?.getBlob();
-      let signatureUrl: string | null = null;
-      if (signatureBlob) {
-        const path = `${submissionId}/signature.png`;
-        const { error } = await supabase.storage.from("property-submissions").upload(path, signatureBlob);
-        if (error) throw error;
-        const { data } = supabase.storage.from("property-submissions").getPublicUrl(path);
-        signatureUrl = data.publicUrl;
-      }
+      if (!signatureBlob) throw new Error("No se pudo leer la firma.");
+      const signaturePath = `${folder}/signature.png`;
+      const { error: sigError } = await bucket.upload(signaturePath, signatureBlob, { contentType: "image/png" });
+      if (sigError) throw sigError;
 
-      const record = {
-        operation_type: formData.operationType || null,
-        property_type: formData.propertyType || null,
-        city: formData.city || null,
-        address: formData.address || null,
-        price: formData.price ? Number(formData.price) : null,
-        area: formData.area ? Number(formData.area) : null,
-        bedrooms: formData.bedrooms ? Number(formData.bedrooms) : null,
-        bathrooms: formData.bathrooms ? Number(formData.bathrooms) : null,
-        description: formData.description || null,
-        owner_name: formData.ownerName || null,
-        owner_id_number: formData.ownerIdNumber || null,
-        owner_email: formData.ownerEmail || null,
-        owner_phone: formData.ownerPhone || null,
-        photo_urls: photoUrls,
-        signature_url: signatureUrl,
-      };
-
-      const { error: insertError } = await supabase.from("property_submissions").insert(record);
+      const { data: submissionId, error: insertError } = await supabase.rpc("submit_property", {
+        payload: {
+          operation_type: formData.operationType || null,
+          property_type: formData.propertyType || null,
+          city: formData.city || null,
+          address: formData.address || null,
+          price: formData.price || null,
+          area: formData.area || null,
+          bedrooms: formData.bedrooms || null,
+          bathrooms: formData.bathrooms || null,
+          description: formData.description || null,
+          owner_name: formData.ownerName || null,
+          owner_id_number: formData.ownerIdNumber || null,
+          owner_phone: formData.ownerPhone || null,
+          photo_paths: photoPaths,
+          signature_path: signaturePath,
+          data_consent: dataConsent,
+          policy_version: POLICY_VERSION,
+        },
+      });
       if (insertError) throw insertError;
 
-      // Best-effort email notification — the submission is already saved even if this fails.
-      supabase.functions.invoke("notify-submission", { body: { record } }).catch(() => {});
+      // Aviso por correo: el servidor lee la publicación guardada; si falla, la publicación igual queda guardada.
+      supabase.functions.invoke("notify-submission", { body: { id: submissionId } }).catch(() => {});
 
       window.open(getWhatsAppUrl(buildWhatsAppMessage()), "_blank", "noopener,noreferrer");
       setSubmitted(true);
     } catch (err) {
       setSubmitError(
         "No se pudo guardar la publicación. Revisa tu conexión e intenta de nuevo. " +
-          (err instanceof Error ? err.message : ""),
+          (err && typeof err === "object" && "message" in err ? String((err as { message: unknown }).message) : ""),
       );
     } finally {
       setIsSubmitting(false);
@@ -490,8 +503,8 @@ const PublicarInmueble = () => {
                 <label className="block border-2 border-dashed border-border/60 p-8 text-center hover:border-gold/50 transition-colors cursor-pointer">
                   <Upload className="w-8 h-8 mx-auto text-muted-foreground mb-2" />
                   <p className="text-sm text-muted-foreground">Haz clic para seleccionar tus fotos</p>
-                  <p className="text-xs text-muted-foreground mt-1">Máximo {MAX_PHOTOS} fotos, JPG o PNG</p>
-                  <input type="file" accept="image/*" multiple className="hidden" onChange={handlePhotoChange} />
+                  <p className="text-xs text-muted-foreground mt-1">Máximo {MAX_PHOTOS} fotos, JPG, PNG o WEBP</p>
+                  <input type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" onChange={handlePhotoChange} />
                 </label>
               )}
               {photoError && <p className="text-sm text-destructive">{photoError}</p>}

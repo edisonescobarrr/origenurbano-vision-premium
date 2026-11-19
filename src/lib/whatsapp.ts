@@ -1,5 +1,5 @@
 /** WhatsApp Business / chat: código país + número sin + ni espacios */
-export const WHATSAPP_PHONE_E164 = "573215893324";
+export const WHATSAPP_PHONE_E164 = "573136061920";
 
 const DEFAULT_PREFILL = "Hola, me gustaría recibir asesoría personalizada";
 

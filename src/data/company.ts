@@ -3,7 +3,7 @@ export const COMPANY = {
   name: "ARQUENO",
   legalName: "ARQUENO S.A.S.",
   email: "arquenocontacto@gmail.com",
-  phoneDisplay: "+57 321 589 3324",
+  phoneDisplay: "+57 313 606 1920",
   city: "Bogotá, Colombia",
   siteUrl: "https://www.arqueno.com",
   domain: "www.arqueno.com",

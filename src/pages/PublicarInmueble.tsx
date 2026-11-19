@@ -594,7 +594,7 @@ const PublicarInmueble = () => {
                       autoComplete="one-time-code"
                       placeholder="Código que te llegó al correo"
                       value={otpCode}
-                      onChange={(e) => setOtpCode(e.target.value.replace(/D/g, ""))}
+                      onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ""))}
                       className="h-12 bg-secondary/40 border-border/40"
                       maxLength={10}
                     />

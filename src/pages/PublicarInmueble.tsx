@@ -592,11 +592,11 @@ const PublicarInmueble = () => {
                       aria-label="Código de verificación"
                       inputMode="numeric"
                       autoComplete="one-time-code"
-                      placeholder="Código de 6 dígitos"
+                      placeholder="Código que te llegó al correo"
                       value={otpCode}
-                      onChange={(e) => setOtpCode(e.target.value)}
+                      onChange={(e) => setOtpCode(e.target.value.replace(/D/g, ""))}
                       className="h-12 bg-secondary/40 border-border/40"
-                      maxLength={6}
+                      maxLength={10}
                     />
                     <Button
                       type="button"

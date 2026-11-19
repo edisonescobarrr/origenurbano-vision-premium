@@ -59,11 +59,11 @@ export const SERVICES: Service[] = [
     tagline: "Vende al mejor precio, con estrategia real",
     description:
       "Vender no es solo publicar un anuncio. Diseñamos una estrategia de precio y exposición para que tu propiedad llegue a los compradores correctos, en el menor tiempo posible.",
-    features: ["Valoración profesional", "Marketing digital", "Red de compradores"],
+    features: ["Estimación de precio", "Marketing digital", "Red de compradores"],
     process: [
       {
-        title: "Valoración profesional",
-        description: "Analizamos el mercado y tu propiedad para definir un precio competitivo y realista.",
+        title: "Estimación de precio",
+        description: "Analizamos el mercado y tu propiedad para proponerte un precio competitivo y realista (no es un avalúo certificado).",
       },
       {
         title: "Preparación y presentación",
@@ -136,7 +136,7 @@ export const SERVICES: Service[] = [
       },
       {
         title: "Due diligence",
-        description: "Verificamos la situación legal y financiera de cada oportunidad antes de que inviertas.",
+        description: "Revisamos con cuidado los documentos y números de cada oportunidad antes de que inviertas, y te indicamos cuándo conviene un estudio de títulos con abogado.",
       },
       {
         title: "Gestión integral",

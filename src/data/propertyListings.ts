@@ -13,6 +13,8 @@ export type PropertyListing = {
   area?: number;
   /** Enlace al recorrido virtual 360° (página estática en /recorrido/...) */
   tourUrl?: string;
+  /** Foto 360 que se mueve de fondo en el bloque del recorrido */
+  tourPreview?: string;
   /** Enlace a Google Maps */
   mapUrl?: string;
   type: string;
@@ -29,24 +31,8 @@ export const PROPERTY_LISTINGS: PropertyListing[] = [
     id: "apartamento-bella-vista",
     slug: "apartamento-bella-vista",
     coverImage: `${BELLA_VISTA}/portada.jpg`,
-    gallery: [
-      `${BELLA_VISTA}/portada.jpg`,
-      `${BELLA_VISTA}/fotos/sala-cocina.jpg`,
-      `${BELLA_VISTA}/fotos/cocina.jpg`,
-      `${BELLA_VISTA}/fotos/comedor.jpg`,
-      `${BELLA_VISTA}/fotos/habitacion.jpg`,
-      `${BELLA_VISTA}/fotos/terraza.jpg`,
-      `${BELLA_VISTA}/fotos/vista.jpg`,
-    ],
-    galleryLabels: [
-      "Fachada del Edificio Bella Vista",
-      "Cocina abierta y ventanal",
-      "Cocina",
-      "Comedor con vista",
-      "Habitación con clósets",
-      "Zona social en la terraza",
-      "Vista desde el edificio",
-    ],
+    gallery: [`${BELLA_VISTA}/portada.jpg`],
+    galleryLabels: ["Fachada del Edificio Bella Vista"],
     title: "Apartamento Bella Vista",
     location: "Cumbal, Nariño",
     price: "$210.000.000",
@@ -65,6 +51,7 @@ export const PROPERTY_LISTINGS: PropertyListing[] = [
       "Zona de lavandería privada",
     ],
     tourUrl: BELLA_VISTA,
+    tourPreview: `${BELLA_VISTA}/escenas/04/base.jpg`,
     mapUrl: "https://maps.app.goo.gl/AWuzWQJRGMckTDNu6",
   },
 ];

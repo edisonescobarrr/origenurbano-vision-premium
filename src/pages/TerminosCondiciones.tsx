@@ -11,8 +11,8 @@ const TerminosCondiciones = () => {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           {/* Breadcrumb */}
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-earth transition-colors mb-8 font-body text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -23,7 +23,7 @@ const TerminosCondiciones = () => {
             <h1 className="font-display text-3xl sm:text-4xl font-medium text-foreground mb-8">
               Términos y Condiciones de Uso
             </h1>
-            
+
             <p className="text-muted-foreground font-body leading-relaxed mb-8">
               Última actualización: Septiembre 2026
             </p>
@@ -33,8 +33,8 @@ const TerminosCondiciones = () => {
                 1. Aceptación de los Términos
               </h2>
               <p className="font-body text-foreground/80">
-                Al acceder y utilizar el sitio web de ARQUENO (en adelante "el Sitio"), usted acepta 
-                estar sujeto a estos términos y condiciones de uso. Si no está de acuerdo con alguna 
+                Al acceder y utilizar el sitio web de ARQUENO (en adelante "el Sitio"), usted acepta
+                estar sujeto a estos términos y condiciones de uso. Si no está de acuerdo con alguna
                 parte de estos términos, le solicitamos que no utilice nuestro sitio web.
               </p>
             </section>
@@ -44,7 +44,7 @@ const TerminosCondiciones = () => {
                 2. Uso Permitido del Sitio
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                El usuario se compromete a utilizar el Sitio de manera lícita y conforme a estos términos. 
+                El usuario se compromete a utilizar el Sitio de manera lícita y conforme a estos términos.
                 Está prohibido:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
@@ -68,16 +68,17 @@ const TerminosCondiciones = () => {
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Promoción y exhibición de propiedades inmobiliarias</li>
-                <li>Intermediación en compra, venta y arrendamiento de inmuebles</li>
-                <li>Asesoría inmobiliaria personalizada</li>
+                <li>Acompañamiento en procesos de compra y venta de inmuebles</li>
+                <li>Asesoría técnica e inmobiliaria personalizada</li>
                 <li>Información sobre el mercado inmobiliario colombiano</li>
                 <li>Gestión de contacto entre propietarios e interesados</li>
               </ul>
               <div className="bg-card border border-border rounded-lg p-6 mt-6">
                 <p className="font-body text-foreground/80 text-sm">
-                  <strong>Importante:</strong> La información de propiedades publicada en el Sitio tiene 
-                  carácter informativo. Los precios, características y disponibilidad están sujetos a 
-                  cambios sin previo aviso y deben ser confirmados directamente con nuestros asesores.
+                  <strong>Importante:</strong> Los precios publicados están en pesos colombianos y son los
+                  que fija el propietario. Si un precio o la disponibilidad cambian, actualizamos la
+                  publicación en el Sitio. Antes de cerrar un negocio, confirme las condiciones finales
+                  con nosotros por escrito.
                 </p>
               </div>
             </section>
@@ -91,10 +92,8 @@ const TerminosCondiciones = () => {
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Proporcionar información veraz y actualizada</li>
-                <li>Mantener la confidencialidad de sus credenciales de acceso</li>
                 <li>Verificar la información de propiedades antes de tomar decisiones</li>
                 <li>Cumplir con la legislación colombiana aplicable</li>
-                <li>Notificar cualquier uso no autorizado de su cuenta</li>
               </ul>
             </section>
 
@@ -129,7 +128,7 @@ const TerminosCondiciones = () => {
                 <li>Fotografías de propiedades</li>
               </ul>
               <p className="font-body text-foreground/80 mt-4">
-                Son propiedad exclusiva de ARQUENO o de sus respectivos propietarios, y están 
+                Son propiedad exclusiva de ARQUENO o de sus respectivos propietarios, y están
                 protegidos por las leyes de propiedad intelectual de Colombia y tratados internacionales.
               </p>
             </section>
@@ -143,14 +142,14 @@ const TerminosCondiciones = () => {
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
                 <li>Que el Sitio esté disponible de forma ininterrumpida</li>
-                <li>Que el contenido esté libre de errores o sea completamente preciso</li>
                 <li>Que las transacciones inmobiliarias se concreten</li>
                 <li>La exactitud de la información proporcionada por terceros</li>
                 <li>El resultado de cualquier negociación inmobiliaria</li>
               </ul>
               <p className="font-body text-foreground/80 mt-4">
-                El uso del Sitio es bajo su propio riesgo. ARQUENO actúa como intermediario y no 
-                se hace responsable de disputas entre compradores y vendedores.
+                ARQUENO acompaña a las partes, pero el negocio lo celebran directamente el comprador y
+                el vendedor. Nada de lo anterior limita los derechos que la ley le reconoce como
+                consumidor.
               </p>
             </section>
 
@@ -159,10 +158,12 @@ const TerminosCondiciones = () => {
                 8. Limitación de Responsabilidad
               </h2>
               <p className="font-body text-foreground/80">
-                En ningún caso ARQUENO será responsable por daños indirectos, incidentales, 
-                especiales o consecuentes que surjan del uso o la imposibilidad de uso del Sitio, 
-                incluyendo pérdida de beneficios, pérdida de datos o interrupción del negocio, 
-                incluso si se ha advertido de la posibilidad de tales daños.
+                En ningún caso ARQUENO será responsable por daños indirectos, incidentales,
+                especiales o consecuentes que surjan del uso o la imposibilidad de uso del Sitio,
+                incluyendo pérdida de beneficios, pérdida de datos o interrupción del negocio,
+                incluso si se ha advertido de la posibilidad de tales daños, salvo en los casos en que la
+                ley no permita limitar la responsabilidad (por ejemplo, dolo o culpa grave, o los
+                derechos del consumidor de la Ley 1480 de 2011).
               </p>
             </section>
 
@@ -171,9 +172,9 @@ const TerminosCondiciones = () => {
                 9. Enlaces a Terceros
               </h2>
               <p className="font-body text-foreground/80">
-                El Sitio puede contener enlaces a sitios web de terceros. ARQUENO no tiene control 
-                sobre el contenido de estos sitios y no se hace responsable de su contenido, políticas 
-                de privacidad o prácticas. La inclusión de enlaces no implica respaldo o asociación 
+                El Sitio puede contener enlaces a sitios web de terceros. ARQUENO no tiene control
+                sobre el contenido de estos sitios y no se hace responsable de su contenido, políticas
+                de privacidad o prácticas. La inclusión de enlaces no implica respaldo o asociación
                 con dichos sitios.
               </p>
             </section>
@@ -183,10 +184,9 @@ const TerminosCondiciones = () => {
                 10. Modificaciones
               </h2>
               <p className="font-body text-foreground/80">
-                ARQUENO se reserva el derecho de modificar estos términos y condiciones en 
-                cualquier momento. Las modificaciones entrarán en vigor desde su publicación en el 
-                Sitio. El uso continuado del Sitio después de cualquier cambio constituye su aceptación 
-                de los nuevos términos.
+                ARQUENO se reserva el derecho de modificar estos términos y condiciones en
+                cualquier momento. Las modificaciones entrarán en vigor desde su publicación en el
+                Sitio, con su fecha, y no afectan los acuerdos que ya estén en curso.
               </p>
             </section>
 
@@ -196,9 +196,10 @@ const TerminosCondiciones = () => {
               </h2>
               <div className="bg-card border border-border rounded-lg p-6">
                 <p className="font-body text-foreground/80">
-                  Estos términos se rigen por las leyes de la República de Colombia. Cualquier disputa 
-                  que surja de estos términos o del uso del Sitio será sometida a la jurisdicción 
-                  exclusiva de los tribunales competentes de la ciudad de Bogotá, Colombia.
+                  Estos términos se rigen por las leyes de la República de Colombia. Si tiene una
+                  queja, escríbanos primero a {COMPANY.email}: le responderemos en máximo 15 días
+                  hábiles. Como consumidor, usted conserva siempre su derecho a acudir a la
+                  Superintendencia de Industria y Comercio (SIC) o al juez de su domicilio.
                 </p>
               </div>
             </section>
@@ -208,9 +209,9 @@ const TerminosCondiciones = () => {
                 12. Disposiciones Finales
               </h2>
               <p className="font-body text-foreground/80">
-                Si alguna disposición de estos términos se considera inválida o inaplicable, dicha 
-                disposición será eliminada sin afectar la validez de las demás disposiciones. La 
-                falta de ejercicio de cualquier derecho bajo estos términos no constituirá una 
+                Si alguna disposición de estos términos se considera inválida o inaplicable, dicha
+                disposición será eliminada sin afectar la validez de las demás disposiciones. La
+                falta de ejercicio de cualquier derecho bajo estos términos no constituirá una
                 renuncia al mismo.
               </p>
             </section>

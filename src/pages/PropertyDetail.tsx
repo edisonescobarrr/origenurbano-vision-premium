@@ -69,60 +69,93 @@ const PropertyDetail = () => {
           </Link>
 
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="relative aspect-[4/3] bg-secondary/40 border border-border/60 overflow-hidden">
-                <img
-                  src={mainSrc}
-                  alt={mainLabel}
-                  // React 18 solo reconoce el atributo en minúsculas; los tipos solo aceptan fetchPriority
-                  {...{ fetchpriority: "high" }}
-                  decoding="async"
-                  className={
-                    property.imageFit === "cover"
-                      ? "w-full h-full object-cover object-center"
-                      : "w-full h-full object-contain object-center p-2 sm:p-4"
-                  }
-                />
-                {property.featured && (
-                  <span className="absolute top-4 left-4 bg-gold text-gold-foreground text-xs font-body uppercase tracking-wider px-3 py-1">
-                    Destacado
+            {property.tourUrl ? (
+              <div className="lg:col-span-7">
+                <a
+                  href={property.tourUrl}
+                  className="group relative flex justify-center overflow-hidden bg-primary border border-border/60"
+                  aria-label={`Entrar al recorrido virtual 360° de ${property.title}`}
+                >
+                  <img
+                    src={property.coverImage}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50"
+                  />
+                  <img
+                    src={property.coverImage}
+                    alt={property.galleryLabels[0] ?? property.title}
+                    decoding="async"
+                    className="relative w-auto max-w-full h-auto max-h-[78vh] object-contain"
+                  />
+                  {property.featured && (
+                    <span className="absolute top-4 left-4 bg-gold text-gold-foreground text-xs font-body uppercase tracking-wider px-3 py-1">
+                      Destacado
+                    </span>
+                  )}
+                  <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
+                  <span className="absolute bottom-5 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 whitespace-nowrap bg-gold text-gold-foreground font-body text-sm uppercase tracking-wider px-6 py-3 shadow-elevated group-hover:brightness-110 transition">
+                    <Rotate3d className="w-5 h-5" />
+                    Entrar al recorrido 360°
                   </span>
+                </a>
+              </div>
+            ) : (
+              <div className="lg:col-span-7 space-y-4">
+                <div className="relative aspect-[4/3] bg-secondary/40 border border-border/60 overflow-hidden">
+                  <img
+                    src={mainSrc}
+                    alt={mainLabel}
+                    // React 18 solo reconoce el atributo en minúsculas; los tipos solo aceptan fetchPriority
+                    {...{ fetchpriority: "high" }}
+                    decoding="async"
+                    className={
+                      property.imageFit === "cover"
+                        ? "w-full h-full object-cover object-center"
+                        : "w-full h-full object-contain object-center p-2 sm:p-4"
+                    }
+                  />
+                  {property.featured && (
+                    <span className="absolute top-4 left-4 bg-gold text-gold-foreground text-xs font-body uppercase tracking-wider px-3 py-1">
+                      Destacado
+                    </span>
+                  )}
+                  <span className="absolute bottom-4 left-4 bg-primary/90 text-primary-foreground text-xs font-body px-3 py-1">
+                    {mainLabel}
+                  </span>
+                </div>
+
+                {property.gallery.length > 1 && (
+                  <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-thin">
+                    {property.gallery.map((src, i) => (
+                      <button
+                        key={src}
+                        type="button"
+                        onClick={() => setActiveIndex(i)}
+                        className={`relative shrink-0 w-24 h-20 sm:w-28 sm:h-24 border-2 overflow-hidden bg-secondary/30 transition-all ${
+                          i === activeIndex
+                            ? "border-gold ring-2 ring-gold/30"
+                            : "border-transparent opacity-70 hover:opacity-100"
+                        }`}
+                      >
+                        <img
+                          src={src}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className={
+                            property.imageFit === "cover"
+                              ? "w-full h-full object-cover object-center"
+                              : "w-full h-full object-contain object-center p-1"
+                          }
+                        />
+                      </button>
+                    ))}
+                  </div>
                 )}
-                <span className="absolute bottom-4 left-4 bg-primary/90 text-primary-foreground text-xs font-body px-3 py-1">
-                  {mainLabel}
-                </span>
               </div>
 
-              {property.gallery.length > 1 && (
-                <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-thin">
-                  {property.gallery.map((src, i) => (
-                    <button
-                      key={src}
-                      type="button"
-                      onClick={() => setActiveIndex(i)}
-                      className={`relative shrink-0 w-24 h-20 sm:w-28 sm:h-24 border-2 overflow-hidden bg-secondary/30 transition-all ${
-                        i === activeIndex
-                          ? "border-gold ring-2 ring-gold/30"
-                          : "border-transparent opacity-70 hover:opacity-100"
-                      }`}
-                    >
-                      <img
-                        src={src}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        className={
-                          property.imageFit === "cover"
-                            ? "w-full h-full object-cover object-center"
-                            : "w-full h-full object-contain object-center p-1"
-                        }
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
+            )}
             <div className="lg:col-span-5 space-y-6">
               <div>
                 <p className="text-earth font-body text-xs uppercase tracking-[0.2em] mb-2">
@@ -224,6 +257,52 @@ const PropertyDetail = () => {
               </div>
             </div>
           </div>
+
+          {property.tourUrl ? (
+            <section className="mt-14 sm:mt-20" aria-labelledby="recorrido-360">
+              <style>{`
+                @keyframes arqueno-pano { from { background-position: 0 50%; } to { background-position: -1520px 50%; } }
+                .arqueno-pano { background-size: auto 760px; background-repeat: repeat-x; animation: arqueno-pano 70s linear infinite; }
+                @media (prefers-reduced-motion: reduce) { .arqueno-pano { animation: none; } }
+              `}</style>
+              <a href={property.tourUrl} className="group relative block overflow-hidden h-[360px] sm:h-[440px] bg-primary">
+                {property.tourPreview ? (
+                  <div
+                    className="arqueno-pano absolute inset-0"
+                    style={{ backgroundImage: `url(${property.tourPreview})` }}
+                    aria-hidden="true"
+                  />
+                ) : null}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/40" />
+                <div className="relative h-full flex flex-col items-center justify-center text-center px-6 text-white">
+                  <Rotate3d className="w-12 h-12 text-gold mb-4" />
+                  <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80 mb-2">El sello ARQUENO</p>
+                  <h2 id="recorrido-360" className="font-display text-3xl sm:text-5xl font-medium mb-3">
+                    Recorre el apartamento en 360°
+                  </h2>
+                  <p className="font-body text-white/85 max-w-xl mb-7">
+                    Camina por cada ambiente, mira en todas las direcciones y ubícate en el plano, desde tu celular o tu computador.
+                  </p>
+                  <span className="inline-flex items-center gap-2 bg-gold text-gold-foreground font-body text-sm uppercase tracking-wider px-8 py-3.5 group-hover:brightness-110 transition">
+                    Iniciar recorrido
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </div>
+              </a>
+              <div className="grid sm:grid-cols-3 gap-px bg-border border border-border">
+                {[
+                  ["Interior y exterior", "Desde la calle hasta la terraza, sin perder la orientación."],
+                  ["Plano con tu ubicación", "Un plano te muestra dónde estás y hacia dónde miras."],
+                  ["Visítalo cuando quieras", "Sin agendar ni desplazarte: ábrelo y compártelo por WhatsApp."],
+                ].map(([titulo, texto]) => (
+                  <div key={titulo} className="bg-background p-6">
+                    <p className="font-display text-lg text-foreground mb-1">{titulo}</p>
+                    <p className="font-body text-sm text-muted-foreground">{texto}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </main>
       <Footer />

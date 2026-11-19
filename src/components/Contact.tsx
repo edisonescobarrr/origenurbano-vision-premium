@@ -201,18 +201,21 @@ const Contact = () => {
                 />
               </div>
 
+              <label className="flex items-start gap-3 font-body text-sm text-muted-foreground cursor-pointer">
+                <input type="checkbox" required className="mt-1 h-4 w-4 shrink-0 accent-current" />
+                <span>
+                  Autorizo a {COMPANY.legalName} a usar mis datos para responder esta consulta, según la{" "}
+                  <Link to="/politica-de-privacidad" className="underline hover:text-earth">
+                    política de privacidad
+                  </Link>
+                  . El mensaje se envía por WhatsApp desde mi teléfono.
+                </span>
+              </label>
+
               <Button type="submit" variant="premium" size="xl" className="w-full">
                 <Send className="mr-2 w-4 h-4" />
                 Enviar Mensaje
               </Button>
-
-              <p className="font-body text-xs text-muted-foreground mt-4 text-center">
-                Al enviar este formulario, aceptas nuestra{" "}
-                <Link to="/politica-de-privacidad" className="underline hover:text-earth">
-                  política de privacidad
-                </Link>
-                .
-              </p>
             </form>
           </div>
         </div>

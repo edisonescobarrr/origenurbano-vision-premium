@@ -2,9 +2,13 @@
 export const COMPANY = {
   name: "ARQUENO",
   legalName: "ARQUENO S.A.S.",
+  nit: "902.105.926-9",
+  /** Actividad principal inscrita en el registro mercantil */
+  registeredActivity: "Actividades de ingeniería y otras actividades conexas de consultoría técnica",
+  address: "Cra. 10 #20-62, Cumbal, Nariño, Colombia",
   email: "arquenocontacto@gmail.com",
   phoneDisplay: "+57 313 606 1920",
-  city: "Bogotá, Colombia",
+  city: "Cumbal, Nariño, Colombia",
   siteUrl: "https://www.arqueno.com",
   domain: "www.arqueno.com",
   hours: {

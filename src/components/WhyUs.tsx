@@ -10,9 +10,9 @@ const WhyUs = () => {
     },
     {
       icon: Scale,
-      title: "Acompañamiento Legal",
+      title: "Documentos en Orden",
       description:
-        "Revisamos toda la documentación legal para garantizar transacciones seguras y sin contratiempos.",
+        "Te ayudamos a revisar que los documentos del inmueble estén completos antes de firmar, y te orientamos sobre cuándo acudir a un abogado o notaría.",
     },
     {
       icon: Users,
@@ -33,8 +33,8 @@ const WhyUs = () => {
     "Red de contactos y oportunidades exclusivas",
     "Tecnología al servicio de tu búsqueda",
     "Seguimiento post-venta y asesoría continua",
-    "Alianzas con entidades financieras",
-    "Valoraciones certificadas y confiables",
+    "Orientación para acceder a crédito de vivienda",
+    "Estimaciones de precio basadas en el mercado",
   ];
 
   return (
@@ -89,7 +89,7 @@ const WhyUs = () => {
             {/* Quote */}
             <blockquote className="mt-8 pt-8 border-t border-primary-foreground/10">
               <p className="font-display text-xl italic text-primary-foreground/90 mb-4">
-                "Una buena inversión inmobiliaria no es cuestión de suerte. 
+                "Una buena inversión inmobiliaria no es cuestión de suerte.
                 Es el resultado de decisiones informadas."
               </p>
               <cite className="font-body text-sm text-gold-light not-italic">

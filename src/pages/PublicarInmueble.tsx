@@ -28,7 +28,7 @@ const MAX_PHOTOS = 10;
 const MAX_PHOTO_SIZE_MB = 10;
 const ALLOWED_PHOTO_TYPES: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
 // Versión de la política de privacidad que la persona acepta (prueba de la autorización, Decreto 1377/2013 art. 8).
-const POLICY_VERSION = "privacidad-2026-09";
+const POLICY_VERSION = "privacidad-2026-11";
 
 const PublicarInmueble = () => {
   const [searchParams] = useSearchParams();

@@ -11,8 +11,8 @@ const PoliticaPrivacidad = () => {
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           {/* Breadcrumb */}
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-earth transition-colors mb-8 font-body text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -23,9 +23,9 @@ const PoliticaPrivacidad = () => {
             <h1 className="font-display text-3xl sm:text-4xl font-medium text-foreground mb-8">
               Política de Privacidad y Tratamiento de Datos Personales
             </h1>
-            
+
             <p className="text-muted-foreground font-body leading-relaxed mb-8">
-              Última actualización: Septiembre 2026
+              Última actualización: Noviembre 2026 (versión privacidad-2026-11)
             </p>
 
             <section className="mb-10">
@@ -34,7 +34,8 @@ const PoliticaPrivacidad = () => {
               </h2>
               <div className="bg-card border border-border rounded-lg p-6 font-body">
                 <p className="mb-2"><strong>Razón Social:</strong> {COMPANY.legalName}</p>
-                <p className="mb-2"><strong>Dirección:</strong> {COMPANY.city}</p>
+                <p className="mb-2"><strong>NIT:</strong> {COMPANY.nit}</p>
+                <p className="mb-2"><strong>Dirección:</strong> {COMPANY.address}</p>
                 <p className="mb-2"><strong>Teléfono:</strong> {COMPANY.phoneDisplay}</p>
                 <p className="break-words"><strong>Correo electrónico:</strong> {COMPANY.email}</p>
               </div>
@@ -48,17 +49,17 @@ const PoliticaPrivacidad = () => {
                 ARQUENO recopila los siguientes datos personales con el consentimiento del titular:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
-                <li>Nombre completo</li>
-                <li>Número de identificación (cédula, NIT)</li>
-                <li>Dirección de correo electrónico</li>
-                <li>Número de teléfono móvil y/o fijo</li>
-                <li>Dirección de residencia o trabajo</li>
+                <li>Nombre completo, correo electrónico y teléfono (formulario de contacto y de publicación)</li>
+                <li>Número de cédula del propietario, solo cuando publica un inmueble</li>
                 <li>
                   Dirección y fotografías del inmueble, y su firma en la autorización de publicación,
                   cuando publica un inmueble en el sitio
                 </li>
-                <li>Información financiera (cuando sea necesaria para transacciones inmobiliarias)</li>
-                <li>Datos de navegación y cookies (ver Política de Cookies)</li>
+                <li>
+                  Prueba de su autorización: fecha y hora, versión de esta política, dirección IP y
+                  navegador desde el que firmó
+                </li>
+                <li>Lo mínimo para que el sitio funcione en su navegador (ver Política de Cookies)</li>
               </ul>
             </section>
 
@@ -70,13 +71,11 @@ const PoliticaPrivacidad = () => {
                 Los datos personales serán utilizados para las siguientes finalidades:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
-                <li>Gestionar solicitudes de información sobre propiedades inmobiliarias</li>
-                <li>Facilitar procesos de compra, venta o arrendamiento de inmuebles</li>
-                <li>Enviar comunicaciones comerciales y promocionales (con consentimiento previo)</li>
-                <li>Proporcionar asesoría inmobiliaria personalizada</li>
-                <li>Cumplir con obligaciones legales y contractuales</li>
-                <li>Mejorar nuestros servicios y experiencia del usuario</li>
-                <li>Realizar análisis estadísticos y de mercado</li>
+                <li>Responder sus consultas sobre inmuebles y servicios</li>
+                <li>Verificar su correo electrónico antes de recibir una publicación</li>
+                <li>Revisar, publicar y promocionar el inmueble que usted autoriza</li>
+                <li>Contactarlo para coordinar visitas, ofertas y el proceso de compra o venta</li>
+                <li>Conservar la prueba de su autorización y cumplir obligaciones legales</li>
               </ul>
             </section>
 
@@ -88,12 +87,18 @@ const PoliticaPrivacidad = () => {
                 De acuerdo con la Ley 1581 de 2012, usted tiene derecho a:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
-                <li><strong>Conocer:</strong> Acceder a sus datos personales en cualquier momento</li>
-                <li><strong>Actualizar:</strong> Rectificar datos inexactos o incompletos</li>
-                <li><strong>Suprimir:</strong> Solicitar la eliminación de sus datos cuando no sean necesarios</li>
-                <li><strong>Revocar:</strong> Retirar su consentimiento para el tratamiento</li>
-                <li><strong>Oponerse:</strong> Rechazar el tratamiento para fines específicos</li>
-                <li><strong>Portabilidad:</strong> Solicitar sus datos en formato estructurado</li>
+                <li><strong>Conocer, actualizar y rectificar</strong> sus datos personales</li>
+                <li><strong>Solicitar prueba</strong> de la autorización que nos dio</li>
+                <li><strong>Ser informado</strong> sobre el uso que les hemos dado</li>
+                <li>
+                  <strong>Presentar quejas</strong> ante la Superintendencia de Industria y Comercio (SIC),
+                  después de haber hecho su consulta o reclamo ante nosotros
+                </li>
+                <li>
+                  <strong>Revocar</strong> la autorización y/o <strong>pedir que se borren</strong> sus datos,
+                  salvo que exista un deber legal o contractual de conservarlos
+                </li>
+                <li><strong>Acceder gratis</strong> a sus datos personales</li>
               </ul>
             </section>
 
@@ -107,9 +112,15 @@ const PoliticaPrivacidad = () => {
               <div className="bg-card border border-border rounded-lg p-6 font-body">
                 <p className="mb-2 break-words"><strong>Correo electrónico:</strong> {COMPANY.email}</p>
                 <p className="mb-2"><strong>Teléfono:</strong> {COMPANY.phoneDisplay}</p>
-                <p className="mb-2"><strong>Dirección física:</strong> {COMPANY.city}</p>
+                <p className="mb-2"><strong>Dirección física:</strong> {COMPANY.address}</p>
                 <p><strong>Horario de atención:</strong> Lunes a Viernes de 8:00 a.m. a 6:00 p.m.</p>
               </div>
+              <p className="font-body text-foreground/80 mt-4">
+                Indique su nombre, cédula, lo que solicita y cómo prefiere que le respondamos.
+                Respondemos las <strong>consultas</strong> en máximo 10 días hábiles (prorrogables 5 días
+                más, avisándole el motivo) y los <strong>reclamos</strong> en máximo 15 días hábiles
+                (prorrogables 8 días más), según los artículos 14 y 15 de la Ley 1581 de 2012.
+              </p>
             </section>
 
             <section className="mb-10">
@@ -117,9 +128,9 @@ const PoliticaPrivacidad = () => {
                 6. Conservación de la Información
               </h2>
               <p className="font-body text-foreground/80">
-                Los datos personales serán conservados durante el tiempo necesario para cumplir con las 
-                finalidades descritas en esta política, o mientras exista una relación contractual o legal 
-                vigente. Una vez cumplida la finalidad, los datos serán eliminados de forma segura, salvo 
+                Los datos personales serán conservados durante el tiempo necesario para cumplir con las
+                finalidades descritas en esta política, o mientras exista una relación contractual o legal
+                vigente. Una vez cumplida la finalidad, los datos serán eliminados de forma segura, salvo
                 que exista obligación legal de conservarlos por un período adicional.
               </p>
             </section>
@@ -129,17 +140,24 @@ const PoliticaPrivacidad = () => {
                 7. Transferencia de Datos a Terceros
               </h2>
               <p className="font-body text-foreground/80 mb-4">
-                ARQUENO podrá compartir sus datos personales con:
+                ARQUENO no vende sus datos. Para que el sitio funcione, usamos estos proveedores, que
+                tratan los datos solo por encargo nuestro:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2">
-                <li>Entidades financieras para procesos de crédito inmobiliario</li>
-                <li>Notarías y oficinas de registro para formalización de transacciones</li>
-                <li>Autoridades competentes cuando sea requerido por ley</li>
-                <li>Proveedores de servicios tecnológicos (bajo contratos de confidencialidad)</li>
+                <li><strong>Supabase</strong>: base de datos, verificación de correo y archivos (fotos y firma)</li>
+                <li><strong>Vercel</strong>: alojamiento del sitio web</li>
+                <li><strong>Resend</strong>: envío de correos de verificación y avisos</li>
+                <li>
+                  <strong>WhatsApp (Meta)</strong>: solo cuando usted decide escribirnos por WhatsApp; el
+                  mensaje lo envía usted desde su aplicación
+                </li>
               </ul>
               <p className="font-body text-foreground/80 mt-4">
-                En todos los casos, garantizamos que los terceros receptores cumplan con estándares 
-                adecuados de protección de datos.
+                Estos proveedores pueden tener servidores fuera de Colombia (por ejemplo, en Estados
+                Unidos). Al aceptar esta política, usted autoriza esa transmisión internacional de sus
+                datos, conforme al artículo 26 de la Ley 1581 de 2012. También podremos entregar datos
+                a notarías u oficinas de registro cuando usted avance en una compra o venta, y a las
+                autoridades cuando la ley lo exija.
               </p>
             </section>
 
@@ -148,7 +166,7 @@ const PoliticaPrivacidad = () => {
                 8. Legislación Aplicable
               </h2>
               <p className="font-body text-foreground/80">
-                Esta política se rige por la normatividad colombiana vigente en materia de protección 
+                Esta política se rige por la normatividad colombiana vigente en materia de protección
                 de datos personales, principalmente:
               </p>
               <ul className="list-disc pl-6 font-body text-foreground/80 space-y-2 mt-4">
@@ -163,9 +181,9 @@ const PoliticaPrivacidad = () => {
                 9. Modificaciones a esta Política
               </h2>
               <p className="font-body text-foreground/80">
-                ARQUENO se reserva el derecho de modificar esta política en cualquier momento. 
-                Las modificaciones serán comunicadas a través de nuestro sitio web y/o por correo 
-                electrónico cuando sean sustanciales.
+                Si cambiamos esta política, publicaremos la nueva versión en esta página con su fecha.
+                Si el cambio afecta las finalidades o los responsables, se lo avisaremos y, cuando la
+                ley lo exija, le pediremos una nueva autorización.
               </p>
             </section>
 

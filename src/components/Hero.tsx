@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useStickyProgress, clamp01, easeOut } from "@/hooks/useStickyProgress";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -8,6 +9,30 @@ import heroBg from "@/assets/hero-home-bg.webp";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const sectionRef = useRef<HTMLElement>(null);
+  const photoRef = useRef<HTMLDivElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Cambio de ambiente: la foto crece dentro de un círculo hasta llenar la pantalla,
+  // el mensaje grande se aleja y aparece el buscador.
+  useStickyProgress(sectionRef, (p) => {
+    const grow = easeOut(clamp01(p / 0.6));
+    if (photoRef.current) photoRef.current.style.clipPath = `circle(${(9 + 81 * grow).toFixed(2)}vmax at 50% 62%)`;
+    if (headRef.current) {
+      const h = clamp01(p / 0.42);
+      headRef.current.style.opacity = String(1 - h);
+      headRef.current.style.transform = `translate3d(0, ${(-h * 90).toFixed(1)}px, 0) scale(${(1 + h * 0.25).toFixed(3)})`;
+      headRef.current.style.visibility = h >= 1 ? "hidden" : "visible";
+    }
+    if (searchRef.current) {
+      const v = easeOut(clamp01((p - 0.45) / 0.35));
+      searchRef.current.style.opacity = String(v);
+      searchRef.current.style.transform = `translate3d(0, ${((1 - v) * 50).toFixed(1)}px, 0)`;
+      searchRef.current.style.pointerEvents = v > 0.4 ? "auto" : "none";
+      searchRef.current.style.visibility = v <= 0 ? "hidden" : "visible";
+    }
+  });
   const [operationType, setOperationType] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [city, setCity] = useState("");
@@ -44,43 +69,44 @@ const Hero = () => {
   };
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-        style={{ backgroundImage: `url(${heroBg})` }} 
-      />
-      
-      {/* Warm Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/90" />
-      
-      {/* Subtle warm tint overlay */}
-      <div className="absolute inset-0 bg-gold/5" />
+    <section id="inicio" ref={sectionRef} className="relative h-[210vh] bg-background">
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Foto dentro del círculo que crece */}
+        <div ref={photoRef} className="absolute inset-0" style={{ clipPath: "circle(9vmax at 50% 62%)" }}>
+          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroBg})` }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/85" />
+          <div className="absolute inset-0 bg-gold/5" />
+        </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Tagline */}
-          <p className="text-earth font-body text-sm uppercase tracking-[0.3em] mb-4 opacity-0 animate-fade-up">
-            Tu hogar comienza aquí
+        {/* Mensaje grande de entrada */}
+        <div ref={headRef} className="absolute inset-x-0 top-[13vh] sm:top-[14vh] z-10 px-4 text-center pointer-events-none">
+          <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.35em] mb-5 opacity-0 animate-fade-up">
+            ARQUENO · Inmobiliaria en Colombia
           </p>
-
-          {/* Main Headline */}
-          <h1 className="font-display text-4xl/[1.1] sm:text-5xl/[1.1] lg:text-6xl/[1.1] text-foreground font-medium mb-4 opacity-0 animate-fade-up delay-100">
-            Encuentra el{" "}
-            <span className="text-gradient-gold">hogar de tus sueños</span>
+          <h1 className="font-display font-light text-foreground leading-[0.88] tracking-[-0.04em] text-[clamp(64px,15vw,220px)]">
+            <span className="block overflow-hidden"><span className="block opacity-0 animate-fade-up delay-100">Encuentra</span></span>
+            <span className="block overflow-hidden"><span className="block italic text-gold opacity-0 animate-fade-up delay-200">tu hogar</span></span>
           </h1>
+        </div>
 
-          {/* Subtitle */}
-          <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-10 sm:mb-14 opacity-0 animate-fade-up delay-200">
-            Decisiones inteligentes para construir patrimonio. 
-            Te acompañamos en cada paso hacia tu vivienda ideal.
-          </p>
+        {/* Buscador que aparece al bajar */}
+        <div
+          ref={searchRef}
+          className="hero-search absolute inset-0 z-20 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16"
+        >
+          <div className="max-w-4xl mx-auto text-center w-full">
+            <p className="text-earth font-body text-sm uppercase tracking-[0.3em] mb-4">Tu hogar comienza aquí</p>
+            <h2 className="font-display text-3xl/[1.1] sm:text-5xl/[1.1] text-foreground font-medium mb-4">
+              ¿Qué estás <span className="text-gradient-gold">buscando</span>?
+            </h2>
+            <p className="font-body text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10">
+              Decisiones inteligentes para construir patrimonio. Te acompañamos en cada paso hacia tu vivienda ideal.
+            </p>
 
           {/* Premium Search Card */}
-          <div className="opacity-0 animate-fade-up delay-300">
+          <div>
             <div className="bg-card/98 backdrop-blur-xl shadow-elevated p-6 sm:p-8 max-w-3xl mx-auto border border-border/30">
-              
+
               {/* Desktop Layout */}
               <div className="hidden md:block">
                 <div className="grid grid-cols-3 gap-4 mb-6">
@@ -142,11 +168,11 @@ const Hero = () => {
                 </div>
 
                 {/* Action Button - Full width */}
-                <Button 
-                  onClick={handleSearch} 
+                <Button
+                  onClick={handleSearch}
                   className={`w-full h-14 font-semibold text-base shadow-gold transition-all hover:shadow-lg hover:scale-[1.01] ${
-                    isOwnerAction 
-                      ? "bg-earth hover:bg-earth/90 text-earth-foreground" 
+                    isOwnerAction
+                      ? "bg-earth hover:bg-earth/90 text-earth-foreground"
                       : "bg-gold hover:bg-gold/90 text-gold-foreground"
                   }`}
                 >
@@ -215,11 +241,11 @@ const Hero = () => {
                 </div>
 
                 {/* Action Button */}
-                <Button 
-                  onClick={handleSearch} 
+                <Button
+                  onClick={handleSearch}
                   className={`w-full h-12 font-semibold shadow-gold transition-all hover:shadow-lg mt-2 ${
-                    isOwnerAction 
-                      ? "bg-earth hover:bg-earth/90 text-earth-foreground" 
+                    isOwnerAction
+                      ? "bg-earth hover:bg-earth/90 text-earth-foreground"
                       : "bg-gold hover:bg-gold/90 text-gold-foreground"
                   }`}
                 >
@@ -232,10 +258,12 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in delay-500">
-        <div className="w-6 h-10 border-2 border-foreground/20 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-gold rounded-full mt-2 animate-bounce" />
+        {/* Indicador para bajar */}
+        <div className="absolute bottom-6 sm:bottom-8 inset-x-0 z-10 text-center pointer-events-none" data-hero-fade>
+          <p className="font-body text-[11px] uppercase tracking-[0.3em] text-foreground/60 mb-3">Desliza</p>
+          <div className="w-6 h-10 border-2 border-foreground/25 rounded-full flex justify-center mx-auto">
+            <div className="w-1 h-3 bg-gold rounded-full mt-2 animate-bounce" />
+          </div>
         </div>
       </div>
     </section>

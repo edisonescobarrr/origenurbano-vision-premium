@@ -1,4 +1,5 @@
 import { Target, Eye, Shield, TrendingUp } from "lucide-react";
+import RevealWords from "@/components/motion/RevealWords";
 import aboutBg from "@/assets/about-bg.webp";
 
 const About = () => {
@@ -30,23 +31,24 @@ const About = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-earth font-body text-sm uppercase tracking-[0.2em] mb-4">
+          <p data-reveal className="text-earth font-body text-sm uppercase tracking-[0.2em] mb-4">
             Quiénes Somos
           </p>
           <h2 className="font-display text-4xl md:text-5xl text-foreground font-medium mb-6">
-            El origen de la confianza
+            <RevealWords text="El origen de la confianza" />
           </h2>
-          <div className="w-16 h-px bg-gold mx-auto" />
+          <div data-reveal="line" style={{ ["--i" as string]: 4 }} className="w-16 h-px bg-gold mx-auto" />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Image */}
           <div className="relative">
-            <div className="aspect-[4/3] overflow-hidden">
+            <div data-reveal="mask" className="aspect-[4/3] overflow-hidden">
               <img
                 src={aboutBg}
                 alt="ARQUENO - Desarrollo urbano en Colombia"
-                className="w-full h-full object-cover"
+                data-parallax="0.08"
+                className="w-full h-full object-cover scale-110"
                 loading="lazy"
                 decoding="async"
               />
@@ -56,13 +58,13 @@ const About = () => {
           </div>
 
           {/* Content */}
-          <div>
+          <div data-reveal="right">
             <h3 className="font-display text-2xl md:text-3xl text-foreground font-medium mb-6">
               Más que una inmobiliaria, somos tu aliado estratégico
             </h3>
             <p className="font-body text-muted-foreground text-lg leading-relaxed mb-6">
-              ARQUENO nace de la convicción de que adquirir vivienda es una de las 
-              decisiones más importantes en la vida. Por eso, creamos una experiencia 
+              ARQUENO nace de la convicción de que adquirir vivienda es una de las
+              decisiones más importantes en la vida. Por eso, creamos una experiencia
               inmobiliaria diferente: cercana, transparente y enfocada en resultados.
             </p>
             <p className="font-body text-muted-foreground leading-relaxed">
@@ -78,6 +80,8 @@ const About = () => {
           {values.map((value, index) => (
             <div
               key={value.title}
+              data-reveal="up"
+              style={{ ["--i" as string]: index }}
               className="group p-6 bg-card hover:bg-secondary transition-colors duration-300"
             >
               <value.icon className="w-10 h-10 text-gold mb-4 group-hover:scale-110 transition-transform" />

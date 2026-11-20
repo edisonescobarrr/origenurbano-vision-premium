@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import Index from "./pages/Index";
 import CookieBanner from "./components/CookieBanner";
+import ScrollFx from "@/components/motion/ScrollFx";
 import ScrollToHash from "./components/ScrollToHash";
 import RouteMeta from "./components/RouteMeta";
 
@@ -30,6 +31,7 @@ export const AppShell = () => (
   <TooltipProvider>
     <Toaster />
     <ScrollToHash />
+    <ScrollFx />
     <RouteMeta />
     <Suspense fallback={<RouteFallback />}>
       <Routes>

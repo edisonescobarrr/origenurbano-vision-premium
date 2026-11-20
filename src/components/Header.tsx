@@ -28,7 +28,7 @@ const Header = () => {
     { href: "#nosotros", label: "Quiénes Somos" },
     { href: "#servicios", label: "Servicios" },
     { href: "#propiedades", label: "Propiedades" },
-    { href: "#diferencial", label: "Por Qué Nosotros" },
+    { href: "#diferencial", label: "Lo que hacemos" },
     { href: "#contacto", label: "Contacto" },
   ];
 

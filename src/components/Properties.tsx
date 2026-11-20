@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import RevealWords from "@/components/motion/RevealWords";
 import { Link, useSearchParams } from "react-router-dom";
 import { MapPin, Bed, Bath, Square, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -72,7 +73,7 @@ const Properties = () => {
   } else if (criteria) {
     heading = searchedCity ? `Aún no tenemos inmuebles en ${searchedCity}` : "Aún no tenemos inmuebles para tu búsqueda";
   } else if (listings.length > 0) {
-    heading = "Planos e isometrías disponibles";
+    heading = "Inmuebles disponibles";
   }
 
   const changeSearchParams = new URLSearchParams();
@@ -85,11 +86,11 @@ const Properties = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 sm:mb-16 gap-4">
           <div>
-            <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
+            <p data-reveal className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
               Propiedades publicadas
             </p>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium">
-              {heading}
+              <RevealWords key={heading} text={heading} />
             </h2>
           </div>
           {criteria && PROPERTY_LISTINGS.length > 0 && (
@@ -131,14 +132,14 @@ const Properties = () => {
         )}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {listings.map((property) => {
+          {listings.map((property, idx) => {
             const imgClass =
               property.imageFit === "contain"
                 ? "w-full h-full object-contain object-center p-2 sm:p-3 group-hover:scale-[1.02] transition-transform duration-700"
                 : "w-full h-full object-cover group-hover:scale-105 transition-transform duration-700";
 
             const article = (
-              <article className="group bg-card overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-500 h-full flex flex-col">
+              <article className="card-sheen group bg-card overflow-hidden shadow-soft hover:shadow-elevated transition-all duration-500 h-full flex flex-col">
                 <div className="relative aspect-[4/3] overflow-hidden bg-secondary/40">
                   <img
                     src={property.coverImage}
@@ -202,6 +203,8 @@ const Properties = () => {
               <Link
                 key={property.id}
                 to={`/propiedad/${property.slug}`}
+                data-reveal="up"
+                style={{ ["--i" as string]: idx }}
                 className="block h-full rounded-none focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {article}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import RevealWords from "@/components/motion/RevealWords";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -78,21 +79,21 @@ const Contact = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-10 sm:mb-16">
-          <p className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
+          <p data-reveal className="text-earth font-body text-xs sm:text-sm uppercase tracking-[0.2em] mb-3 sm:mb-4">
             Contacto
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground font-medium mb-4 sm:mb-6">
-            Comienza tu inversión hoy
+            <RevealWords text="Comienza tu inversión hoy" />
           </h2>
           <p className="font-body text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-            Estamos listos para ayudarte. Cuéntanos sobre tu proyecto 
+            Estamos listos para ayudarte. Cuéntanos sobre tu proyecto
             y agendaremos una asesoría sin compromiso.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Contact Info */}
-          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+          <div data-reveal="left" className="lg:col-span-2 space-y-4 sm:space-y-6">
             {contactInfo.map((item) => (
               <div
                 key={item.title}
@@ -128,7 +129,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-3">
+          <div data-reveal="right" className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
               className="bg-background p-8 shadow-soft"

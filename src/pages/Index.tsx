@@ -6,6 +6,7 @@ import Properties from "@/components/Properties";
 import WhyUs from "@/components/WhyUs";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Lema from "@/components/Lema";
 
 const Index = () => {
   return (
@@ -15,6 +16,7 @@ const Index = () => {
         <Hero />
         <Properties />
         <Services />
+        <Lema />
         <About />
         <WhyUs />
         <Contact />

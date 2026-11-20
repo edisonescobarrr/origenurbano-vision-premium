@@ -337,3 +337,10 @@ html, body { overflow-x: clip; }
 /* Tarjetas apiladas de Lo que hacemos: dónde se detiene cada una */
 #diferencial { --stack-top: 11vh; --stack-step: 26px; }
 @media (max-width: 767px) { #diferencial { --stack-top: 70px; --stack-step: 12px; } }
+
+/* Quiénes somos: se ilumina el bloque que está en el centro de la pantalla */
+.js .about-block { opacity: 0.22; transform: translate3d(18px, 0, 0); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.js .about-block.is-active { opacity: 1; transform: none; }
+.about-icon { transition: background-color 0.5s ease, color 0.5s ease; }
+.about-block.is-active .about-icon { background-color: hsl(var(--gold)); color: hsl(var(--gold-foreground)); }
+@media (prefers-reduced-motion: reduce) { .js .about-block { opacity: 1; transform: none; } }

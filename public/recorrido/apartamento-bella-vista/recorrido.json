@@ -2,7 +2,7 @@
   "titulo": "Apartamento Bella Vista",
   "subtitulo": "Recorrido virtual 360°",
   "inicio": "04",
-  "giroInicial": 0,
+  "giroInicial": 35,
   "grupos": [
     {
       "nombre": "Exterior",
